@@ -3,8 +3,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --za-red:#d32f2f;
-  --za-light-red:#ffe9e9
+  --primary:#df2532;
+  --primary-light:#faecee;
+  --secondary:#00bf9f;
+  --secondary-light:#e9fbf8;
+  --tertiary:#888;
 }
 
 
