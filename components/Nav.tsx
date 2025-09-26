@@ -11,7 +11,7 @@ export default function Nav(): ReactElement {
     console.log("logout");
   };
   return (
-    <div className="w-[90%] sm:w-55  h-full p-2 sticky top-0 bg-white">
+    <div className="w-[90%] sm:w-55  h-full p-2 sticky top-0 bg-white border-l-[1px] border-gray-100">
       <nav className="w-full h-full flex flex-col justify-around p-2">
         {/*Logo */}
         <div className="w-full h-16  flex flex-row-reverse gap-2 items-center ">
@@ -28,8 +28,29 @@ export default function Nav(): ReactElement {
         {/* Nav midd */}
         <div className="w-full h-[80%] flex flex-col gap-3 items-end pt-2">
           <Link
+            href="/dashboard"
+            className={`w-full h-auto flex flex-row-reverse gap-2 items-center rounded-[5px]  p-2 cursor-pointer hover:border-r-2 ${
+              path?.includes("dashboard") && `bg-[var(--primary-light)]`
+            }`}
+          >
+            <Upload
+              size="size-5"
+              color="#343434"
+              fill={path?.includes("dashboard") ? `var(--primary)` : false}
+            />
+            <p
+              className={`text-[#343434] text-[0.8rem] ${
+                path?.includes("dashboard") && `text-[var(--primary)]`
+              }`}
+            >
+              داشبورد
+            </p>
+          </Link>
+          <Link
             href="/upload"
-            className="w-full h-auto flex flex-row-reverse gap-2 items-center rounded-[4px] bg-[var(--primary-light)] p-2 cursor-pointer"
+            className={`w-full h-auto flex flex-row-reverse gap-2 items-center rounded-[5px]  p-2 cursor-pointer ${
+              path?.includes("upload") && `bg-[var(--primary-light)]`
+            }`}
           >
             <Upload
               size="size-5"
@@ -41,7 +62,7 @@ export default function Nav(): ReactElement {
                 path?.includes("upload") && `text-[var(--primary)]`
               }`}
             >
-              آپلود
+              آپلود فایل
             </p>
           </Link>
         </div>
@@ -49,7 +70,7 @@ export default function Nav(): ReactElement {
         <div className="w-full  flex flex-col gap-2 items-end relative bottom-0 border-t border-gray-100">
           <Link
             href="/settings"
-            className="w-full h-auto flex flex-row-reverse gap-2 items-center cursor-pointer rounded-[4px] p-2"
+            className="w-full h-auto flex flex-row-reverse gap-2 items-center cursor-pointer rounded-[5px] p-2"
           >
             <Setting
               size="size-5"
@@ -66,7 +87,7 @@ export default function Nav(): ReactElement {
           </Link>
           <div
             onClick={handleLogout}
-            className="w-full h-auto flex flex-row-reverse gap-2 items-center cursor-pointer rounded-[4px] p-2"
+            className="w-full h-auto flex flex-row-reverse gap-2 items-center cursor-pointer rounded-[5px] p-2"
           >
             <Logout size="size-5 rotate-[180deg]" color="var(--primary)" />
             <p className="text-[var(--primary)] text-[0.8rem]">خروج</p>

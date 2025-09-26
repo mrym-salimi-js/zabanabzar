@@ -1,12 +1,13 @@
 import { ReactElement } from "react";
 
-type iconProps = {
+type IconProps = {
   size: string;
   color: string;
   strokeWidth?: string;
   fill?: string | false;
+  name?: string;
 };
-export function Logout({ size, color, fill }: iconProps): ReactElement {
+export function Logout({ size, color, fill }: IconProps): ReactElement {
   if (fill) {
     return (
       <svg
@@ -41,7 +42,7 @@ export function Logout({ size, color, fill }: iconProps): ReactElement {
     );
   }
 }
-export function Setting({ size, color }: iconProps): ReactElement {
+export function Setting({ size, color }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +65,100 @@ export function Setting({ size, color }: iconProps): ReactElement {
     </svg>
   );
 }
-export function Upload({ size, color, fill }: iconProps): ReactElement {
+export function Moon({ size, color }: IconProps): ReactElement {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke={color}
+      className={size}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+      />
+    </svg>
+  );
+}
+export function Pencil({ size, color }: IconProps): ReactElement {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill={color}
+      className={size}
+    >
+      <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
+    </svg>
+  );
+}
+export function Bin({ size, color }: IconProps): ReactElement {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill={color}
+      className={size}
+    >
+      <path
+        fillRule="evenodd"
+        d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+export function FileWithName({ size, color, name }: IconProps): ReactElement {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill={color}
+      className={size}
+    >
+      {/* بدنه آیکن */}
+      <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z" />
+      <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+
+      {/* متن وسط */}
+      <text
+        x="50%"
+        y="52%"
+        textAnchor="middle"
+        dominantBaseline="middle"
+        fontSize="6"
+        fontWeight="bold"
+        fill="white"
+        fontFamily="sans-serif"
+        style={{ pointerEvents: "none", userSelect: "none" }}
+      >
+        {name}
+      </text>
+    </svg>
+  );
+}
+export function Tick(): ReactElement {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-3.5 w-3.5"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="1"
+    >
+      <path
+        fillRule="evenodd"
+        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+        clipRule="evenodd"
+      ></path>
+    </svg>
+  );
+}
+export function Upload({ size, color, fill }: IconProps): ReactElement {
   if (fill) {
     return (
       <svg
@@ -73,8 +167,7 @@ export function Upload({ size, color, fill }: iconProps): ReactElement {
         fill={fill}
         className={size}
       >
-        <path d="M9.97.97a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1-1.06 1.06l-1.72-1.72v3.44h-1.5V3.31L8.03 5.03a.75.75 0 0 1-1.06-1.06l3-3ZM9.75 6.75v6a.75.75 0 0 0 1.5 0v-6h3a3 3 0 0 1 3 3v7.5a3 3 0 0 1-3 3h-7.5a3 3 0 0 1-3-3v-7.5a3 3 0 0 1 3-3h3Z" />
-        <path d="M7.151 21.75a2.999 2.999 0 0 0 2.599 1.5h7.5a3 3 0 0 0 3-3v-7.5c0-1.11-.603-2.08-1.5-2.599v7.099a4.5 4.5 0 0 1-4.5 4.5H7.151Z" />
+        <path d="M11.47 1.72a.75.75 0 0 1 1.06 0l3 3a.75.75 0 0 1-1.06 1.06l-1.72-1.72V7.5h-1.5V4.06L9.53 5.78a.75.75 0 0 1-1.06-1.06l3-3ZM11.25 7.5V15a.75.75 0 0 0 1.5 0V7.5h3.75a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3h-9a3 3 0 0 1-3-3v-9a3 3 0 0 1 3-3h3.75Z" />
       </svg>
     );
   } else {
@@ -90,13 +183,13 @@ export function Upload({ size, color, fill }: iconProps): ReactElement {
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m0-3-3-3m0 0-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
+          d="M9 8.25H7.5a2.25 2.25 0 0 0-2.25 2.25v9a2.25 2.25 0 0 0 2.25 2.25h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25H15m0-3-3-3m0 0-3 3m3-3V15"
         />
       </svg>
     );
   }
 }
-export function Search({ size, color }: iconProps): ReactElement {
+export function Search({ size, color }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +207,7 @@ export function Search({ size, color }: iconProps): ReactElement {
     </svg>
   );
 }
-export function User({ size, color }: iconProps): ReactElement {
+export function User({ size, color }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -132,13 +225,17 @@ export function User({ size, color }: iconProps): ReactElement {
     </svg>
   );
 }
-export function ChevronDown({ size, color }: iconProps): ReactElement {
+export function ChevronDown({
+  size,
+  color,
+  strokeWidth,
+}: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
+      strokeWidth={strokeWidth}
       stroke={color}
       className={size}
     >

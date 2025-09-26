@@ -21,11 +21,11 @@ export const metadata: Metadata = {
   description: "ابزاری برای مدیریت منابع و یادگیری زبان",
   icons: {
     icon: [
-      { url: "/Logo.webp", sizes: "16x16", type: "image/webp" },
-      { url: "/Logo.webp", sizes: "32x32", type: "image/webp" },
-      { url: "/Logo.webp", sizes: "48x48", type: "image/webp" },
+      { url: "/Logo2.webp", sizes: "16x16", type: "image/webp" },
+      { url: "/Logo2.webp", sizes: "32x32", type: "image/webp" },
+      { url: "/Logo2.webp", sizes: "48x48", type: "image/webp" },
     ],
-    apple: "/Logo.webp", // برای آیفون/آیپد
+    apple: "/Logo2.webp", // برای آیفون/آیپد
   },
 };
 
@@ -37,11 +37,11 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body className={`${iranSans.variable}${geistSans.variable} antialiased`}>
-        <div className="w-full h-screen flex flex-row-reverse gap-0.5 bg-[#f7f7f7e6]">
+        <div className="w-full h-screen flex flex-row-reverse gap-0.5 bg-white">
           {/* Nav */}
           <Nav />
           {/* Content */}
-          <div className="w-[80.9%] h-full p-0.5 flex flex-col gap-1 ">
+          <div className="w-[85.3%] h-full  flex flex-col gap-1 ">
             <Header />
             {children}
           </div>
