@@ -1,14 +1,20 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #ffffff;
+   --background-light: #ffffff;
+   --background-dark: #101828;
   --foreground: #171717;
   --primary:#df2532;
   --primary-light:#faecee;
+  --primary-dark:#82181a69;
   --secondary:#00bf9f;
   --secondary-light:#e9fbf8;
-  --tertiary:#888888;
+  --tertiary:#6a7282;
+  --tertiary-light:#f3f4f6;
+  --tertiary-dark:#232e3d;
 }
+
 
 
 @font-face {
@@ -18,9 +24,14 @@
 
 * {
       font-family: Shabnam;
+      border-color: var(--tertiary-light);
  }
-@theme inline {
-  --color-background: var(--background);
+ .dark *{
+  border-color:var(--tertiary-dark) ;
+ }
+ 
+ @theme inline {
+  --color-background: var( --background-light);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-iran-sans: var(--font-iran-sans);
@@ -28,13 +39,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+     --background-light: #0a0a0a;
     --foreground: #ededed;
   }
 }
 
 body {
-  background: var(--background);
+  /* background: var( --background-light); */
   color: var(--foreground);
   font-family: var(--font-iran-sans),Arial, Helvetica, sans-serif;
 }

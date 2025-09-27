@@ -16,13 +16,13 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full h-full flex flex-col gap-2 bg-whit border-gray-100 rounded-[15px] border-[1px] p-2">
+      <div className="w-full h-full flex flex-col gap-2 bg-whit   rounded-[15px] border-[1px] p-2">
         <div className="w-full h-auto p-1 flex"></div>
         {/* Table */}
         <div dir="rtl" className="w-full h-auto p-1 flex flex-col gap-1">
           {/* Table header */}
           <div
-            className="w-full h-12 p-3 text-[0.8rem] bg-gray-100 
+            className="w-full h-12 p-3 text-[0.8rem] bg-gray-100  dark:bg-[var(--tertiary-dark)] dark:text-white
               grid grid-cols-[40px_repeat(5,1fr)]
               items-center text-end
               rounded-tr-[12px] rounded-tl-[12px]"
@@ -32,7 +32,7 @@ export default function Home() {
               <label className="flex items-center cursor-pointer relative">
                 <input
                   type="checkbox"
-                  className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded border border-gray-300 checked:bg-[var(--primary)] checked:border-[var(--primary)]"
+                  className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded border !border-gray-200 dark:!border-gray-600 checked:bg-[var(--secondary)] checked:border-[var(--secondary)]"
                   id="check1"
                 />
                 <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -51,7 +51,7 @@ export default function Home() {
 
           {/* Table rows */}
           <div
-            className="w-full h-12 p-3 text-[0.8rem] border-b border-gray-100 
+            className="w-full h-12 p-3 text-[0.8rem] border-b   
             grid grid-cols-[40px_repeat(5,1fr)]
             items-center text-end"
           >
@@ -60,7 +60,7 @@ export default function Home() {
               <label className="flex items-center cursor-pointer relative">
                 <input
                   type="checkbox"
-                  className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded border border-gray-300 checked:bg-[var(--primary)] checked:border-[var(--primary)]"
+                  className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded border border-gray-300 dark:!border-gray-600 checked:bg-[var(--secondary)] checked:border-[var(--secondary)]"
                   id="check1"
                 />
                 <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -74,17 +74,21 @@ export default function Home() {
               متن تستی
             </div>
 
-            <div className="text-start truncate min-w-0">2 MG</div>
-            <div className="text-start truncate min-w-0 text-[var(--secondary)]">
+            <div className="text-start truncate text-[var(--tertiary)] min-w-0">
+              2 MG
+            </div>
+            <div className="text-start truncate  min-w-0 text-[var(--secondary)]">
               مشاهده
             </div>
-            <div className="text-start truncate min-w-0">1400/2/1</div>
-            <div className="text-start truncate min-w-0 cursor-pointer hover:opacity-[0.7]">
+            <div className="text-start truncate text-[var(--tertiary)] min-w-0">
+              1400/2/1
+            </div>
+            <div className="text-start truncate  min-w-0 cursor-pointer hover:opacity-[0.7]">
               <Bin size="size-5" color="var(--primary)" />
             </div>
           </div>
           <div
-            className="w-full h-12 p-3 text-[0.8rem] border-b border-gray-100 
+            className="w-full h-12 p-3 text-[0.8rem] border-b   
             grid grid-cols-[40px_repeat(5,1fr)]
             items-center text-end"
           >
@@ -93,7 +97,7 @@ export default function Home() {
               <label className="flex items-center cursor-pointer relative">
                 <input
                   type="checkbox"
-                  className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded border border-gray-300 checked:bg-[var(--primary)] checked:border-[var(--primary)]"
+                  className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded border border-gray-300 dark:!border-gray-600 checked:bg-[var(--secondary)] checked:border-[var(--secondary)]"
                   id="check1"
                 />
                 <span className="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -107,11 +111,15 @@ export default function Home() {
               متن تستی
             </div>
 
-            <div className="text-start truncate min-w-0">5 MG</div>
-            <div className="text-start truncate min-w-0 text-[var(--primary)]">
+            <div className="text-start truncate text-[var(--tertiary)] min-w-0">
+              5 MG
+            </div>
+            <div className="text-start truncate  min-w-0 text-[var(--primary)]">
               استخراج
             </div>
-            <div className="text-start truncate min-w-0">1400/2/3</div>
+            <div className="text-start truncate text-[var(--tertiary)] min-w-0">
+              1400/2/3
+            </div>
             <div className="text-start truncate min-w-0 cursor-pointer hover:opacity-[0.7]">
               <Bin size="size-5" color="var(--primary)" />
             </div>
