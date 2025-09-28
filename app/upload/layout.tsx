@@ -21,12 +21,8 @@ export const metadata: Metadata = {
   title: "زبان ابزار",
   description: "ابزاری برای مدیریت منابع و یادگیری زبان",
   icons: {
-    icon: [
-      { url: "/Logo.webp", sizes: "16x16", type: "image/webp" },
-      { url: "/Logo.webp", sizes: "32x32", type: "image/webp" },
-      { url: "/Logo.webp", sizes: "48x48", type: "image/webp" },
-    ],
-    apple: "/Logo.webp",
+    icon: [{ url: "/Logo.png?v=3", sizes: "16x16", type: "image/png" }],
+    apple: "/Logo.png",
   },
 };
 

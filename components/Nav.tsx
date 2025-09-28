@@ -24,7 +24,7 @@ export default function Nav(): ReactElement {
         <div className="w-full h-16  flex flex-row-reverse gap-2 items-center ">
           <Image
             alt="زبان ابزار"
-            src="/Logo.webp"
+            src="/Logo.png"
             width={30}
             height={30}
             priority

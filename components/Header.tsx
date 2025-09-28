@@ -24,18 +24,19 @@ export default function Header(): ReactElement {
   return (
     <header className="w-full h-20 flex flex-row-reverse justify-between items-center  dark:bg-[var(--background-dark)]  p-2 px-4 border-b  ">
       {/*Page title */}
-      <div className="flex flex-col items-end justify-center gap-2 p-2">
-        {pageTopic.map((t) => {
-          return (
-            path.includes(t.path) && (
-              <>
-                <p className="text-[0.8rem] dark:text-white">{t.title}</p>
-                <p className="text-[0.7rem] text-[var(--tertiary)]">{t.desc}</p>
-              </>
-            )
-          );
-        })}
-      </div>
+      {pageTopic.map((t, index) => {
+        return (
+          path.includes(t.path) && (
+            <div
+              key={index}
+              className="flex flex-col items-end justify-center gap-2 p-2"
+            >
+              <p className="text-[0.8rem] dark:text-white">{t.title}</p>
+              <p className="text-[0.7rem] text-[var(--tertiary)]">{t.desc}</p>
+            </div>
+          )
+        );
+      })}
 
       {/*Left items */}
       <div className="flex gap-1">
@@ -46,10 +47,10 @@ export default function Header(): ReactElement {
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className=" p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl"
         >
-          {theme !== "dark" ? (
-            <Moon color="var(--tertiary)" size="size-5" />
-          ) : (
+          {theme === "dark" ? (
             <Sun color="var(--tertiary)" size="size-5" />
+          ) : (
+            <Moon color="var(--tertiary)" size="size-5" />
           )}
         </div>
         <div className=" p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl">
