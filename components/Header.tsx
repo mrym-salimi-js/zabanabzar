@@ -15,7 +15,7 @@ export default function Header(): ReactElement {
     {
       title: "آپلود فایل",
       desc: "آپلود فایل ها و تصاویر متنی",
-      path: "/upload",
+      path: "/files",
     },
   ];
   const { theme, setTheme } = useTheme();

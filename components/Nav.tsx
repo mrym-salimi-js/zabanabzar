@@ -15,7 +15,7 @@ export default function Nav(): ReactElement {
 
   const navItems = [
     { href: "/dashboard", icon: Dashboard, label: "داشبورد" },
-    { href: "/upload", icon: Upload, label: "اپلود فایل" },
+    { href: "/files", icon: Upload, label: "اپلود فایل" },
   ];
   return (
     <div className="w-[90%] sm:w-55  h-full p-2 sticky top-0 bg-white dark:bg-[var(--background-dark)]  border-l-[1px] border-gray-100">

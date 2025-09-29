@@ -1,5 +1,5 @@
 import { Bin, FileWithName, Pencil, Tick } from "@/components/icon";
-import { UploadFileModal } from "@/components/upload/UploadFileModal";
+import { Modal } from "@/components/files/modals/uploadFiles/Modal";
 import { ReactElement } from "react";
 
 export default function Home(): ReactElement {
@@ -8,7 +8,7 @@ export default function Home(): ReactElement {
       <div className="w-full h-[87%] flex flex-col gap-2 p-2">
         <div className="w-full h-20 flex  items-center p-2">
           <div className="flex gap-2 items-center">
-            <UploadFileModal />
+            <Modal />
             <span className="w-auto h-auto py-3 px-4 flex gap-2 hover:opacity-[0.7] cursor-pointer items-center justify-center rounded-[12px] bg-[var(--secondary)]">
               <Pencil size="size-4" color="#ffffff" />
               <p className="text-white text-[0.8rem]">تایپ</p>

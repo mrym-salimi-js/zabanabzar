@@ -11,5 +11,15 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  pgweb:
+    image: sosedoff/pgweb
+    ports:
+      - "8081:8081"
+    environment:
+      PGWEB_DATABASE_URL: postgres://postgres:password@db:5432/mydb?sslmode=disable
+    depends_on:
+      - db
+    restart: always
+
 volumes:
   pgdata:
