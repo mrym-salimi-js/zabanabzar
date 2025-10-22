@@ -1,15 +1,55 @@
 "use client";
 
-import { useRef, useState, ChangeEvent } from "react";
+import { useRef, ChangeEvent, useReducer } from "react";
 import { Button } from "@/components/ui/button";
+import { uploadReducer } from "@/reducers/uploadReducer";
+import axios from "axios";
+import type { AxiosProgressEvent } from "axios";
 
 export default function FilePicker() {
-  const [fileName, setFileName] = useState<string>("");
+  const [filesState, dispatch] = useReducer(uploadReducer, []);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) setFileName(file.name);
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    //Get selected files
+    const files = e.target.files as FileList;
+    if (!files) return;
+
+    // Set mood into  "ADD_FILES"
+    dispatch({ type: "ADD_FILES", files: Array.from(files) });
+
+    // Create formData for each selected files
+    Array.from(files).forEach((file, index) => {
+      //Add file inti formData
+      const formData = new FormData();
+      formData.append("file", file);
+      // Post file by axios
+      axios
+        .post("/api/upload", formData, {
+          // Set percent for progress of file
+          onUploadProgress: (progressEvent: AxiosProgressEvent) => {
+            const percent = Math.round(
+              (progressEvent.loaded / (progressEvent.total || 1)) * 100
+            );
+
+            // Update percent of each file in state
+            dispatch({ type: "UPDATE_PROGRESS", index, progress: percent });
+          },
+        })
+        .then((res) => {
+          // Set "done" status for every file after get it link from storage (s3)
+          dispatch({
+            type: "SET_STATUS",
+            index,
+            status: "done",
+            url: res.data.fileUrl,
+          });
+        })
+        .catch(() => {
+          // set "error" status if uoploading failed
+          dispatch({ type: "SET_STATUS", index, status: "error" });
+        });
+    });
   };
 
   const openFileDialog = () => {
@@ -33,10 +73,6 @@ export default function FilePicker() {
         onChange={handleFileChange}
         className="hidden"
       />
-
-      {fileName && (
-        <p className="text-sm text-gray-700 dark:text-gray-200">{fileName}</p>
-      )}
     </div>
   );
 }
