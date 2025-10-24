@@ -16,7 +16,7 @@ export default function FilePicker() {
     if (!files) return;
 
     //Add new file into state
-    addFiles(files);
+    addFiles(Array.from(files));
 
     // Create formData for each selected files
     Array.from(files).forEach((file, index) => {
@@ -25,7 +25,7 @@ export default function FilePicker() {
       formData.append("file", file);
       // Post file by axios
       axios
-        .post("/api/upload", formData, {
+        .post("/api/upload/storage", formData, {
           // Set percent for progress of file
           onUploadProgress: (progressEvent: AxiosProgressEvent) => {
             const percent = Math.round(
@@ -42,7 +42,7 @@ export default function FilePicker() {
         })
         .catch(() => {
           // Set error status for each file
-          updateStatus(index, "error", "undefined");
+          updateStatus(index, "error", undefined);
         });
     });
   };
@@ -63,6 +63,7 @@ export default function FilePicker() {
       </Button>
 
       <input
+        multiple
         ref={fileInputRef}
         type="file"
         onChange={handleFileChange}
