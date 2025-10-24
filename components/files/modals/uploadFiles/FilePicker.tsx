@@ -1,22 +1,22 @@
 "use client";
 
-import { useRef, ChangeEvent, useReducer } from "react";
+import { useRef, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { uploadReducer } from "@/reducers/uploadReducer";
 import axios from "axios";
 import type { AxiosProgressEvent } from "axios";
+import { useUploadStore } from "@/store/uploadFileStore";
 
 export default function FilePicker() {
-  const [filesState, dispatch] = useReducer(uploadReducer, []);
+  const { addFiles, updateProgress, updateStatus } = useUploadStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     //Get selected files
-    const files = e.target.files as FileList;
+    const files = e.target.files as File[] | null;
     if (!files) return;
 
-    // Set mood into  "ADD_FILES"
-    dispatch({ type: "ADD_FILES", files: Array.from(files) });
+    //Add new file into state
+    addFiles(files);
 
     // Create formData for each selected files
     Array.from(files).forEach((file, index) => {
@@ -32,22 +32,17 @@ export default function FilePicker() {
               (progressEvent.loaded / (progressEvent.total || 1)) * 100
             );
 
-            // Update percent of each file in state
-            dispatch({ type: "UPDATE_PROGRESS", index, progress: percent });
+            // Update progress percent of each file in state
+            updateProgress(index, percent);
           },
         })
         .then((res) => {
-          // Set "done" status for every file after get it link from storage (s3)
-          dispatch({
-            type: "SET_STATUS",
-            index,
-            status: "done",
-            url: res.data.fileUrl,
-          });
+          // Set done status for each file after get it link from storage (s3)
+          updateStatus(index, "done", res.data.fileUrl);
         })
         .catch(() => {
-          // set "error" status if uoploading failed
-          dispatch({ type: "SET_STATUS", index, status: "error" });
+          // Set error status for each file
+          updateStatus(index, "error", "undefined");
         });
     });
   };
