@@ -1,30 +1,19 @@
 import { Bin, FileWithName, Retry } from "@/components/icon";
 import React, { ReactElement } from "react";
 import { ProgressBar } from "./ProgressBar";
-import { useUploadStore } from "@/store/uploadFileStore";
+import { useUploadStore, UploadFilePersist } from "@/store/uploadFileStore";
+import { deleteFile } from "@/services/deleteFile";
+import { uploadFile } from "@/services/uploadFile";
 
 export default function UploadedFilesList(): ReactElement {
-  const { files, removeFile } = useUploadStore();
-  const handleRemoveFile = async (
-    index: number,
-    fileUrl: string | undefined
-  ) => {
-    if (files[index].status === "error") removeFile(index);
-    if (!fileUrl) return;
-    try {
-      const res = await fetch("/api/upload/storage", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fileUrl }),
-      });
-      console.dir(res);
-      // Throw erorr
-      if (!res.ok) throw new Error("حذف سرور موفق نبود");
-      // Remove from localStorage
-      removeFile(index);
-    } catch (error) {
-      console.error("خطا در حذف فایل از S3:", error);
-    }
+  const { files } = useUploadStore();
+
+  const handleRemoveFile = async (file: UploadFilePersist) => {
+    const status = file.status;
+    const id = file.id;
+    const fileUrl = file.url;
+
+    await deleteFile(status, id, fileUrl);
   };
   return (
     <div className="w-full h-auto p-2 flex flex-col items-end gap-2">
@@ -58,11 +47,14 @@ export default function UploadedFilesList(): ReactElement {
                         </p>
                       </div>
                       {file.status === "error" && (
-                        <div className="w-5 h-5 flex items-center justify-center rounded-full cursor-pointer hover:opacity-[0.7] mr-2">
+                        <div
+                          onClick={() => uploadFile(file.id)}
+                          className="w-5 h-5 flex items-center justify-center rounded-full cursor-pointer hover:opacity-[0.7] mr-2"
+                        >
                           <Retry size="size-4 " color="var(--tertiary) " />
                         </div>
                       )}
-                      <div onClick={() => handleRemoveFile(index, file.url)}>
+                      <div onClick={() => handleRemoveFile(file)}>
                         <Bin
                           size="size-4 cursor-pointer hover:opacity-[0.7]"
                           color="var(--tertiary) "

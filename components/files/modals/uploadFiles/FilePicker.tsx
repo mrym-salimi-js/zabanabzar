@@ -2,12 +2,12 @@
 
 import { useRef, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
-import type { AxiosProgressEvent } from "axios";
 import { useUploadStore } from "@/store/uploadFileStore";
+import { saveFileToIndexedDB } from "@/lib/indexedDB";
+import { uploadFile } from "@/services/uploadFile";
 
 export default function FilePicker() {
-  const { addFiles, updateProgress, updateStatus } = useUploadStore();
+  const { addFiles } = useUploadStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -15,35 +15,23 @@ export default function FilePicker() {
     const files = e.target.files as File[] | null;
     if (!files) return;
 
-    //Add new file into state
-    addFiles(Array.from(files));
-
     // Create formData for each selected files
-    Array.from(files).forEach((file, index) => {
-      //Add file inti formData
-      const formData = new FormData();
-      formData.append("file", file);
-      // Post file by axios
-      axios
-        .post("/api/upload/storage", formData, {
-          // Set percent for progress of file
-          onUploadProgress: (progressEvent: AxiosProgressEvent) => {
-            const percent = Math.round(
-              (progressEvent.loaded / (progressEvent.total || 1)) * 100
-            );
+    Array.from(files).forEach(async (file) => {
+      const id = crypto.randomUUID();
+      // Save file in indexedDB
+      await saveFileToIndexedDB(id, file);
+      //Add new file into state
+      addFiles({
+        id,
+        name: file.name,
+        size: file.size,
+        status: "uploading",
+        progress: 0,
+        url: undefined,
+      });
 
-            // Update progress percent of each file in state
-            updateProgress(index, percent);
-          },
-        })
-        .then((res) => {
-          // Set done status for each file after get it link from storage (s3)
-          updateStatus(index, "done", res.data.fileUrl);
-        })
-        .catch(() => {
-          // Set error status for each file
-          updateStatus(index, "error", undefined);
-        });
+      // Start file upload by getting from indexedDB
+      await uploadFile(id);
     });
   };
 

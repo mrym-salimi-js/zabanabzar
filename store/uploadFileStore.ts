@@ -3,21 +3,21 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 type StatusFile = "uploading" | "done" | "error";
 
-interface UploadFilePersist {
-  mainFile: File;
+export interface UploadFilePersist {
+  id: string;
   name: string;
   size: number;
   progress: number;
   status: StatusFile;
-  url?: string;
+  url?: string | undefined;
 }
 
 interface UploadState {
   files: UploadFilePersist[];
-  addFiles: (newFiles: File[]) => void;
-  updateProgress: (index: number, progress: number) => void;
-  updateStatus: (index: number, status: StatusFile, url?: string) => void;
-  removeFile: (index: number) => void;
+  addFiles: (item: UploadFilePersist) => void;
+  updateProgress: (id: string, progress: number) => void;
+  updateStatus: (id: string, status: StatusFile, url?: string) => void;
+  removeFile: (id: string) => void;
   clearFiles: () => void;
 }
 
@@ -25,37 +25,29 @@ export const useUploadStore = create<UploadState>()(
   persist(
     (set) => ({
       files: [],
-      addFiles: (newFiles: File[]) =>
+      addFiles: (item) =>
         set((state) => ({
-          files: [
-            ...newFiles.map((file) => ({
-              mainFile: file,
-              name: file.name,
-              size: file.size,
-              progress: 0,
-              status: "uploading" as const,
-              url: undefined,
-            })),
-            ...state.files,
-          ],
+          files: [item, ...state.files],
         })),
 
-      updateProgress: (index: number, progress: number) =>
+      updateProgress: (id, progress) =>
         set((state) => ({
-          files: state.files.map((item, i) =>
-            i === index ? { ...item, progress } : item
+          files: state.files.map((item) =>
+            id === item.id ? { ...item, progress } : item
           ),
         })),
 
-      updateStatus: (index: number, status: StatusFile, url?: string) =>
+      updateStatus: (id, status, url?) =>
         set((state) => ({
-          files: state.files.map((item, i) =>
-            i === index ? { ...item, status, url } : item
+          files: state.files.map((item) =>
+            id === item.id ? { ...item, status, url } : item
           ),
         })),
 
-      removeFile: (index: number) =>
-        set((state) => ({ files: state.files.filter((f, i) => i !== index) })),
+      removeFile: (id) =>
+        set((state) => ({
+          files: state.files.filter((item) => id !== item.id),
+        })),
 
       clearFiles: () => set({ files: [] }),
     }),
