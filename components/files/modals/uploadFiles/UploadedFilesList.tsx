@@ -34,17 +34,27 @@ export default function UploadedFilesList(): ReactElement {
                         <p className="w-[80%] truncate dark:text-white text-[0.7rem]">
                           {file.name}
                         </p>
-                        <p
-                          className={` ${file.status === "error" ? `text-[var(--primary)]` : `text-gray-400`} text-[0.6rem]`}
-                        >
-                          {file.size < 1024 * 1024
-                            ? (file.size / 1024).toFixed(1) + " KB"
-                            : (file.size / (1024 * 1024)).toFixed(1) + " MB"}
-                          {" | "}
-                          {file.status === "error"
-                            ? "erorr"
-                            : `${file.progress}%`}
-                        </p>
+                        <div className="flex gap-1  text-[0.6rem]">
+                          <p className="text-gray-400">
+                            {file.size < 1024 * 1024
+                              ? (file.size / 1024).toFixed(1) + " KB"
+                              : (file.size / (1024 * 1024)).toFixed(1) + " MB"}
+                          </p>
+                          <p className="text-gray-400">{" | "}</p>
+                          {file.status === "uploading" && (
+                            <p className="text-yellow-500 ">
+                              {`uploading (${file.progress}%)`}
+                            </p>
+                          )}
+                          {file.status === "done" && (
+                            <p className="text-[var(--secondary)] ">
+                              {"complete"}
+                            </p>
+                          )}
+                          {file.status === "error" && (
+                            <p className="text-[var(--primary)] ">{"error"}</p>
+                          )}
+                        </div>
                       </div>
                       {file.status === "error" && (
                         <div

@@ -8,6 +8,7 @@ import React, {
   useState,
 } from "react";
 import FilePicker from "./FilePicker";
+import { processAndUploadFiles } from "@/services/processAndUploadFiles";
 type DropFiles = {
   files: File[];
   setFiles: Dispatch<SetStateAction<File[]>>;
@@ -24,6 +25,10 @@ export default function DropFiles({
     setIsOver(false);
 
     const files = e.dataTransfer.files;
+    if (!files) return;
+
+    // Create formData for each selected files
+    processAndUploadFiles(files);
 
     if (files) setFiles((prev: File[]) => [...prev, ...files]);
   };

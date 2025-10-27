@@ -7,7 +7,7 @@ export const deleteFile = async (
   fileUrl: string | undefined
 ) => {
   const { removeFile } = useUploadStore.getState();
-  console.log(id);
+
   if (status === "error" || fileUrl === undefined) {
     removeFile(id);
     deleteFileFromIndexedDB(id);

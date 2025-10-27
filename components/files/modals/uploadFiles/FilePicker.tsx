@@ -2,37 +2,22 @@
 
 import { useRef, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { useUploadStore } from "@/store/uploadFileStore";
-import { saveFileToIndexedDB } from "@/lib/indexedDB";
-import { uploadFile } from "@/services/uploadFile";
+import { processAndUploadFiles } from "@/services/processAndUploadFiles";
 
 export default function FilePicker() {
-  const { addFiles } = useUploadStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     //Get selected files
+
     const files = e.target.files as File[] | null;
+
     if (!files) return;
 
     // Create formData for each selected files
-    Array.from(files).forEach(async (file) => {
-      const id = crypto.randomUUID();
-      // Save file in indexedDB
-      await saveFileToIndexedDB(id, file);
-      //Add new file into state
-      addFiles({
-        id,
-        name: file.name,
-        size: file.size,
-        status: "uploading",
-        progress: 0,
-        url: undefined,
-      });
+    processAndUploadFiles(files);
 
-      // Start file upload by getting from indexedDB
-      await uploadFile(id);
-    });
+    e.target.value = "";
   };
 
   const openFileDialog = () => {

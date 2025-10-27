@@ -24,8 +24,11 @@ export const uploadFile = async (id: string) => {
         updateProgress(id, percent);
       },
     })
-    .then(() => {
-      updateStatus(id, "done");
+    .then((response) => {
+      //Get file URL
+      const fileUrl = response.data.fileUrl;
+
+      updateStatus(id, "done", fileUrl);
     })
     .catch((error) => {
       console.dir(error);
