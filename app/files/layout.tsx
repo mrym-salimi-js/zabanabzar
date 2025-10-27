@@ -1,57 +1,21 @@
-import type { Metadata } from "next";
-import { Geist } from "next/font/google";
-import "@/app/globals.css";
-import localFont from "next/font/local";
+// app/files/layout.tsx
 import Nav from "@/components/Nav";
 import Header from "@/components/Header";
-import { ThemeProvider } from "next-themes";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const iranSans = localFont({
-  src: "../../public/font/Rastin-Circle.ttf",
-  variable: "--font-iran-sans",
-  display: "swap",
-});
-
-export const metadata: Metadata = {
-  title: "زبان ابزار",
-  description: "ابزاری برای مدیریت منابع و یادگیری زبان",
-  icons: {
-    icon: [{ url: "/Logo.png?v=3", sizes: "16x16", type: "image/png" }],
-    apple: "/Logo.png",
-  },
-};
-
-export default function RootLayout({
+export default function FilesLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="fa">
-      <body
-        className={`${iranSans.variable}${geistSans.variable} antialiased dark:bg-[var(--background-dark)]`}
-      >
-        <ThemeProvider
-          attribute="class"
-          enableSystem={true}
-          defaultTheme="system"
-        >
-          <div className="w-full h-screen flex flex-row-reverse gap-0.5  ">
-            {/* Nav */}
-            <Nav />
-            {/* Content */}
-            <div className="w-[85.3%] h-full  flex flex-col gap-1 ">
-              <Header />
-              {children}
-            </div>
-          </div>
-        </ThemeProvider>
-      </body>
-    </html>
+    <div className="w-full h-screen flex flex-row-reverse gap-0.5">
+      {/* Nav */}
+      <Nav />
+      {/* Content */}
+      <div className="w-[85.3%] h-full flex flex-col gap-1">
+        <Header />
+        {children}
+      </div>
+    </div>
   );
 }

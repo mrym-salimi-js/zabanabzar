@@ -1,6 +1,7 @@
 import { getFileFromIndexedDB } from "@/lib/indexedDB";
 import { useUploadStore } from "@/store/uploadFileStore";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export const uploadFile = async (id: string) => {
   const { updateProgress, updateStatus } = useUploadStore.getState(); // Use getState() metod beacause we import zustand hook in a usual funtion not component
@@ -27,11 +28,11 @@ export const uploadFile = async (id: string) => {
     .then((response) => {
       //Get file URL
       const fileUrl = response.data.fileUrl;
-
       updateStatus(id, "done", fileUrl);
     })
     .catch((error) => {
       console.dir(error);
+      toast.error("فایل در server storage اپلود نشد");
       updateStatus(id, "error");
     });
 };

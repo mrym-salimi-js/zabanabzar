@@ -1,5 +1,6 @@
 import { deleteFileFromIndexedDB } from "@/lib/indexedDB";
 import { useUploadStore } from "@/store/uploadFileStore";
+import toast from "react-hot-toast";
 
 export const deleteFile = async (
   status: string,
@@ -21,12 +22,12 @@ export const deleteFile = async (
       body: JSON.stringify({ fileUrl }),
     });
 
-    // Throw erorr
-    if (!res.ok) throw new Error("حذف سرور موفق نبود");
+    // Toast erorr
+    if (!res.ok) toast.error("حذف فایل از سرور موفق نبود");
     // Remove from localStorage
     removeFile(id);
     deleteFileFromIndexedDB(id);
   } catch (error) {
-    console.error("خطا در حذف فایل از S3:", error);
+    toast.error(`خطا در حذف فایل از server storage`);
   }
 };
