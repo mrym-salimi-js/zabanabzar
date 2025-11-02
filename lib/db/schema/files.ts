@@ -16,6 +16,10 @@ export const files = pgTable("files", {
 
   size: bigint("size", { mode: "number" }).notNull(),
 
+  ext: varchar("ext", { length: 10 }).notNull(),
+
+  url: text("url").notNull(),
+
   exText: text("ex_text"),
 
   userId: uuid("user_id").notNull(),

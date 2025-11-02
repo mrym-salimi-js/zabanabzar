@@ -8,19 +8,14 @@ import FileInfoDesc from "./FileInfoDesc";
 import UploadedFilesList from "./UploadedFilesList";
 import DropFiles from "./DropFiles";
 import ModalFooter from "./ModalFooter";
-type UploadedFile = {
-  id: number;
-  name: string;
-  udserId: number;
-  url: string;
-  size: number;
-  type: string;
-  originalText: string | null;
-  translatedText: string | null;
-  subtitleFile: string | null;
-  status: string;
-  createdAt: Date;
-};
+// type UploadedFile = {
+//   name: string;
+//   size: number;
+//   udserId: number;
+//   exText: string | null;
+//   url: string;
+//   ext: string;
+// };
 export function Modal(): ReactElement {
   const [files, setFiles] = useState<File[]>([]);
   return (
