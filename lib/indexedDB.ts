@@ -1,3 +1,4 @@
+import { files } from "@/lib/db/schema";
 // Open or create database
 const DB_NAME = "fileUploadsDB";
 const STORE_NAME = "uploads";
@@ -44,13 +45,26 @@ export async function getFileFromIndexedDB(id: string): Promise<File | null> {
     request.onerror = () => reject(request.error);
   });
 }
-// Dlete file after success Upload from database
+// Dlete special file
 export async function deleteFileFromIndexedDB(id: string) {
   const db = await openDB();
   return new Promise((resolve, reject) => {
     const tx = db.transaction(STORE_NAME, "readwrite");
     const store = tx.objectStore(STORE_NAME);
     store.delete(id);
+
+    tx.oncomplete = () => resolve(true);
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+// Delete all files
+export async function deleteAllFilesFromIndexedDB() {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    const store = tx.objectStore(STORE_NAME);
+    store.clear();
 
     tx.oncomplete = () => resolve(true);
     tx.onerror = () => reject(tx.error);

@@ -1,25 +1,12 @@
 import { Upload } from "@/components/icon";
-import React, {
-  Dispatch,
-  DragEvent,
-  ReactElement,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import React, { DragEvent, ReactElement, useState } from "react";
 import FilePicker from "./FilePicker";
 import { processAndUploadFiles } from "@/services/processAndUploadFiles";
-type DropFiles = {
-  files: File[];
-  setFiles: Dispatch<SetStateAction<File[]>>;
-};
 
-export default function DropFiles({
-  files,
-  setFiles,
-}: DropFiles): ReactElement {
+export default function DropFiles(): ReactElement {
   const [isOver, setIsOver] = useState<boolean>(false);
 
+  // Handle onDrop events
   const handleOnDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsOver(false);
@@ -29,29 +16,19 @@ export default function DropFiles({
 
     // Create formData for each selected files
     processAndUploadFiles(files);
-
-    if (files) setFiles((prev: File[]) => [...prev, ...files]);
   };
+
+  // Handle onDragOver events
   const handleOnDgragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsOver(true);
   };
+
+  // Handle onDragLeave events
   const handleOnDgragLeave = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     setIsOver(false);
   };
-  useEffect(() => {
-    const formData = new FormData();
-    files.forEach((f) => {
-      formData.append("name", f.name);
-      formData.append("size", f.size.toString()); // یادت باشه بعدا تایپ این فیلد توی دیتابیس رو درست کنی
-      formData.append("type", f.type);
-      formData.append("url", "");
-      formData.append("originalText", "");
-      formData.append("translatedText", "");
-      formData.append("subtitleFile", "");
-    });
-  }, [files]);
 
   return (
     <div

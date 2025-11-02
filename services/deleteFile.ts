@@ -16,7 +16,7 @@ export const deleteFile = async (
   if (!fileUrl) return;
 
   try {
-    const res = await fetch("/api/upload/storage", {
+    const res = await fetch("/api/files/storage", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ fileUrl }),

@@ -17,7 +17,7 @@ export const uploadFile = async (id: string) => {
   formData.append("file", file);
 
   await axios
-    .post("/api/upload/storage", formData, {
+    .post("/api/files/storage", formData, {
       // Get percent of file progress
       onUploadProgress: (event) => {
         const percent = Math.round((event.loaded * 100) / (event.total ?? 1));

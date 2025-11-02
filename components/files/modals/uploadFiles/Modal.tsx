@@ -1,7 +1,7 @@
 "use client";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import UploadFilesBtn from "../../UploadFilesBtn";
 import ModalHeader from "./ModalHeader";
 import FileInfoDesc from "./FileInfoDesc";
@@ -17,7 +17,6 @@ import ModalFooter from "./ModalFooter";
 //   ext: string;
 // };
 export function Modal(): ReactElement {
-  const [files, setFiles] = useState<File[]>([]);
   return (
     <Dialog>
       <form>
@@ -29,7 +28,7 @@ export function Modal(): ReactElement {
           <ModalHeader />
           <div className="w-full h-[1px] bg-gray-100 dark:bg-[var(--tertiary-dark)]"></div>
           {/*Drag and drop file Or choose  */}
-          <DropFiles files={files} setFiles={setFiles} />
+          <DropFiles />
           {/*File Info desc */}
           <FileInfoDesc />
           {/*Uploaded files */}

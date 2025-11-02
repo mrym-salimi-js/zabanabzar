@@ -5,6 +5,7 @@ import localFont from "next/font/local";
 import "@/app/globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
+import { Providers } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,11 +42,13 @@ export default function RootLayout({
       <body
         className={`${iranSans.variable} ${geistSans.variable} antialiased dark:bg-[var(--background-dark)]`}
       >
-        <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-          {children}
-          {/* Toaster برای کل اپ */}
-          <Toaster position="top-right" reverseOrder={false} />
-        </ThemeProvider>
+        <Providers>
+          <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+            {children}
+
+            <Toaster position="top-center" reverseOrder={false} />
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ import {
   bigint,
   text,
   timestamp,
-  uuid,
+  integer,
 } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 
@@ -22,7 +22,7 @@ export const files = pgTable("files", {
 
   exText: text("ex_text"),
 
-  userId: uuid("user_id").notNull(),
+  userId: integer("user_id").notNull(),
 
   createdAt: timestamp("created_at")
     .default(sql`now()`)

@@ -6,7 +6,7 @@ export type FileInsertType = typeof files.$inferInsert;
 export type FileSelectType = typeof files.$inferSelect;
 
 // Create new file
-export async function craeteFile(date: FileInsertType) {
+export async function craeteFile(date: FileInsertType[]) {
   const result = await db.insert(files).values(date).returning();
   return result[0];
 }
