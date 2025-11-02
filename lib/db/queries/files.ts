@@ -1,0 +1,38 @@
+import { files } from "./../schema/files";
+import { db } from "../index";
+import { eq } from "drizzle-orm";
+
+export type FileInsertType = typeof files.$inferInsert;
+export type FileSelectType = typeof files.$inferSelect;
+
+// Create new file
+export async function craeteFile(date: FileInsertType) {
+  const result = await db.insert(files).values(date).returning();
+  return result[0];
+}
+
+// Get all files
+export async function getAllFiles() {
+  return await db.select().from(files).orderBy(files.createdAt);
+}
+
+// Get special file
+export async function getFileById(id: number) {
+  const result = await db.select().from(files).where(eq(files.id, id));
+  return result[0];
+}
+
+// Edit special file
+export async function updateFile(id: number, data: Partial<FileInsertType>) {
+  return await db.update(files).set(data).where(eq(files.id, id)).returning();
+}
+
+// Delete special file
+export async function deleteFile(id: number) {
+  return await db.delete(files).where(eq(files.id, id)).returning();
+}
+
+// Delete all files
+export async function deleteAllFiles() {
+  return await db.delete(files);
+}
