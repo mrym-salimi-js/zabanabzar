@@ -29,8 +29,6 @@ export function Modal(): ReactElement {
           <div className="w-full h-[1px] bg-gray-100 dark:bg-[var(--tertiary-dark)]"></div>
           {/*Drag and drop file Or choose  */}
           <DropFiles />
-          {/*File Info desc */}
-          <FileInfoDesc />
           {/*Uploaded files */}
           <UploadedFilesList />
           {/*Modal footer */}

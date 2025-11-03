@@ -10,9 +10,11 @@ export default function FilesLayout({
   return (
     <div className="w-full h-screen flex flex-row-reverse gap-0.5">
       {/* Nav */}
-      <Nav />
+      <div className="w-[250px] hidden lg:block">
+        <Nav />
+      </div>
       {/* Content */}
-      <div className="w-[85.3%] h-full flex flex-col gap-1">
+      <div className=" lg:w-[85.3%] w-full h-full flex flex-col gap-1">
         <Header />
         {children}
       </div>

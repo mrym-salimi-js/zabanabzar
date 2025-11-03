@@ -40,6 +40,7 @@ export default function FilePicker() {
         ref={fileInputRef}
         type="file"
         onChange={handleFileChange}
+        accept=".txt,.pdf,.docx,.jpg,.jpeg,.png"
         className="hidden"
       />
     </div>

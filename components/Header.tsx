@@ -1,51 +1,56 @@
-// import Image from "next/image";
 "use client";
+
 import React, { ReactElement } from "react";
 import { Moon, Search, Sun, User } from "./icon";
-import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
+import Image from "next/image";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Nav from "./Nav";
 
-type PageTopic = {
-  title: string;
-  desc: string;
-  path: string;
-};
 export default function Header(): ReactElement {
-  const pageTopic: PageTopic[] = [
-    {
-      title: "آپلود فایل",
-      desc: "آپلود فایل ها و تصاویر متنی",
-      path: "/files",
-    },
-  ];
   const { theme, setTheme } = useTheme();
 
-  const path = usePathname();
   return (
-    <header className="w-full h-20 flex flex-row-reverse justify-between items-center  dark:bg-[var(--background-dark)]  p-2 px-4 border-b  ">
-      {/*Page title */}
-      {pageTopic.map((t, index) => {
-        return (
-          path.includes(t.path) && (
-            <div
-              key={index}
-              className="flex flex-col items-end justify-center gap-2 p-2"
-            >
-              <p className="text-[0.8rem] dark:text-white">{t.title}</p>
-              <p className="text-[0.7rem] text-[var(--tertiary)]">{t.desc}</p>
+    <header className="w-full h-20 flex flex-row-reverse justify-between lg:justify-end items-center dark:bg-[var(--background-dark)] p-2 px-4 border-b">
+      {/* Right items */}
+      <div className="w-auto flex  gap-2 flex-row-reverse items-center lg:hidden">
+        {/* منوی همبرگری موبایل */}
+        <Sheet>
+          <SheetTrigger asChild>
+            <div className="w-6 h-auto flex flex-col gap-1 cursor-pointer hover:opacity-[0.7] items-end">
+              <span className="w-full h-[3px] bg-gray-700 rounded-full"></span>
+              <span className="w-full h-[3px] bg-gray-700 rounded-full"></span>
+              <span className="w-2/3 h-[3px] bg-gray-700 rounded-full"></span>
             </div>
-          )
-        );
-      })}
+          </SheetTrigger>
 
-      {/*Left items */}
+          {/* Nav به‌صورت Sheet در موبایل */}
+          <SheetContent side="right" className="p-0 w-[70%] sm:w-[300px]">
+            <Nav />
+          </SheetContent>
+        </Sheet>
+
+        {/* لوگو */}
+        <div className="flex flex-row-reverse gap-2 items-center">
+          <Image
+            alt="زبان ابزار"
+            src="/Logo.png"
+            width={30}
+            height={30}
+            priority
+          />
+          <h1 className="dark:text-white">زبان ابزار</h1>
+        </div>
+      </div>
+
+      {/* Left items */}
       <div className="flex gap-1">
-        <div className=" p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)]  items-center rounded-xl">
+        <div className="p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl">
           <User color="var(--tertiary)" size="size-5" />
         </div>
         <div
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className=" p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl"
+          className="p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl"
         >
           {theme === "dark" ? (
             <Sun color="var(--tertiary)" size="size-5" />
@@ -53,7 +58,7 @@ export default function Header(): ReactElement {
             <Moon color="var(--tertiary)" size="size-5" />
           )}
         </div>
-        <div className=" p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl">
+        <div className="p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl">
           <Search color="var(--tertiary)" size="size-5" />
         </div>
       </div>
