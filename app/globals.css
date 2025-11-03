@@ -3,16 +3,18 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-   --background-light: #ffffff;
-   --background-dark: #101828;
+  --background-light: #ffffff;
+  --background-dark: #101828;
   --primary: #df2532;
-  --primary-light:#faecee;
-  --primary-dark:#82181a69;
+  --primary-light: #faecee;
+  --primary-dark: #82181a69;
   --secondary: #00bf9f;
-  --secondary-light:#e9fbf8;
-  --tertiary:#6a7282;
-  --tertiary-light:#f3f4f6;
-  --tertiary-dark:#232e3d;
+  --secondary-light: #e9fbf8;
+  --secondary-dark: #00bf9f68;
+  --tertiary: #6a7282;
+  --tertiary-light: #f3f4f6;
+  --tertiary-dark: #232e3d;
+  --fourth: #454545;
   --radius: 0.625rem;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -46,20 +48,20 @@
 }
 
 @font-face {
-      font-family: Shabnam;
-      src: url(../public/font/Shabnam-Medium.ttf) format('truetype');
-    }
+  font-family: Shabnam;
+  src: url(../public/font/Shabnam-Medium.ttf) format("truetype");
+}
 
 * {
-      font-family: Shabnam;
-      border-color: var(--tertiary-light);
- }
- .dark *{
-  border-color:var(--tertiary-dark) ;
- }
+  font-family: Shabnam;
+  border-color: var(--tertiary-light);
+}
+.dark * {
+  border-color: var(--tertiary-dark);
+}
 
- @theme inline {
-  --color-background: var( --background-light);
+@theme inline {
+  --color-background: var(--background-light);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-iran-sans: var(--font-iran-sans);
@@ -100,13 +102,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-     --background-light: #0a0a0a;
+    --background-light: #0a0a0a;
   }
 }
 
 body {
   /* background: var( --background-light); */
-  font-family: var(--font-iran-sans),Arial, Helvetica, sans-serif;
+  font-family: var(--font-iran-sans), Arial, Helvetica, sans-serif;
 }
 
 /* .dark {
@@ -142,30 +144,29 @@ body {
    --sidebar-border: oklch(1 0 0 / 10%);
    --sidebar-ring: oklch(0.556 0 0);
 } */
-  ::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
-    }
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
 
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
+::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-    ::-webkit-scrollbar-thumb {
-      background: #eaeaea;
-      border-radius: 20px;
-    }
+::-webkit-scrollbar-thumb {
+  background: #eaeaea;
+  border-radius: 20px;
+}
 
-    ::-webkit-scrollbar-thumb:hover {
-      background: #a6a6a6;
-    }
+::-webkit-scrollbar-thumb:hover {
+  background: #a6a6a6;
+}
 
-  
 @layer base {
   * {
     @apply border-border outline-ring/50;
-   }
+  }
   body {
     @apply bg-background text-foreground;
-   }
+  }
 }

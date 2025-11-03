@@ -3,8 +3,8 @@ import { ReactElement } from "react";
 import { Dashboard, Logout, Setting, Upload } from "./icon";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 import { useTheme } from "next-themes";
+import { Logo } from "./Logo";
 
 export default function Nav(): ReactElement {
   const path = usePathname();
@@ -21,16 +21,7 @@ export default function Nav(): ReactElement {
     <div className="  h-full p-2 dark:bg-[var(--background-dark)]  border-l-[1px] border-gray-100 z-100">
       <nav className="w-full h-full flex flex-col justify-around items-end p-2">
         {/*Logo */}
-        <div className="w-[50%] h-16  flex flex-row-reverse gap-2 items-center ">
-          <Image
-            alt="زبان ابزار"
-            src="/Logo.png"
-            width={30}
-            height={30}
-            priority
-          />
-          <h1 className="dark:text-white"> زبان ابزار</h1>
-        </div>
+        <Logo />
 
         {/* Nav midd */}
         <div className="w-full h-[80%] flex flex-col gap-3 items-end pt-2">
