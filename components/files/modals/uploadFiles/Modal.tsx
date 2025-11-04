@@ -1,13 +1,14 @@
 "use client";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ReactElement } from "react";
-import UploadFilesBtn from "../../UploadFilesBtn";
 import ModalHeader from "./ModalHeader";
-import FileInfoDesc from "./FileInfoDesc";
 import UploadedFilesList from "./UploadedFilesList";
 import DropFiles from "./DropFiles";
 import ModalFooter from "./ModalFooter";
+import DDBItem from "@/components/DDBItem";
+import { Upload } from "@/components/icon";
+import { Button } from "@/components/ui/button";
 // type UploadedFile = {
 //   name: string;
 //   size: number;
@@ -19,9 +20,15 @@ import ModalFooter from "./ModalFooter";
 export function Modal(): ReactElement {
   return (
     <Dialog>
-      <form>
+      <form className="w-full">
         {/*Upload Btn */}
-        <UploadFilesBtn />
+        {/* <DialogTrigger asChild>
+          <Button variant="outline">Open Dialog</Button>
+        </DialogTrigger> */}
+        <DialogTrigger className="w-full">
+          <DDBItem icon={Upload} label="آپلود" />
+        </DialogTrigger>
+
         {/*Upload modal */}
         <DialogContent className="sm:max-w-[425px]">
           {/*Modal header */}

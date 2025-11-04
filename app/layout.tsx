@@ -40,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="fa">
       <body
-        className={`${iranSans.variable} ${geistSans.variable} antialiased dark:bg-[var(--background-dark)]`}
+        className={`${iranSans.variable} ${geistSans.variable} antialiased dark:bg-[var(--tertiary-dark)] bg-[#F9FAFB]`}
       >
         <Providers>
           <ThemeProvider attribute="class" enableSystem defaultTheme="system">

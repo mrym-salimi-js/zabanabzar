@@ -8,13 +8,13 @@ export default function FilesLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full h-screen flex flex-row-reverse gap-0.5">
+    <div className="w-full h-screen flex flex-row-reverse  bg-transparent">
       {/* Nav */}
       <div className="w-[250px] hidden lg:block">
         <Nav />
       </div>
       {/* Content */}
-      <div className=" lg:w-[85.3%] w-full h-full flex flex-col gap-1">
+      <div className=" lg:w-[85.3%] w-full h-full flex flex-col gap-1 p-1 bg-transparent">
         <Header />
         {children}
       </div>

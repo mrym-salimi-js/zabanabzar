@@ -18,7 +18,7 @@ export default function Nav(): ReactElement {
     { href: "/files", icon: Upload, label: "اپلود فایل" },
   ];
   return (
-    <div className="  h-full p-2 dark:bg-[var(--background-dark)]  border-l-[1px] border-gray-100 z-100">
+    <div className="  h-full p-2 dark:bg-[var(--background-dark)] bg-white  border-l-[1px] border-gray-100 z-100">
       <nav className="w-full h-full flex flex-col justify-around items-end p-2">
         {/*Logo */}
         <Logo />
