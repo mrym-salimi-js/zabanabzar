@@ -7,8 +7,8 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import DropDownBtn from "./DropDownBtn";
-import { Filter } from "./icon";
+import DropDownBtn from "../../TriggerBtn";
+import { Filter } from "../../icon";
 
 const fileTypes = [
   { id: "pdf", label: "PDF" },

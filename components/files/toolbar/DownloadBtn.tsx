@@ -3,11 +3,12 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ReactElement, useRef } from "react";
 import { Bin, Download } from "@/components/icon";
-import DropDownBtn from "./DropDownBtn";
-import ModalFooter from "./ModalFooter";
+import TriggerBtn from "../../TriggerBtn";
+import ModalFooter from "../../ModalFooter";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { CleanFileType } from "./files/modals/uploadFiles/ModalFooterProcess";
+import { CleanFileType } from "../modals/uploadFiles/ModalFooterProcess";
+import ModalContent from "../../ModalContent";
 
 export function DownloadBtn(): ReactElement {
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -38,18 +39,18 @@ export function DownloadBtn(): ReactElement {
       <form className="w-full">
         {/*Delete Btn */}
         <DialogTrigger className="w-full">
-          <DropDownBtn icon={Download} label="دانلود" />
+          <TriggerBtn icon={Download} label="دانلود" />
         </DialogTrigger>
 
         {/*Upload modal */}
         <DialogContent className="sm:max-w-[425px]">
           {/*Modal content */}
-          <div className="w-full h-auto flex flex-col gap-4 items-center py-2">
-            <span className="w-auto h-auto p-4 bg-[var(--secondary-light)] rounded-full">
-              <Download color="var(--secondary)" size="size-7" />
-            </span>
-            <p className="text-[0.9rem]">دانلود انجام شود؟</p>
-          </div>
+          <ModalContent
+            icon={Download}
+            question="دانلود انجام شود؟"
+            lightBGColor="bg-[var(--secondary-light)]"
+            mainColor="var(--secondary)"
+          />
           {/*Modal footer */}
           <ModalFooter
             handleCancel={handleCancel}

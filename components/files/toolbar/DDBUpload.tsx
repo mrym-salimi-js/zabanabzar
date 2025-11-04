@@ -5,16 +5,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Modal } from "./files/modals/uploadFiles/Modal";
-import { Pencil, Plus } from "./icon";
+import { Modal } from "../modals/uploadFiles/Modal";
+import { Pencil, Plus } from "../../icon";
 import DDBItem from "./DDBItem";
-import DropDownBtn from "./DropDownBtn";
+import TriggerBtn from "../../TriggerBtn";
 
 export function DDBUpload() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <DropDownBtn icon={Plus} label="بارگذاری" />
+        <TriggerBtn icon={Plus} label="بارگذاری" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-auto rounded-xl p-2" align="start">
         <DropdownMenuGroup className=" flex flex-col ">

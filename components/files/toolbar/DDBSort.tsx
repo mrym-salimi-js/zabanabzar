@@ -9,8 +9,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import DropDownBtn from "./DropDownBtn";
-import { Sort } from "./icon";
+import TriggerBtn from "@/components/TriggerBtn";
+import { Sort } from "@/components/icon";
 
 export function DDBSort() {
   const [position, setPosition] = React.useState("new");
@@ -18,7 +18,7 @@ export function DDBSort() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <DropDownBtn icon={Sort} label="مرتب سازی" />
+        <TriggerBtn icon={Sort} label="مرتب سازی" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-auto p-2 rounded-xl">
         <DropdownMenuRadioGroup

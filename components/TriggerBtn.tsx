@@ -5,7 +5,7 @@ interface IconTextBtnProps {
   label: string;
 }
 
-export default function DropDownBtn({
+export default function TriggerBtn({
   icon: Icon,
   label,
 }: IconTextBtnProps): ReactElement {
@@ -13,7 +13,7 @@ export default function DropDownBtn({
     <Button
       variant="outline"
       type="button"
-      className="w-auto h-11 rounded-xl flex items-center justify-end gap-1.5"
+      className="w-auto h-11 rounded-xl p-2 flex items-center justify-end gap-1.5"
     >
       <p className=" text-[0.8rem] dark:text-white">{label}</p>
       <Icon size="size-4" color="black" />

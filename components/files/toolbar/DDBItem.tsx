@@ -1,5 +1,5 @@
+import { Button } from "@/components/ui/button";
 import { ReactElement } from "react";
-import { Button } from "./ui/button";
 interface DDBItemProps {
   icon: React.ElementType;
   label: string;

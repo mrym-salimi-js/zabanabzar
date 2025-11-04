@@ -6,7 +6,7 @@ import ModalHeader from "./ModalHeader";
 import UploadedFilesList from "./UploadedFilesList";
 import DropFiles from "./DropFiles";
 import ModalFooterProcess from "./ModalFooterProcess";
-import DDBItem from "@/components/DDBItem";
+import DDBItem from "@/components/files/toolbar/DDBItem";
 import { Upload } from "@/components/icon";
 // type UploadedFile = {
 //   name: string;
