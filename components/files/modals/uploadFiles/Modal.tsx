@@ -5,10 +5,9 @@ import { ReactElement } from "react";
 import ModalHeader from "./ModalHeader";
 import UploadedFilesList from "./UploadedFilesList";
 import DropFiles from "./DropFiles";
-import ModalFooter from "./ModalFooter";
+import ModalFooterProcess from "./ModalFooterProcess";
 import DDBItem from "@/components/DDBItem";
 import { Upload } from "@/components/icon";
-import { Button } from "@/components/ui/button";
 // type UploadedFile = {
 //   name: string;
 //   size: number;
@@ -22,9 +21,7 @@ export function Modal(): ReactElement {
     <Dialog>
       <form className="w-full">
         {/*Upload Btn */}
-        {/* <DialogTrigger asChild>
-          <Button variant="outline">Open Dialog</Button>
-        </DialogTrigger> */}
+
         <DialogTrigger className="w-full">
           <DDBItem icon={Upload} label="آپلود" />
         </DialogTrigger>
@@ -39,7 +36,7 @@ export function Modal(): ReactElement {
           {/*Uploaded files */}
           <UploadedFilesList />
           {/*Modal footer */}
-          <ModalFooter />
+          <ModalFooterProcess />
         </DialogContent>
       </form>
     </Dialog>

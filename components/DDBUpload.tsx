@@ -7,14 +7,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Modal } from "./files/modals/uploadFiles/Modal";
 import { Pencil, Plus } from "./icon";
-import IconTextBtn from "./IconTextBtn";
 import DDBItem from "./DDBItem";
+import DropDownBtn from "./DropDownBtn";
 
 export function DDBUpload() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <IconTextBtn icon={Plus} label="بارگذاری" />
+        <DropDownBtn icon={Plus} label="بارگذاری" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-auto rounded-xl p-2" align="start">
         <DropdownMenuGroup className=" flex flex-col ">

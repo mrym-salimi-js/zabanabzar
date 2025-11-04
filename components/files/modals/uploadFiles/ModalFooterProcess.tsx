@@ -1,14 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import { deleteAllFilesFromIndexedDB } from "@/lib/indexedDB";
 import { deleteFile } from "@/services/deleteFile";
 import { useUploadStore } from "@/store/uploadFileStore";
 import React, { ReactElement, useRef } from "react";
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
+import ModalFooter from "@/components/ModalFooter";
 
-type CleanFileType = {
+export type CleanFileType = {
   name: string;
   size: number;
   url: string | undefined;
@@ -16,7 +14,7 @@ type CleanFileType = {
   userId: number;
 };
 
-export default function ModalFooter(): ReactElement {
+export default function ModalFooterProcess(): ReactElement {
   // Create ref for hidden btn, for using closing modal after sending data
   const closeRef = useRef<HTMLButtonElement>(null);
   const { files, clearFiles } = useUploadStore();
@@ -29,17 +27,17 @@ export default function ModalFooter(): ReactElement {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(files),
       });
-      if (!res.ok) throw new Error("خطا در ذخیره فایل‌ها");
+      if (!res.ok) throw new Error("خطا در ذخیره ");
       return res.json();
     },
     onSuccess: () => {
       clearFiles();
       deleteAllFilesFromIndexedDB();
-      toast.success("فایل‌ها با موفقیت ذخیره شدند");
+      toast.success("ذخیره سازی با موفقیت انجام شد");
       // Click on hidden closing btn after sending data
       closeRef.current?.click();
     },
-    onError: () => toast.error("ارسال فایل‌ها ناموفق بود"),
+    onError: () => toast.error("ارسال ناموفق بود"),
   });
 
   // Clear all uploaded file after click on "انصراف" btn
@@ -55,7 +53,7 @@ export default function ModalFooter(): ReactElement {
     // Check done status of all files
     const allDone = files.every((f) => f.status === "done");
     if (!allDone) {
-      toast.error("خطا! اپلود فایل ها را کامل کنید");
+      toast.error("خطا! اپلود را کامل نیست");
       return;
     }
 
@@ -79,36 +77,13 @@ export default function ModalFooter(): ReactElement {
     mutation.mutate(cleanFiles);
   };
   return (
-    <>
-      <DialogClose asChild>
-        <button ref={closeRef} className="hidden"></button>
-      </DialogClose>
-
-      <DialogFooter className="md:justify-between">
-        <DialogClose asChild>
-          <Button
-            onClick={handleClearFiles}
-            variant="outline"
-            className="md:w-[50%] border-0 bg-gray-200 items-center dark:bg-[var(--tertiary-dark)] dark:text-white"
-          >
-            انصراف
-          </Button>
-        </DialogClose>
-        <Button
-          onClick={handleSendData}
-          variant="outline"
-          className="md:w-[50%] border-0 bg-[var(--secondary)] items-center text-white"
-        >
-          {mutation.isPending ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              در حال ارسال
-            </>
-          ) : (
-            "تایید"
-          )}
-        </Button>
-      </DialogFooter>
-    </>
+    <ModalFooter
+      handleCancel={handleClearFiles}
+      handleConfirm={handleSendData}
+      mutation={mutation}
+      closeRef={closeRef}
+      confirmBtnBG="bg-[var(--secondary)]"
+      confirmLabelLoading="در حال ارسال"
+    />
   );
 }
