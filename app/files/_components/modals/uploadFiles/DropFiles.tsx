@@ -1,4 +1,4 @@
-import { Upload } from "@/components/icon";
+import { Upload } from "@/components/Icons";
 import React, { DragEvent, ReactElement, useState } from "react";
 import FilePicker from "./FilePicker";
 import { processAndUploadFiles } from "@/services/processAndUploadFiles";

@@ -5,18 +5,14 @@ interface IconTextBtnProps {
   label: string;
 }
 
-export default function TriggerBtn({
+export function TriggerBtn({
   icon: Icon,
   label,
 }: IconTextBtnProps): ReactElement {
   return (
-    <Button
-      variant="outline"
-      type="button"
-      className="w-auto h-11 rounded-xl p-2 flex items-center justify-end gap-1.5"
-    >
-      <p className=" text-[0.8rem] dark:text-white">{label}</p>
+    <div className="w-auto h-11 rounded-xl cursor-pointer p-3 flex items-center justify-end border bg-white  gap-1.5">
+      <p className=" text-[0.8rem] dark:text-white text-nowrap">{label}</p>
       <Icon size="size-4" color="black" />
-    </Button>
+    </div>
   );
 }

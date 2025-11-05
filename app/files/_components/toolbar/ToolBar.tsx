@@ -1,8 +1,8 @@
-import { DDBUpload } from "@/components/files/toolbar/DDBUpload";
-import { DDBFilter } from "@/components/files/toolbar/DDBFilter";
-import { DDBSort } from "@/components/files/toolbar/DDBSort";
-import { DeleteBtn } from "@/components/files/toolbar/DeleteBtn";
-import { DownloadBtn } from "@/components/files/toolbar/DownloadBtn";
+import { DDBUpload } from "@/app/files/_components/toolbar/DDBUpload";
+import { DDBFilter } from "@/app/files/_components/toolbar/DDBFilter";
+import { DDBSort } from "@/app/files/_components/toolbar/DDBSort";
+import { DeleteBtn } from "@/app/files/_components/toolbar/DeleteBtn";
+import { DownloadBtn } from "@/app/files/_components/toolbar/DownloadBtn";
 export default function ToolBar() {
   return (
     <div className="w-full h-15 flex justify-end items-center">

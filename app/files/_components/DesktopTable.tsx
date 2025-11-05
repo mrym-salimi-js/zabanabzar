@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Bin, FileWithName, Tick } from "@/components/icon";
+import { Bin, FileWithName, Tick } from "@/components/Icons";
 export default function DesktopTable(): ReactElement {
   return (
     <div dir="rtl" className="w-full h-auto p-1 md:flex flex-col gap-1 hidden">

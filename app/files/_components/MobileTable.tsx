@@ -1,4 +1,4 @@
-import { Bin, Download, Edit, FileWithName, Text } from "@/components/icon";
+import { Bin, Download, Edit, FileWithName, Text } from "@/components/Icons";
 import { ReactElement } from "react";
 
 export default function MobileTable(): ReactElement {

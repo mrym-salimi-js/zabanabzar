@@ -1,6 +1,6 @@
 "use client";
 
-import { Upload } from "@/components/icon";
+import { Upload } from "@/components/Icons";
 import {
   DialogDescription,
   DialogHeader,

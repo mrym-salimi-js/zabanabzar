@@ -1,4 +1,4 @@
-import { Bin, FileWithName, Retry } from "@/components/icon";
+import { Bin, FileWithName, Retry } from "@/components/Icons";
 import React, { ReactElement } from "react";
 import { ProgressBar } from "./ProgressBar";
 import { useUploadStore, UploadFilePersist } from "@/store/uploadFileStore";

@@ -1,8 +1,9 @@
 import { ReactElement } from "react";
-import MobileTable from "@/components/files/MobileTable";
-import DesktopTable from "@/components/files/DesktopTable";
-import ToolBar from "@/components/files/toolbar/ToolBar";
-import { ListItems, SquaredItems } from "@/components/icon";
+import MobileTable from "@/app/files/_components/MobileTable";
+import DesktopTable from "@/app/files/_components/DesktopTable";
+import ToolBar from "@/app/files/_components/toolbar/ToolBar";
+import { ListItems, SquaredItems } from "@/components/Icons";
+import { PaginatedList } from "@/app/files/_components/PaginatedList";
 export default function Home(): ReactElement {
   return (
     <>
@@ -24,6 +25,8 @@ export default function Home(): ReactElement {
           {/* Table for mobile */}
           <MobileTable />
         </div>
+        {/*Pagination */}
+        <PaginatedList />
       </div>
     </>
   );

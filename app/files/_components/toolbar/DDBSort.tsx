@@ -9,8 +9,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import TriggerBtn from "@/components/TriggerBtn";
-import { Sort } from "@/components/icon";
+import { TriggerBtn } from "@/components/TriggerBtn";
+import { Sort } from "@/components/Icons";
 
 export function DDBSort() {
   const [position, setPosition] = React.useState("new");

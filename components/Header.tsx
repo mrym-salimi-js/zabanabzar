@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactElement } from "react";
-import { Moon, Search, Sun, User } from "./icon";
+import { Moon, Search, Sun, User } from "./Icons";
 import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Nav from "./Nav";

@@ -1,6 +1,6 @@
 "use client";
 import { ReactElement } from "react";
-import { Dashboard, Logout, Setting, Upload } from "./icon";
+import { Dashboard, Logout, Setting, Upload } from "./Icons";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";

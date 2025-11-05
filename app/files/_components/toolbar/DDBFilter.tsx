@@ -7,8 +7,8 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import DropDownBtn from "../../TriggerBtn";
-import { Filter } from "../../icon";
+import { Filter } from "@/components/Icons";
+import { TriggerBtn } from "@/components/TriggerBtn";
 
 const fileTypes = [
   { id: "pdf", label: "PDF" },
@@ -28,7 +28,7 @@ export function DDBFilter(): React.ReactElement {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <DropDownBtn icon={Filter} label="فیلتر" />
+        <TriggerBtn icon={Filter} label="فیلتر" />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="w-auto p-2 rounded-xl">

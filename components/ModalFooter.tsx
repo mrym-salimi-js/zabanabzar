@@ -3,7 +3,7 @@ import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import React, { ReactElement } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { CleanFileType } from "./files/modals/uploadFiles/ModalFooterProcess";
+import { CleanFileType } from "../app/files/_components/modals/uploadFiles/ModalFooterProcess";
 
 type ModalFooterProps = {
   handleCancel: () => void;

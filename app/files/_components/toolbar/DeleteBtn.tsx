@@ -2,13 +2,13 @@
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ReactElement, useRef } from "react";
-import { Bin } from "@/components/icon";
-import TriggerBtn from "../../TriggerBtn";
-import ModalFooter from "../../ModalFooter";
+import { Bin } from "@/components/Icons";
+import { TriggerBtn } from "@/components/TriggerBtn";
+import ModalFooter from "@/components/ModalFooter";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { CleanFileType } from "../modals/uploadFiles/ModalFooterProcess";
-import ModalContent from "../../ModalContent";
+import { CleanFileType } from "@/app/files/_components/modals/uploadFiles/ModalFooterProcess";
+import ModalContent from "@/components/ModalContent";
 
 export function DeleteBtn(): ReactElement {
   const closeRef = useRef<HTMLButtonElement>(null);
