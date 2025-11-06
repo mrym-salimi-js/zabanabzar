@@ -12,7 +12,7 @@ export default function Header(): ReactElement {
   const { theme, setTheme } = useTheme();
 
   return (
-    <header className="w-full h-20 flex bg-white flex-row-reverse justify-between lg:justify-end items-center dark:bg-[var(--background-dark)] p-2 px-4 border-b rounded-sm">
+    <header className="w-full h-16 flex bg-white flex-row-reverse justify-between lg:justify-end items-center dark:bg-[var(--background-dark)] p-2 px-4 border-b rounded-sm">
       {/* Right items */}
       <div className="w-auto flex  gap-3 flex-row-reverse items-center lg:hidden">
         {/* Hamburger menu icon*/}

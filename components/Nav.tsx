@@ -1,6 +1,6 @@
 "use client";
 import { ReactElement } from "react";
-import { Dashboard, Logout, Setting, Upload } from "./Icons";
+import { Dashboard, Folder, Logout, Setting } from "./Icons";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";
@@ -15,11 +15,11 @@ export default function Nav(): ReactElement {
 
   const navItems = [
     { href: "/dashboard", icon: Dashboard, label: "داشبورد" },
-    { href: "/files", icon: Upload, label: "اپلود فایل" },
+    { href: "/files", icon: Folder, label: "فایل ها" },
   ];
   return (
     <div className="  h-full p-2 dark:bg-[var(--background-dark)] bg-white  border-l-[1px] border-gray-100 z-100">
-      <nav className="w-full h-full flex flex-col justify-around items-end p-2">
+      <nav className="w-full h-full flex flex-col justify-around items-end p-3.5">
         {/*Logo */}
         <Logo />
 
