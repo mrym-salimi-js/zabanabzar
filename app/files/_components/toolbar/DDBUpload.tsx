@@ -22,7 +22,7 @@ export function DDBUpload() {
             {/* Upload item */}
             <Modal />
           </DropdownMenuItem>
-          <DropdownMenuItem className="justify-end p-0">
+          <DropdownMenuItem className="justify-end p-0 ">
             {/* Write item */}
             <DDBItem icon={Pencil} label="نوشتن" />
           </DropdownMenuItem>

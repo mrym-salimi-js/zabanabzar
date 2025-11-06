@@ -45,7 +45,7 @@ export function PaginatedList() {
               onClick={() => setCurrentPage((cp) => Math.max(1, cp - 1))}
               className="px-3 py-2 flex gap-1 items-center border rounded-md hover:bg-muted"
             >
-              <p className="text-[0.8]">قبلی</p>
+              <p className="text-[0.8] dark:text-white">قبلی</p>
               <ChevronLeft className="w-4 h-4" />
             </Link>
           </PaginationItem>
@@ -56,8 +56,10 @@ export function PaginatedList() {
                 <Link
                   href={p === 1 ? `/files` : `/files/page${p}`}
                   onClick={() => setCurrentPage(p)}
-                  className={`px-4 py-2 border rounded-md ${
-                    currentPage === p ? "bg-white " : "hover:bg-muted"
+                  className={`px-4 py-2 border rounded-md dark:text-white ${
+                    currentPage === p
+                      ? "bg-white dark:bg-transparent "
+                      : "hover:bg-muted"
                   }`}
                 >
                   {p}
@@ -76,7 +78,7 @@ export function PaginatedList() {
               }
               className="px-3 py-2  flex gap-1 items-center rounded-md hover:bg-muted"
             >
-              <p className="text-[0.8]">بعدی</p>
+              <p className="text-[0.8] dark:text-white">بعدی</p>
               <ChevronRight className="w-4 h-4" />
             </Link>
           </PaginationItem>
