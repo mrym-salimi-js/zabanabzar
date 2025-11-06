@@ -36,7 +36,7 @@ export function PaginatedList() {
   }, [currentPage, totalPages]);
 
   return (
-    <div className="w-full h-auto mt-4 flex items-center justify-center">
+    <div className="w-full h-auto mt-4 flex items-center justify-center text-[0.9rem]">
       <Pagination>
         <PaginationContent>
           <PaginationItem className={currentPage === 1 ? "hidden" : "block"}>
@@ -45,7 +45,7 @@ export function PaginatedList() {
               onClick={() => setCurrentPage((cp) => Math.max(1, cp - 1))}
               className="px-3 py-2 flex gap-1 items-center border rounded-md hover:bg-muted"
             >
-              <p className="text-[0.8] dark:text-white">قبلی</p>
+              <p className="dark:text-white">قبلی</p>
               <ChevronLeft className="w-4 h-4" />
             </Link>
           </PaginationItem>
@@ -78,7 +78,7 @@ export function PaginatedList() {
               }
               className="px-3 py-2  flex gap-1 items-center rounded-md hover:bg-muted"
             >
-              <p className="text-[0.8] dark:text-white">بعدی</p>
+              <p className="dark:text-white">بعدی</p>
               <ChevronRight className="w-4 h-4" />
             </Link>
           </PaginationItem>

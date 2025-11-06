@@ -27,7 +27,7 @@ export function Modal(): ReactElement {
         </DialogTrigger>
 
         {/*Upload modal */}
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[425px] rounded-3xl">
           {/*Modal header */}
           <ModalHeader />
           <div className="w-full h-[1px] bg-gray-100 dark:bg-[var(--tertiary-dark)]"></div>

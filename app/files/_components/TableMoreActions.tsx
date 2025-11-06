@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Bin, Download, Edit, More, Visit } from "@/components/Icons";
 
-export function MoreActions() {
+export function TableMoreActions() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
