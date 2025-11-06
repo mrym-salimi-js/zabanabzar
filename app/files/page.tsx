@@ -7,7 +7,7 @@ import { PaginatedList } from "@/app/files/_components/PaginatedList";
 export default function Home(): ReactElement {
   return (
     <>
-      <div className="w-full h-auto flex flex-col gap-1 p-1">
+      <div className="w-full max-h-[90%] flex flex-col gap-1 p-1">
         {/* Toolbar Btns */}
         <ToolBar />
         <div className="w-full h-full flex flex-col gap-2 bg-white dark:bg-[var(--background-dark)] rounded-[15px] md:border-[1px] p-2">
