@@ -1,6 +1,15 @@
 "use client";
 import { ReactElement } from "react";
-import { Dashboard, Folder, Logout, Setting } from "./Icons";
+import {
+  Calendar,
+  Card,
+  Chart,
+  Chat,
+  Dashboard,
+  Folder,
+  Logout,
+  Setting,
+} from "./Icons";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useTheme } from "next-themes";
@@ -16,15 +25,21 @@ export default function Nav(): ReactElement {
   const navItems = [
     { href: "/dashboard", icon: Dashboard, label: "داشبورد" },
     { href: "/files", icon: Folder, label: "فایل ها" },
+    { href: "/flashcards", icon: Card, label: "فلش کارت ها" },
+    { href: "/ai-chat", icon: Chat, label: "دستیار" },
+    { href: "/calendar", icon: Calendar, label: "روزنگار" },
+    { href: "/reports", icon: Chart, label: "گزارش ها" },
   ];
   return (
     <div className="  h-full p-2 dark:bg-[var(--background-dark)] bg-white  border-l-[1px] border-gray-100 z-100">
       <nav className="w-full h-full flex flex-col justify-around items-end p-3.5">
         {/*Logo */}
-        <Logo />
+        <div className="w-full h-auto py-3 border-b">
+          <Logo />
+        </div>
 
         {/* Nav midd */}
-        <div className="w-full h-[80%] flex flex-col gap-3 items-end pt-2">
+        <div className="w-full h-[80%] flex flex-col gap-4 items-end pt-2">
           {navItems.map((i, index) => {
             return (
               <Link
@@ -36,7 +51,7 @@ export default function Nav(): ReactElement {
                 }`}
               >
                 <i.icon
-                  size="size-5 "
+                  size="size-5"
                   color={theme !== "dark" ? `#000000` : `#ffffff`}
                   fill={path?.includes(i.href) ? `var(--primary)` : false}
                 />
@@ -54,7 +69,7 @@ export default function Nav(): ReactElement {
           })}
         </div>
         {/* Nav end */}
-        <div className="w-full  flex flex-col gap-2 items-end relative bottom-0 border-t border-gray-100">
+        <div className="w-full  flex flex-col gap-2 items-end relative bottom-0 pt-2 border-t">
           <Link
             href="/"
             className={`w-full h-auto flex flex-row-reverse gap-2 items-center rounded-[5px]  p-2 cursor-pointer  ${

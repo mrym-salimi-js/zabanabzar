@@ -110,6 +110,14 @@ body {
   /* background: var( --background-light); */
   font-family: var(--font-iran-sans), Arial, Helvetica, sans-serif;
 }
+/* scrollbar hidden*/
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* Firefox */
+}
 
 /* .dark {
    --background: oklch(0.145 0 0);
