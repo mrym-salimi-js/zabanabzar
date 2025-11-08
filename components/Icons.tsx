@@ -609,28 +609,7 @@ export function User({ classes }: IconProps): ReactElement {
     </svg>
   );
 }
-export function ChevronDown({
-  size,
-  color,
-  strokeWidth,
-}: IconProps): ReactElement {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={strokeWidth}
-      stroke="strokeWidth"
-      className={classes}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m19.5 8.25-7.5 7.5-7.5-7.5"
-      />
-    </svg>
-  );
-}
+
 export function Close({ classes }: IconProps): ReactElement {
   return (
     <svg
@@ -669,16 +648,14 @@ export function More({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="strokeWidth"
+      fill="currentColor"
       className={classes}
     >
       <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"
+        fillRule="evenodd"
+        d="M4.5 12a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm6 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Zm6 0a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z"
+        clipRule="evenodd"
       />
     </svg>
   );

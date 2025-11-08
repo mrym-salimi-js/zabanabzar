@@ -18,7 +18,7 @@ export default function MobileTable(): ReactElement {
         <div className="w-full h-auto p-2 flex flex-row-reverse items-center justify-between">
           <div className="max-w-[150px]  flex flex-row-reverse items-center gap-2 dark:bg-[var(--tertiary-dark)] dark:text-white">
             {/*File ext icon */}
-            <FileWithName size="w-7 h-7 mt-1" color="red" name="PDF" />
+            <FileWithName classes="w-7 h-7 text-[#950e0e] mt-1" name="PDF" />
             <div className=" flex flex-col items-end">
               {/*File name */}
               <p className="truncate text-[0.8rem] ">متن تستی</p>
@@ -30,11 +30,11 @@ export default function MobileTable(): ReactElement {
           <div className="flex gap-1 items-center">
             {/* Delete */}
             <span className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--primary-light)]">
-              <Bin color="var(--primary)" size="size-4" />
+              <Bin classes="size-4 text-[var(--primary)]" />
             </span>
             {/* Visit or extraction */}
             <span className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--secondary-light)]">
-              <Visit color="var(--secondary)" size="size-4" />
+              <Visit classes="size-4 text-[var(--secondary)]" />
             </span>
           </div>
         </div>
@@ -48,7 +48,7 @@ export default function MobileTable(): ReactElement {
               <p>1400/2/1</p>
               <p>{" | "}</p>
               <div className="flex gap-1 items-center ">
-                <Clock color="#cccccc" size="size-3 mb-0.5" />
+                <Clock classes="text-[#cccccc] size-3 mb-0.5" />
                 <p className="text-[0.7rem]">10:25</p>
               </div>
             </div>
@@ -60,7 +60,7 @@ export default function MobileTable(): ReactElement {
               <p>1400/2/1</p>
               <p>{" | "}</p>
               <div className="flex gap-1 items-center ">
-                <Clock color="#cccccc" size="size-3 mb-0.5" />
+                <Clock classes="text-[#cccccc] size-3 mb-0.5" />
                 <p className="text-[0.7rem]">10:25</p>
               </div>
             </div>

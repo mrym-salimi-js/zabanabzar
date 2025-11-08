@@ -11,36 +11,36 @@ export function TableMoreActions() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
-        <More size="size-6" color="#000000" />
+        <More classes="size-6 text-black" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-auto rounded-xl p-2" align="start">
         <DropdownMenuGroup className=" flex flex-col">
           <DropdownMenuItem className="justify-end p-0 ">
             {/* Visit or extraction */}
-            <div className="p-2 flex gap-2 text-[0.7rem] cursor-pointer">
+            <div className="w-full p-2 flex justify-end hover:bg-[var(--primary-light)] hover:text-[var(--primary)] rounded-md gap-2 text-[0.7rem] cursor-pointer">
               <p>متن</p>
-              <Visit color="var(--secondary)" size="size-5" />
+              <Visit classes="size-5 text-black)]" />
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Delete */}
-            <div className="p-2 flex gap-2 text-[0.7rem] cursor-pointer">
+            <div className="w-full justify-end hover:bg-[var(--primary-light)] hover:text-[var(--primary)] rounded-md p-2 flex gap-2 text-[0.7rem] cursor-pointer">
               <p>حذف</p>
-              <Bin color="var(--primary)" size="size-5" />
+              <Bin classes="size-5 text-black)]" />
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Edit */}
-            <div className="p-2 flex gap-2 text-[0.7rem] cursor-pointer">
+            <div className="w-full justify-end hover:bg-[var(--primary-light)] hover:text-[var(--primary)] rounded-md p-2 flex gap-2 text-[0.7rem] cursor-pointer">
               <p>ویرایش</p>
-              <Edit color="#ffcd38" size="size-5" />
+              <Edit classes="size-5 text-black" />
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Download */}
-            <div className="p-2 flex gap-2 text-[0.7rem] cursor-pointer">
+            <div className="w-full justify-end hover:bg-[var(--primary-light)] hover:text-[var(--primary)] rounded-md p-2 flex gap-2 text-[0.7rem] cursor-pointer">
               <p>دانلود</p>
-              <Download color="var(--fourth)" size="size-5" />
+              <Download classes="size-5 text-black)]" />
             </div>
           </DropdownMenuItem>
         </DropdownMenuGroup>

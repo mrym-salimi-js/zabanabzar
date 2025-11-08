@@ -11,22 +11,22 @@ export function CardMoreActions() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
-        <More size="size-6 rotate-[90deg]" color="#000000" />
+        <More classes="size-6 rotate-[90deg] text-black" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-auto rounded-xl p-2" align="start">
         <DropdownMenuGroup className=" flex flex-col">
           <DropdownMenuItem className="justify-end p-0">
             {/* Edit */}
-            <div className="p-2 flex gap-2 text-[0.7rem] cursor-pointer">
+            <div className="w-full hover:bg-[var(--primary-light)] hover:text-[var(--primary)] rounded-md  p-2 flex justify-end gap-2 text-[0.7rem] cursor-pointer">
               <p>ویرایش</p>
-              <Edit color="#ffcd38" size="size-5" />
+              <Edit classes="text-black size-5" />
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Download */}
-            <div className="p-2 flex gap-2 text-[0.7rem] cursor-pointer">
+            <div className="w-full hover:bg-[var(--primary-light)] hover:text-[var(--primary)] rounded-md  p-2 flex justify-end gap-2 text-[0.7rem] cursor-pointer">
               <p>دانلود</p>
-              <Download color="var(--fourth)" size="size-5" />
+              <Download classes="text-black size-5" />
             </div>
           </DropdownMenuItem>
         </DropdownMenuGroup>
