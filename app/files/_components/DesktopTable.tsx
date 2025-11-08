@@ -8,7 +8,7 @@ export default function DesktopTable(): ReactElement {
       {/* Table header */}
       <div
         className="w-full h-12 p-3 text-[0.8rem] bg-[var(--tertiary-light)]  dark:bg-[var(--tertiary-dark)] dark:text-white
-              grid grid-cols-[40px_repeat(4,1fr)]
+              grid grid-cols-[40px_repeat(5,1fr)]
               items-center text-end
               rounded-tr-[12px] rounded-tl-[12px]"
       >
@@ -17,7 +17,8 @@ export default function DesktopTable(): ReactElement {
 
         {/*Others */}
         <div className="text-start truncate">نام فایل</div>
-        <div className="text-start truncate">تاریخ</div>
+        <div className="text-start truncate">بارگذاری</div>
+        <div className="text-start truncate">ویرایش</div>
         <div className="text-start truncate">حجم</div>
         <div className="text-start truncate">سایر</div>
       </div>
@@ -25,20 +26,27 @@ export default function DesktopTable(): ReactElement {
       {/* Table rows */}
       <div
         className="w-full h-12 p-3 text-[0.8rem] border-b   
-            grid grid-cols-[40px_repeat(4,1fr)]
+            grid grid-cols-[40px_repeat(5,1fr)]
             items-start text-end pb-2"
       >
         {/*Checkbox */}
         <GreenCheckBox />
         {/*Others */}
         <div className="flex truncate gap-1 items-start justify-start min-w-0 dark:text-white   ">
-          <FileWithName size="w-6 h-6" color="orange" name="PNG" />
+          <FileWithName classes="w-6 h-6 text-[#ea990d]" name="PNG" />
           متن تستی
         </div>
         <div className=" text-start flex flex-col  min-w-0 dark:text-white">
           <p>1400/2/1</p>
           <div className="flex gap-1 items-center">
-            <Clock color="#cccccc" size="size-3 mb-0.5" />
+            <Clock classes="text-[#cccccc] size-3 mb-0.5" />
+            <p className="text-[0.7rem] text-gray-300">10:25</p>
+          </div>
+        </div>
+        <div className=" text-start flex flex-col  min-w-0 dark:text-white">
+          <p>1400/2/1</p>
+          <div className="flex gap-1 items-center">
+            <Clock classes="text-[#cccccc] size-3 mb-0.5" />
             <p className="text-[0.7rem] text-gray-300">10:25</p>
           </div>
         </div>

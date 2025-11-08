@@ -45,25 +45,19 @@ export default function Nav(): ReactElement {
               <Link
                 key={index}
                 href={i.href}
-                className={`w-full h-auto flex flex-row-reverse gap-2 items-center rounded-[5px]  p-2 cursor-pointer ${
+                className={`w-full h-auto  flex flex-row-reverse gap-2 items-center rounded-[5px]  p-2 cursor-pointer ${
+                  path?.includes(i.href)
+                    ? `text-[var(--primary)] `
+                    : `dark:text-white`
+                } ${
                   path?.includes(i.href) &&
                   `dark:bg-[var(--primary-dark)] bg-[var(--primary-light)] `
                 }`}
               >
                 <i.icon
-                  size="size-5"
-                  color={theme !== "dark" ? `#000000` : `#ffffff`}
-                  fill={path?.includes(i.href) ? `var(--primary)` : false}
+                  classes={`size-5 ${theme === "dark" ? `stroke-white` : `${path?.includes(i.href) ? `text-[var(--primary)]` : `stroke-black`}`} `}
                 />
-                <p
-                  className={`text-[#000000]  text-[0.8rem] ${
-                    path?.includes(i.href)
-                      ? `text-[var(--primary)] `
-                      : `dark:text-white`
-                  }`}
-                >
-                  {i.label}
-                </p>
+                <p className={`text-[0.8rem] `}>{i.label}</p>
               </Link>
             );
           })}
@@ -77,9 +71,7 @@ export default function Nav(): ReactElement {
             }`}
           >
             <Setting
-              size="size-5 "
-              color={theme !== "dark" ? `#000000` : `#ffffff`}
-              fill={path?.includes("settings") ? `var(--primary)` : false}
+              classes={`size-5 ${path?.includes("settings") ? `text-[var(--primary)]` : `stroke-black`}`}
             />
             <p
               className={`text-[#000000]  text-[0.8rem] ${
@@ -95,7 +87,7 @@ export default function Nav(): ReactElement {
             onClick={handleLogout}
             className="w-full h-auto flex flex-row-reverse gap-2 items-center cursor-pointer rounded-[5px] p-2"
           >
-            <Logout size="size-5 rotate-[180deg]" color="var(--primary)" />
+            <Logout classes="size-5 rotate-[180deg] stroke-[var(--primary)]" />
             <p className="text-[var(--primary)] text-[0.8rem]">خروج</p>
           </div>
         </div>

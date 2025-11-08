@@ -34,7 +34,7 @@ export function DDBFilter(): React.ReactElement {
       <DropdownMenuContent className="w-auto p-2 rounded-xl">
         {fileTypes.map((type) => (
           <DropdownMenuCheckboxItem
-            className="justify-end hover:bg-gray-100"
+            className={`justify-end hover:bg-[var(--primary-light)] hover:text-[var(--primary)] ${!!selected[type.id] ? `text-[var(--primary)]` : `text-black`}`}
             key={type.id}
             checked={!!selected[type.id]}
             onCheckedChange={(checked) => handleCheckedChange(type.id, checked)}

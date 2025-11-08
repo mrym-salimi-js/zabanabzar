@@ -18,9 +18,7 @@ export default function ModalHeader(): ReactElement {
           اپلود فایل جدید
         </DialogTitle>
         <Upload
-          size="size-5"
-          color="#ffffff"
-          fill={theme === "dark" ? "#ffffff" : "#000000"}
+          classes={` size-5 ${theme === "dark" ? "#ffffff" : "#000000"}`}
         />
       </div>
 

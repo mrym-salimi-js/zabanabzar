@@ -16,7 +16,7 @@ export default function ModalContent({
   return (
     <div className="w-full h-auto flex flex-col gap-4 items-center py-2">
       <span className={`w-auto h-auto p-4 ${lightBGColor} rounded-full`}>
-        <Icon color={mainColor} size="size-7" />
+        <Icon classes={`size-7 ${mainColor}`} />
       </span>
       <p className="text-[0.9rem]">{question}</p>
     </div>

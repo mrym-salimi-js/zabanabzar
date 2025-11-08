@@ -18,7 +18,7 @@ export function DDBUpload() {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-auto rounded-xl p-2" align="start">
         <DropdownMenuGroup className=" flex flex-col ">
-          <DropdownMenuItem asChild className="justify-end p-0">
+          <DropdownMenuItem asChild className="justify-end p-0 ">
             {/* Upload item */}
             <Modal />
           </DropdownMenuItem>

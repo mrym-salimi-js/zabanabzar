@@ -19,7 +19,7 @@ export function TableMoreActions() {
             {/* Visit or extraction */}
             <div className="p-2 flex gap-2 text-[0.7rem] cursor-pointer">
               <p>متن</p>
-              <Visit color="var(--fourth)" size="size-5" />
+              <Visit color="var(--secondary)" size="size-5" />
             </div>
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
@@ -40,7 +40,7 @@ export function TableMoreActions() {
             {/* Download */}
             <div className="p-2 flex gap-2 text-[0.7rem] cursor-pointer">
               <p>دانلود</p>
-              <Download color="var(--secondary)" size="size-5" />
+              <Download color="var(--fourth)" size="size-5" />
             </div>
           </DropdownMenuItem>
         </DropdownMenuGroup>

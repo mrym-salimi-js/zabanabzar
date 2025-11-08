@@ -49,7 +49,7 @@ export function DownloadBtn(): ReactElement {
             icon={Download}
             question="دانلود انجام شود؟"
             lightBGColor="bg-[var(--secondary-light)]"
-            mainColor="var(--secondary)"
+            mainColor="text-[var(--secondary)]"
           />
           {/*Modal footer */}
           <ModalFooter

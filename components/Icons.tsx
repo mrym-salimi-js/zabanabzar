@@ -2,20 +2,35 @@
 import { ReactElement } from "react";
 
 type IconProps = {
-  size: string;
-  color: string;
-  strokeWidth?: string;
-  fill?: string | false;
+  classes?: string;
   name?: string;
 };
-export function Logout({ size, color, fill }: IconProps): ReactElement {
-  if (fill) {
+export function Logout({ classes }: IconProps): ReactElement {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="strokeWidth"
+      className={classes}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
+      />
+    </svg>
+  );
+}
+export function Setting({ classes }: IconProps): ReactElement {
+  if (!classes?.includes("stroke")) {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill={fill}
-        className={size}
+        fill="currentColor"
+        className={classes}
       >
         <path
           fillRule="evenodd"
@@ -30,49 +45,31 @@ export function Logout({ size, color, fill }: IconProps): ReactElement {
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke={color}
-        className={size}
+        stroke-width="1.5"
+        stroke="currentColor"
+        className={classes}
       >
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15m-3 0-3-3m0 0 3-3m-3 3H15"
+          d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"
+        />
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
         />
       </svg>
     );
   }
 }
-export function Setting({ size, color }: IconProps): ReactElement {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke={color}
-      className={size}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"
-      />
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-      />
-    </svg>
-  );
-}
-export function Filter({ size, color }: IconProps): ReactElement {
+export function Filter({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
         fillRule="evenodd"
@@ -82,67 +79,57 @@ export function Filter({ size, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function Sort({ size, color }: IconProps): ReactElement {
+export function Sort({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
+        fillRule="evenodd"
+        d="M3 6.75A.75.75 0 0 1 3.75 6h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 6.75ZM3 12a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75A.75.75 0 0 1 3 12Zm8.25 5.25a.75.75 0 0 1 .75-.75h8.25a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75Z"
+        clipRule="evenodd"
       />
     </svg>
   );
 }
-export function Moon({ size, color }: IconProps): ReactElement {
+export function Moon({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"
+        fillRule="evenodd"
+        d="M9.528 1.718a.75.75 0 0 1 .162.819A8.97 8.97 0 0 0 9 6a9 9 0 0 0 9 9 8.97 8.97 0 0 0 3.463-.69.75.75 0 0 1 .981.98 10.503 10.503 0 0 1-9.694 6.46c-5.799 0-10.5-4.7-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 0 1 .818.162Z"
+        clipRule="evenodd"
       />
     </svg>
   );
 }
-export function Sun({ size, color }: IconProps): ReactElement {
+export function Sun({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-      />
+      <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.894 6.166a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5H21a.75.75 0 0 1 .75.75ZM17.834 18.894a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 1 0-1.061 1.06l1.59 1.591ZM12 18a.75.75 0 0 1 .75.75V21a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.303a.75.75 0 0 0-1.061-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.697 7.757a.75.75 0 0 0 1.06-1.06l-1.59-1.591a.75.75 0 0 0-1.061 1.06l1.59 1.591Z" />
     </svg>
   );
 }
-export function Text({ size, color }: IconProps): ReactElement {
+export function Text({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
         fillRule="evenodd"
@@ -153,13 +140,13 @@ export function Text({ size, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function Visit({ size, color }: IconProps): ReactElement {
+export function Visit({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
       <path
@@ -170,39 +157,39 @@ export function Visit({ size, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function Edit({ size, color }: IconProps): ReactElement {
+export function Edit({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
       <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
     </svg>
   );
 }
-export function Pencil({ size, color }: IconProps): ReactElement {
+export function Pencil({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
     </svg>
   );
 }
-export function Dashboard({ size, color, fill }: IconProps): ReactElement {
-  if (fill) {
+export function Dashboard({ classes }: IconProps): ReactElement {
+  if (!classes?.includes("stroke")) {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill={fill}
-        className={size}
+        fill="currentColor"
+        className={classes}
       >
         <path
           fillRule="evenodd"
@@ -218,8 +205,8 @@ export function Dashboard({ size, color, fill }: IconProps): ReactElement {
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke={color}
-        className={size}
+        stroke="strokeWidth"
+        className={classes}
       >
         <path
           strokeLinecap="round"
@@ -230,13 +217,13 @@ export function Dashboard({ size, color, fill }: IconProps): ReactElement {
     );
   }
 }
-export function Bin({ size, color }: IconProps): ReactElement {
+export function Bin({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
         fillRule="evenodd"
@@ -246,13 +233,13 @@ export function Bin({ size, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function FileWithName({ size, color, name }: IconProps): ReactElement {
+export function FileWithName({ classes, name }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       {/* بدنه آیکن */}
       <path d="M5.625 1.5c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5H5.625Z" />
@@ -293,13 +280,13 @@ export function Tick(): ReactElement {
     </svg>
   );
 }
-export function ErrorIcon({ size, color }: IconProps): ReactElement {
+export function ErrorIcon({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
         fillRule="evenodd"
@@ -309,13 +296,13 @@ export function ErrorIcon({ size, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function Retry({ size, color }: IconProps): ReactElement {
+export function Retry({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
         fillRule="evenodd"
@@ -325,13 +312,13 @@ export function Retry({ size, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function Download({ size, color }: IconProps): ReactElement {
+export function Download({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
         fillRule="evenodd"
@@ -342,25 +329,25 @@ export function Download({ size, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function ListItems({ size, color }: IconProps): ReactElement {
+export function ListItems({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path d="M5.625 3.75a2.625 2.625 0 1 0 0 5.25h12.75a2.625 2.625 0 0 0 0-5.25H5.625ZM3.75 11.25a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5H3.75ZM3 15.75a.75.75 0 0 1 .75-.75h16.5a.75.75 0 0 1 0 1.5H3.75a.75.75 0 0 1-.75-.75ZM3.75 18.75a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5H3.75Z" />
     </svg>
   );
 }
-export function SquaredItems({ size, color }: IconProps): ReactElement {
+export function SquaredItems({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
         fillRule="evenodd"
@@ -371,50 +358,31 @@ export function SquaredItems({ size, color }: IconProps): ReactElement {
   );
 }
 
-export function Upload({ size, color, fill }: IconProps): ReactElement {
-  if (fill) {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill={fill}
-        className={size}
-      >
-        <path
-          fillRule="evenodd"
-          d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875Zm6.905 9.97a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72V18a.75.75 0 0 0 1.5 0v-4.19l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z"
-          clipRule="evenodd"
-        />
-        <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
-      </svg>
-    );
-  } else {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke={color}
-        className={size}
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m6.75 12-3-3m0 0-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"
-        />
-      </svg>
-    );
-  }
+export function Upload({ classes }: IconProps): ReactElement {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={classes}
+    >
+      <path
+        fillRule="evenodd"
+        d="M5.625 1.5H9a3.75 3.75 0 0 1 3.75 3.75v1.875c0 1.036.84 1.875 1.875 1.875H16.5a3.75 3.75 0 0 1 3.75 3.75v7.875c0 1.035-.84 1.875-1.875 1.875H5.625a1.875 1.875 0 0 1-1.875-1.875V3.375c0-1.036.84-1.875 1.875-1.875Zm6.905 9.97a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72V18a.75.75 0 0 0 1.5 0v-4.19l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z"
+        clipRule="evenodd"
+      />
+      <path d="M14.25 5.25a5.23 5.23 0 0 0-1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 0 16.5 7.5h-1.875a.375.375 0 0 1-.375-.375V5.25Z" />
+    </svg>
+  );
 }
-export function Card({ size, color, fill }: IconProps): ReactElement {
-  if (fill) {
+export function Card({ classes }: IconProps): ReactElement {
+  if (!classes?.includes("stroke")) {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill={fill}
-        className={size}
+        fill="currentColor"
+        className={classes}
       >
         <path d="M4.5 3.75a3 3 0 0 0-3 3v.75h21v-.75a3 3 0 0 0-3-3h-15Z" />
         <path
@@ -431,8 +399,8 @@ export function Card({ size, color, fill }: IconProps): ReactElement {
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke={color}
-        className={size}
+        stroke="strokeWidth"
+        className={classes}
       >
         <path
           strokeLinecap="round"
@@ -443,14 +411,14 @@ export function Card({ size, color, fill }: IconProps): ReactElement {
     );
   }
 }
-export function Chart({ size, color, fill }: IconProps): ReactElement {
-  if (fill) {
+export function Chart({ classes }: IconProps): ReactElement {
+  if (!classes?.includes("stroke")) {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill={fill}
-        className={size}
+        fill="currentColor"
+        className={classes}
       >
         <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75ZM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 0 1-1.875-1.875V8.625ZM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 0 1 3 19.875v-6.75Z" />
       </svg>
@@ -462,8 +430,8 @@ export function Chart({ size, color, fill }: IconProps): ReactElement {
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke={color}
-        className={size}
+        stroke="strokeWidth"
+        className={classes}
       >
         <path
           strokeLinecap="round"
@@ -474,14 +442,14 @@ export function Chart({ size, color, fill }: IconProps): ReactElement {
     );
   }
 }
-export function Chat({ size, color, fill }: IconProps): ReactElement {
-  if (fill) {
+export function Chat({ classes }: IconProps): ReactElement {
+  if (!classes?.includes("stroke")) {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill={fill}
-        className={size}
+        fill="currentColor"
+        className={classes}
       >
         <path
           fillRule="evenodd"
@@ -497,8 +465,8 @@ export function Chat({ size, color, fill }: IconProps): ReactElement {
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke={color}
-        className={size}
+        stroke="strokeWidth"
+        className={classes}
       >
         <path
           strokeLinecap="round"
@@ -509,14 +477,14 @@ export function Chat({ size, color, fill }: IconProps): ReactElement {
     );
   }
 }
-export function Calendar({ size, color, fill }: IconProps): ReactElement {
-  if (fill) {
+export function Calendar({ classes }: IconProps): ReactElement {
+  if (!classes?.includes("stroke")) {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill={fill}
-        className={size}
+        fill="currentColor"
+        className={classes}
       >
         <path
           fillRule="evenodd"
@@ -532,8 +500,8 @@ export function Calendar({ size, color, fill }: IconProps): ReactElement {
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke={color}
-        className={size}
+        stroke="strokeWidth"
+        className={classes}
       >
         <path
           strokeLinecap="round"
@@ -544,14 +512,14 @@ export function Calendar({ size, color, fill }: IconProps): ReactElement {
     );
   }
 }
-export function Folder({ size, color, fill }: IconProps): ReactElement {
-  if (fill) {
+export function Folder({ classes }: IconProps): ReactElement {
+  if (!classes?.includes("stroke")) {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill={fill}
-        className={size}
+        fill="currentColor"
+        className={classes}
       >
         <path d="M19.5 21a3 3 0 0 0 3-3v-4.5a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3V18a3 3 0 0 0 3 3h15ZM1.5 10.146V6a3 3 0 0 1 3-3h5.379a2.25 2.25 0 0 1 1.59.659l2.122 2.121c.14.141.331.22.53.22H19.5a3 3 0 0 1 3 3v1.146A4.483 4.483 0 0 0 19.5 9h-15a4.483 4.483 0 0 0-3 1.146Z" />
       </svg>
@@ -563,8 +531,8 @@ export function Folder({ size, color, fill }: IconProps): ReactElement {
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke={color}
-        className={size}
+        stroke="strokeWidth"
+        className={classes}
       >
         <path
           strokeLinecap="round"
@@ -575,31 +543,29 @@ export function Folder({ size, color, fill }: IconProps): ReactElement {
     );
   }
 }
-export function Search({ size, color }: IconProps): ReactElement {
+export function Search({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+        fillRule="evenodd"
+        d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
+        clipRule="evenodd"
       />
     </svg>
   );
 }
-export function Table({ size, color }: IconProps): ReactElement {
+export function Table({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
         fillRule="evenodd"
@@ -609,15 +575,15 @@ export function Table({ size, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function Plus({ size, color }: IconProps): ReactElement {
+export function Plus({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
-      stroke={color}
-      className={size}
+      stroke="currentColor"
+      className={classes}
     >
       <path
         strokeLinecap="round"
@@ -627,20 +593,18 @@ export function Plus({ size, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function User({ size, color }: IconProps): ReactElement {
+export function User({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
       viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+        fillRule="evenodd"
+        d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+        clipRule="evenodd"
       />
     </svg>
   );
@@ -656,8 +620,8 @@ export function ChevronDown({
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={strokeWidth}
-      stroke={color}
-      className={size}
+      stroke="strokeWidth"
+      className={classes}
     >
       <path
         strokeLinecap="round"
@@ -667,15 +631,15 @@ export function ChevronDown({
     </svg>
   );
 }
-export function Close({ size, strokeWidth, color }: IconProps): ReactElement {
+export function Close({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
-      strokeWidth={strokeWidth}
-      stroke={color}
-      className={size}
+      strokeWidth="1.5"
+      stroke="strokeWidth"
+      className={classes}
     >
       <path
         strokeLinecap="round"
@@ -685,13 +649,13 @@ export function Close({ size, strokeWidth, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function Clock({ size, strokeWidth, color }: IconProps): ReactElement {
+export function Clock({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
-      fill={color}
-      className={size}
+      fill="currentColor"
+      className={classes}
     >
       <path
         fillRule="evenodd"
@@ -701,15 +665,15 @@ export function Clock({ size, strokeWidth, color }: IconProps): ReactElement {
     </svg>
   );
 }
-export function More({ size, color }: IconProps): ReactElement {
+export function More({ classes }: IconProps): ReactElement {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
-      stroke={color}
-      className={size}
+      stroke="strokeWidth"
+      className={classes}
     >
       <path
         strokeLinecap="round"

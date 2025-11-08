@@ -3,9 +3,6 @@ import {
   Pagination,
   PaginationContent,
   PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/components/ui/pagination";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -43,10 +40,10 @@ export function PaginatedList() {
             <Link
               href={`/files/page${Math.max(1, currentPage - 1)}`}
               onClick={() => setCurrentPage((cp) => Math.max(1, cp - 1))}
-              className="px-3 py-2 flex gap-1 items-center border rounded-md hover:bg-muted"
+              className="px-3 py-2 flex gap-1 items-center rounded-md hover:bg-[var(--primary-light)] dark:hover:bg-[var(--primary-light)]"
             >
-              <p className="dark:text-white">قبلی</p>
-              <ChevronLeft className="w-4 h-4" />
+              <p className="tet-[var(--primary)]">قبلی</p>
+              <ChevronLeft className="w-4 h-4 bg-[var(--primary)]" />
             </Link>
           </PaginationItem>
 
@@ -56,10 +53,10 @@ export function PaginatedList() {
                 <Link
                   href={p === 1 ? `/files` : `/files/page${p}`}
                   onClick={() => setCurrentPage(p)}
-                  className={`px-4 py-2 border rounded-md dark:text-white ${
+                  className={`px-4 py-2 rounded-md text-[var(--primary)] ${
                     currentPage === p
-                      ? "bg-white dark:bg-transparent "
-                      : "hover:bg-muted"
+                      ? "bg-[var(--primary)] text-white "
+                      : "hover:bg-[var(--primary-light)] dark:hover:bg-[var(--primary-dark)]"
                   }`}
                 >
                   {p}
@@ -76,10 +73,10 @@ export function PaginatedList() {
               onClick={() =>
                 setCurrentPage((cp) => Math.min(cp + 1, totalPages))
               }
-              className="px-3 py-2  flex gap-1 items-center rounded-md hover:bg-muted"
+              className="px-3 py-2  flex gap-1 items-center rounded-md hover:bg-[var(--primary-light)] dark:hover:bg-[var(--primary-dark)]"
             >
-              <p className="dark:text-white">بعدی</p>
-              <ChevronRight className="w-4 h-4" />
+              <p className="text-[var(--primary)]">بعدی</p>
+              <ChevronRight className="w-4 h-4 text-[var(--primary)]" />
             </Link>
           </PaginationItem>
         </PaginationContent>

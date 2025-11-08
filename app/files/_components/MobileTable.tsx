@@ -33,8 +33,8 @@ export default function MobileTable(): ReactElement {
               <Bin color="var(--primary)" size="size-4" />
             </span>
             {/* Visit or extraction */}
-            <span className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--tertiary-light)]">
-              <Visit color="var(--fourth)" size="size-4" />
+            <span className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--secondary-light)]">
+              <Visit color="var(--secondary)" size="size-4" />
             </span>
           </div>
         </div>

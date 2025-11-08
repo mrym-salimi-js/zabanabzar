@@ -39,7 +39,7 @@ export default function DropFiles(): ReactElement {
         isOver ? `!border-[var(--primary)]/50` : `!border-[var(--primary)]`
       }`}
     >
-      <Upload size="size-9" color="#000000" fill="var(--primary)" />
+      <Upload classes="size-8 text-[var(--primary)]" />
       <p className=" text-[0.8rem] dark:text-white">بکش و رها کن یا</p>
       <FilePicker />
     </div>

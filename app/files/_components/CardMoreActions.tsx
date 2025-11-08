@@ -26,7 +26,7 @@ export function CardMoreActions() {
             {/* Download */}
             <div className="p-2 flex gap-2 text-[0.7rem] cursor-pointer">
               <p>دانلود</p>
-              <Download color="var(--secondary)" size="size-5" />
+              <Download color="var(--fourth)" size="size-5" />
             </div>
           </DropdownMenuItem>
         </DropdownMenuGroup>

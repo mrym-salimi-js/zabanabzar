@@ -17,7 +17,7 @@ export default function Header(): ReactElement {
         {/* Hamburger menu icon*/}
         <Sheet>
           <SheetTrigger asChild>
-            <Sort color="black" size="size-8" />
+            <Sort classes="size-8 text-black" />
           </SheetTrigger>
 
           {/* Nav in mobile mode*/}
@@ -33,20 +33,20 @@ export default function Header(): ReactElement {
       {/* Left items */}
       <div className="flex gap-1">
         <div className="p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl">
-          <User color="var(--tertiary)" size="size-5" />
+          <User classes="size-5 text-[var(--tertiary)]" />
         </div>
         <div
           onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl"
         >
           {theme === "dark" ? (
-            <Sun color="var(--tertiary)" size="size-5" />
+            <Sun classes="size-5 text-[var(--tertiary)]" />
           ) : (
-            <Moon color="var(--tertiary)" size="size-5" />
+            <Moon classes="size-5 text-[var(--tertiary)]" />
           )}
         </div>
         <div className="p-2 flex cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl">
-          <Search color="var(--tertiary)" size="size-5" />
+          <Search classes="size-5 text-[var(--tertiary)]" />
         </div>
       </div>
     </header>

@@ -49,7 +49,7 @@ export function DeleteBtn(): ReactElement {
             icon={Bin}
             question="حذف انجام شود؟"
             lightBGColor="bg-[var(--primary-light)]"
-            mainColor="var(--primary)"
+            mainColor="text-[var(--primary)]"
           />
           {/*Modal footer */}
           <ModalFooter
