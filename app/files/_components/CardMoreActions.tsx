@@ -5,13 +5,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bin, Download, Edit, More, Visit } from "@/components/Icons";
+import { Download, Edit, More } from "@/components/Icons";
 
 export function CardMoreActions() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
-        <More classes="size-6 rotate-[90deg] text-black" />
+        <More classes="size-6 rotate-[90deg] text-black dark:text-[var(--tertiary)]" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-auto rounded-xl p-2" align="start">
         <DropdownMenuGroup className=" flex flex-col">

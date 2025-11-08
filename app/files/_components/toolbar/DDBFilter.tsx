@@ -31,10 +31,10 @@ export function DDBFilter(): React.ReactElement {
         <TriggerBtn icon={Filter} label="فیلتر" />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="w-auto p-2 rounded-xl">
+      <DropdownMenuContent className="w-auto p-2 rounded-xl dark:bg-[var(--tertiary-dark)]">
         {fileTypes.map((type) => (
           <DropdownMenuCheckboxItem
-            className={`justify-end hover:bg-[var(--primary-light)] hover:text-[var(--primary)] ${!!selected[type.id] ? `text-[var(--primary)]` : `text-black`}`}
+            className={`justify-end hover:bg-[var(--primary-light)] dark:hover:bg-[var(--primary-dark)] dark:text-white hover:text-[var(--primary)] ${!!selected[type.id] ? `text-[var(--primary)]` : `text-black`}`}
             key={type.id}
             checked={!!selected[type.id]}
             onCheckedChange={(checked) => handleCheckedChange(type.id, checked)}

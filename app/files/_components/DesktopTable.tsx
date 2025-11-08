@@ -7,10 +7,10 @@ export default function DesktopTable(): ReactElement {
     <div dir="rtl" className="w-full h-auto p-1 md:flex flex-col gap-1 hidden">
       {/* Table header */}
       <div
-        className="w-full h-12 p-3 text-[0.8rem] bg-[var(--tertiary-light)]  dark:bg-[var(--tertiary-dark)] dark:text-white
+        className="w-full h-12 p-3 text-[0.8rem] bg-[var(--tertiary-light)]  dark:bg-[var(--tertiary-dark)]   
               grid grid-cols-[40px_repeat(5,1fr)]
               items-center text-end
-              rounded-tr-[12px] rounded-tl-[12px]"
+              rounded-tr-[12px] rounded-tl-[12px] dark:text-white"
       >
         {/*Checkbox */}
         <GreenCheckBox />
@@ -27,31 +27,35 @@ export default function DesktopTable(): ReactElement {
       <div
         className="w-full h-12 p-3 text-[0.8rem] border-b   
             grid grid-cols-[40px_repeat(5,1fr)]
-            items-start text-end pb-2"
+            items-start text-end pb-2 dark:text-[var(--tertiary)]"
       >
         {/*Checkbox */}
         <GreenCheckBox />
         {/*Others */}
-        <div className="flex truncate gap-1 items-start justify-start min-w-0 dark:text-white   ">
+        <div className="flex truncate gap-1 items-start justify-start min-w-0 text-white">
           <FileWithName classes="w-6 h-6 text-[#ea990d]" name="PNG" />
           متن تستی
         </div>
-        <div className=" text-start flex flex-col  min-w-0 dark:text-white">
+        <div className=" text-start flex flex-col  min-w-0 ">
           <p>1400/2/1</p>
           <div className="flex gap-1 items-center">
-            <Clock classes="text-[#cccccc] size-3 mb-0.5" />
-            <p className="text-[0.7rem] text-gray-300">10:25</p>
+            <Clock classes="text-[#cccccc] dark:text-[var(--tertiary)]   size-3 mb-0.5" />
+            <p className="text-[0.7rem] text-gray-300 dark:text-[var(--tertiary)]">
+              10:25
+            </p>
           </div>
         </div>
-        <div className=" text-start flex flex-col  min-w-0 dark:text-white">
+        <div className=" text-start flex flex-col min-w-0 ">
           <p>1400/2/1</p>
           <div className="flex gap-1 items-center">
-            <Clock classes="text-[#cccccc] size-3 mb-0.5" />
-            <p className="text-[0.7rem] text-gray-300">10:25</p>
+            <Clock classes="text-[#cccccc] dark:text-[var(--tertiary)]   size-3 mb-0.5" />
+            <p className="text-[0.7rem] text-gray-300 dark:text-[var(--tertiary)]">
+              10:25
+            </p>
           </div>
         </div>
-        <div className="text-start truncate min-w-0 dark:text-white">2 MG</div>
-        <div className="text-start truncate  min-w-0 dark:text-white cursor-pointer hover:opacity-[0.7]">
+        <div className="text-start truncate min-w-0 ">2 MG</div>
+        <div className="text-start truncate  min-w-0 cursor-pointer hover:opacity-[0.7]">
           <TableMoreActions />
         </div>
       </div>
