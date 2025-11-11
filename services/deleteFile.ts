@@ -28,6 +28,7 @@ export const deleteFile = async (
     removeFile(id);
     deleteFileFromIndexedDB(id);
   } catch (error) {
+    console.dir(error);
     toast.error(`خطا در حذف فایل از server storage`);
   }
 };

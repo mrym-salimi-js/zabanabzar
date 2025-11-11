@@ -1,15 +1,16 @@
-import { craeteFile } from "@/lib/db/queries/files";
+// Handle GET req
+
+import { getAllFiles } from "@/lib/db/queries/files";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function GET() {
   try {
-    const body = await req.json();
     // Call query from db/queries of files
-    const newFile = await craeteFile(body);
+    const allFile = await getAllFiles();
 
-    return NextResponse.json(newFile, { status: 201 });
+    return NextResponse.json(allFile, { status: 201 });
   } catch (err) {
     console.error(err);
-    return NextResponse.json({ error: "خطا در ذخیره فایل" }, { status: 500 });
+    return NextResponse.json({ error: "خطا در دریافت فایل" }, { status: 500 });
   }
 }

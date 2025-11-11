@@ -6,8 +6,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Download, Edit, More } from "@/components/Icons";
+import { ReactElement } from "react";
 
-export function CardMoreActions() {
+export function CardMoreActions(): ReactElement {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">

@@ -12,7 +12,7 @@ export function TableMoreActions() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
-        <More classes="size-7 text-black dark:text-[var(--tertiary)]" />
+        <More classes="size-6 text-black dark:text-[var(--tertiary)]" />
       </DropdownMenuTrigger>
       <DropdownMenuContent
         className="w-auto rounded-xl p-2 dark:bg-[var(--tertiary-dark)] dark:text-white"

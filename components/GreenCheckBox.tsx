@@ -3,7 +3,7 @@ import { Tick } from "./Icons";
 
 export function GreenCheckBox(): ReactElement {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center ">
       <label className="flex items-center cursor-pointer relative">
         <input
           type="checkbox"

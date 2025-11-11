@@ -4,6 +4,7 @@ import {
   PaginationContent,
   PaginationItem,
 } from "@/components/ui/pagination";
+import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -33,7 +34,7 @@ export function PaginatedList() {
   }, [currentPage, totalPages]);
 
   return (
-    <div className="w-full h-auto mt-4 flex items-center justify-center text-[0.9rem]">
+    <div className="w-full h-auto mt-4 flex py-3 items-center justify-center text-[0.9rem]">
       <Pagination>
         <PaginationContent>
           <PaginationItem className={currentPage === 1 ? "hidden" : "block"}>
@@ -53,13 +54,13 @@ export function PaginatedList() {
                 <Link
                   href={p === 1 ? `/files` : `/files/page${p}`}
                   onClick={() => setCurrentPage(p)}
-                  className={`px-4 py-2 rounded-md text-[var(--primary)] ${
+                  className={`px-4 py-2 rounded-md text-black dark:text-white ${
                     currentPage === p
                       ? "bg-[var(--primary)] text-white "
                       : "hover:bg-[var(--primary-light)] dark:hover:bg-[var(--primary-dark)]"
                   }`}
                 >
-                  {p}
+                  {toPersianNumbers(p)}
                 </Link>
               </PaginationItem>
             );

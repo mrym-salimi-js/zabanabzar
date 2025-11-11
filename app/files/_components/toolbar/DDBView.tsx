@@ -21,11 +21,11 @@ export function DDBView() {
       >
         <DropdownMenuGroup className=" flex flex-col ">
           <DropdownMenuItem asChild className="justify-end p-0">
-            {/* List item */}
+            {/* Table item */}
             <DDBItem icon={ListItems} label="لیستی" />
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0 ">
-            {/* Grid item */}
+            {/* Card item */}
             <DDBItem icon={SquaredItems} label="کارتی" />
           </DropdownMenuItem>
         </DropdownMenuGroup>
