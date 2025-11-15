@@ -8,14 +8,7 @@ import DropFiles from "./DropFiles";
 import ModalFooterProcess from "./ModalFooterProcess";
 import DDBItem from "@/app/files/_components/toolbar/DDBItem";
 import { Upload } from "@/components/Icons";
-// type UploadedFile = {
-//   name: string;
-//   size: number;
-//   udserId: number;
-//   exText: string | null;
-//   url: string;
-//   ext: string;
-// };
+
 export function Modal(): ReactElement {
   return (
     <Dialog>

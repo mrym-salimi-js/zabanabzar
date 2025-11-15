@@ -5,44 +5,62 @@ import { ReactElement, useRef } from "react";
 import { Bin } from "@/components/Icons";
 import { TriggerBtn } from "@/components/TriggerBtn";
 import ModalFooter from "@/components/ModalFooter";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { CleanFileType } from "@/app/files/_components/modals/uploadFiles/ModalFooterProcess";
 import ModalContent from "@/components/ModalContent";
+import { useFileCheckStore } from "@/store/fileCheckStore";
+import { deleteFromStorage } from "@/services/deleteFromStorage";
 
 export function DeleteBtn(): ReactElement {
+  const selectedUrls = useFileCheckStore((state) => state.selectedUrls);
+  const queryClient = useQueryClient();
   const closeRef = useRef<HTMLButtonElement>(null);
   // Delete data from database
-  const mutation = useMutation<void, Error, CleanFileType[]>({
-    mutationFn: async (files: CleanFileType[]) => {
-      const res = await fetch("/api/files", {
+  const mutation = useMutation<void, Error, string[]>({
+    mutationFn: async (files: string[]) => {
+      const resDB = await fetch("/api/files", {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(files),
       });
-      if (!res.ok) throw new Error("خطا در حذف فایل‌ها");
-      return res.json();
+      // Delete file from storage (s3)
+      await deleteFromStorage(files);
+      return resDB.json();
     },
     onSuccess: () => {
       toast.success("حذف با موفقیت انجام شد");
+      // Update files list
+      queryClient.invalidateQueries({ queryKey: ["files"] });
       // Click on hidden closing btn after sending data
       closeRef.current?.click();
     },
     onError: () => toast.error("حذف ناموفق بود"),
   });
+
+  // Handle trigger click
+  const handleTriggerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (selectedUrls?.length === 0) {
+      e.preventDefault();
+      toast.error("فایلی انتخاب نشده");
+    }
+  };
   //Handle enents after click on "انصراف" Btn
   const handleCancel = () => {};
   //Handle enents after click on "تایید" Btn
-  const handleConfirm = () => {};
+  const handleConfirm = () => {
+    mutation.mutate(selectedUrls);
+  };
   return (
     <Dialog>
       <form className="w-full">
         {/*Delete Btn */}
         <DialogTrigger className="w-full">
-          <TriggerBtn icon={Bin} label="حذف" />
+          <div onClick={(e) => handleTriggerClick(e)} className="w-full">
+            <TriggerBtn icon={Bin} label="حذف" />
+          </div>
         </DialogTrigger>
 
-        {/*Upload modal */}
+        {/*Delete modal */}
         <DialogContent className="sm:max-w-[425px]">
           {/*Modal content */}
           <ModalContent

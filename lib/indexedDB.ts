@@ -1,4 +1,3 @@
-import { files } from "@/lib/db/schema";
 // Open or create database
 const DB_NAME = "fileUploadsDB";
 const STORE_NAME = "uploads";

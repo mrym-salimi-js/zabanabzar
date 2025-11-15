@@ -12,23 +12,26 @@ export const deleteFile = async (
   if (status === "error" || fileUrl === undefined) {
     removeFile(id);
     deleteFileFromIndexedDB(id);
+    return;
   }
+
   if (!fileUrl) return;
 
   try {
+    const fileUrls = [fileUrl];
+
     const res = await fetch("/api/files/storage", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fileUrl }),
+      body: JSON.stringify({ fileUrls }),
     });
 
-    // Toast erorr
     if (!res.ok) toast.error("حذف فایل از سرور موفق نبود");
-    // Remove from localStorage
+
     removeFile(id);
     deleteFileFromIndexedDB(id);
   } catch (error) {
     console.dir(error);
-    toast.error(`خطا در حذف فایل از server storage`);
+    toast.error(`خطا در حذف فایل از سرور`);
   }
 };

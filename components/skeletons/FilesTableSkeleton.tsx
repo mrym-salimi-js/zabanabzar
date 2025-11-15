@@ -17,7 +17,7 @@ export default function FilesTableSkeleton({ skeletonCount }: Props) {
         <div className="w-4 h-4 animate-shimmer rounded-full" />
 
         {/* File name + icon */}
-        <div className="flex items-center gap-2 min-w-0">
+        <div className="flex items-center gap-2 min-w-0 ">
           <div className="w-6 h-6 rounded-full animate-shimmer" />
           <div className="h-4 w-32 animate-shimmer rounded" />
         </div>

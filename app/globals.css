@@ -122,6 +122,15 @@
   border-radius: 4px;
 }
 
+.dark .animate-shimmer {
+  background: linear-gradient(
+    to right,
+    #232e3de5 0%,
+    #232e3d 50%,
+    #232e3d 100%
+  );
+}
+
 body {
   /* background: var( --background-light); */
   font-family: var(--font-iran-sans), Arial, Helvetica, sans-serif;

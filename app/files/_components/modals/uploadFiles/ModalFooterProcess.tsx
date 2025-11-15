@@ -3,7 +3,7 @@ import { deleteFile } from "@/services/deleteFile";
 import { useUploadStore } from "@/store/uploadFileStore";
 import React, { ReactElement, useRef } from "react";
 import toast from "react-hot-toast";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import ModalFooter from "@/components/ModalFooter";
 
 export type CleanFileType = {
@@ -17,7 +17,8 @@ export type CleanFileType = {
 export default function ModalFooterProcess(): ReactElement {
   // Create ref for hidden btn, for using closing modal after sending data
   const closeRef = useRef<HTMLButtonElement>(null);
-  const { files, clearFiles } = useUploadStore();
+  const { files, clearFiles } = useUploadStore(); // Type of this hook params set in stor file
+  const queryClient = useQueryClient();
 
   // Send data mutation
   const mutation = useMutation<void, Error, CleanFileType[]>({
@@ -34,6 +35,9 @@ export default function ModalFooterProcess(): ReactElement {
       clearFiles();
       deleteAllFilesFromIndexedDB();
       toast.success("ذخیره سازی با موفقیت انجام شد");
+
+      // Update files list
+      queryClient.invalidateQueries({ queryKey: ["files"] });
       // Click on hidden closing btn after sending data
       closeRef.current?.click();
     },

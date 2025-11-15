@@ -9,8 +9,10 @@ import toast from "react-hot-toast";
 import { CleanFileType } from "@/app/files/_components/modals/uploadFiles/ModalFooterProcess";
 import ModalContent from "@/components/ModalContent";
 import { Download } from "@/components/Icons";
+import { useFileCheckStore } from "@/store/fileCheckStore";
 
 export function DownloadBtn(): ReactElement {
+  const selectedIds = useFileCheckStore((state) => state.selectedIds);
   const closeRef = useRef<HTMLButtonElement>(null);
   // Delete data from database
   const mutation = useMutation<void, Error, CleanFileType[]>({
@@ -30,6 +32,14 @@ export function DownloadBtn(): ReactElement {
     },
     onError: () => toast.error("دانلود ناموفق بود"),
   });
+
+  // Handle trigger click
+  const handleTriggerClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (selectedIds?.length === 0) {
+      e.preventDefault();
+      toast.error("فایلی انتخاب نشده");
+    }
+  };
   //Handle enents after click on "انصراف" Btn
   const handleCancel = () => {};
   //Handle enents after click on "تایید" Btn
@@ -39,10 +49,12 @@ export function DownloadBtn(): ReactElement {
       <form className="w-full">
         {/*Delete Btn */}
         <DialogTrigger className="w-full">
-          <TriggerBtn icon={Download} label="دانلود" />
+          <div onClick={handleTriggerClick} className="w-full">
+            <TriggerBtn icon={Download} label="دانلود" />
+          </div>
         </DialogTrigger>
 
-        {/*Upload modal */}
+        {/*Download modal */}
         <DialogContent className="sm:max-w-[425px]">
           {/*Modal content */}
           <ModalContent

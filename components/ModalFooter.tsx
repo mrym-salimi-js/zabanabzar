@@ -3,12 +3,10 @@ import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import React, { ReactElement } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import { CleanFileType } from "../app/files/_components/modals/uploadFiles/ModalFooterProcess";
-
 type ModalFooterProps = {
   handleCancel: () => void;
   handleConfirm: () => void;
-  mutation: UseMutationResult<void, Error, CleanFileType[]>;
+  mutation: UseMutationResult<void, Error, string[]>;
   closeRef: React.RefObject<HTMLButtonElement | null>;
   confirmBtnBG: string;
   confirmLabelLoading: string;

@@ -54,19 +54,34 @@ export async function POST(request: NextRequest) {
 }
 export async function DELETE(request: NextRequest) {
   try {
-    const { fileUrl } = await request.json();
-    const key = fileUrl.split("/").pop(); // Extract file name from fileUrl
+    const { fileUrls } = await request.json();
 
-    await client.send(
-      new DeleteObjectCommand({
-        Bucket: process.env.LIARA_BUCKET_NAME,
-        Key: key,
-      })
-    );
+    if (!fileUrls || !Array.isArray(fileUrls) || fileUrls.length === 0) {
+      return NextResponse.json(
+        { error: "هیچ فایلی برای حذف ارسال نشده" },
+        { status: 400 }
+      );
+    }
 
-    return NextResponse.json({ message: "فایل حذف شد" });
+    // Delete array of files
+    const deletePromises = fileUrls.map((fileUrl: string) => {
+      const key = fileUrl.split("/").pop(); // نام فایل
+      return client.send(
+        new DeleteObjectCommand({
+          Bucket: process.env.LIARA_BUCKET_NAME,
+          Key: key,
+        })
+      );
+    });
+
+    await Promise.all(deletePromises);
+
+    return NextResponse.json({ message: "فایل‌ها با موفقیت حذف شدند" });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: "حذف ناموفق" }, { status: 500 });
+    console.error("❌ خطا در حذف:", error);
+    return NextResponse.json(
+      { error: "حذف ناموفق", details: error },
+      { status: 500 }
+    );
   }
 }

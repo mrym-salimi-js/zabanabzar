@@ -1,6 +1,6 @@
 import { files } from "./../schema/files";
 import { db } from "../index";
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 
 export type FileInsertType = typeof files.$inferInsert;
 export type FileSelectType = typeof files.$inferSelect;
@@ -27,12 +27,7 @@ export async function updateFile(id: number, data: Partial<FileInsertType>) {
   return await db.update(files).set(data).where(eq(files.id, id)).returning();
 }
 
-// Delete special file
-export async function deleteFile(id: number) {
-  return await db.delete(files).where(eq(files.id, id)).returning();
-}
-
-// Delete all files
-export async function deleteAllFiles() {
-  return await db.delete(files);
+// Delete files in array
+export async function deleteArryFiles(ids: string[]) {
+  return await db.delete(files).where(inArray(files.url, ids));
 }
