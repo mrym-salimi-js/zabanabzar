@@ -3,6 +3,7 @@ import {
   S3Client,
   PutObjectCommand,
   DeleteObjectCommand,
+  GetObjectCommand,
 } from "@aws-sdk/client-s3";
 
 const client = new S3Client({
@@ -45,13 +46,56 @@ export async function POST(request: NextRequest) {
       fileUrl,
     });
   } catch (error) {
-    console.error("❌ خطا در آپلود:", error);
+    console.error("خطا در آپلود:", error);
     return NextResponse.json(
       { error: "آپلود ناموفق", details: error },
       { status: 500 }
     );
   }
 }
+
+export async function GET(request: NextRequest) {
+  try {
+    const key = request.nextUrl.searchParams.get("key");
+
+    if (!key) {
+      return NextResponse.json(
+        { error: "کلید فایل ارسال نشده" },
+        { status: 400 }
+      );
+    }
+
+    const params = {
+      Bucket: process.env.LIARA_BUCKET_NAME!,
+      Key: key,
+    };
+
+    const data = await client.send(new GetObjectCommand(params));
+
+    if (!data.Body) {
+      return NextResponse.json(
+        { error: "Body فایل خالی است" },
+        { status: 404 }
+      );
+    }
+
+    const uint8 = await data.Body.transformToByteArray();
+    const arrayBuffer = new Uint8Array(uint8).buffer;
+
+    return new Response(arrayBuffer, {
+      headers: {
+        "Content-Type": data.ContentType || "application/octet-stream",
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { error: "خطای دانلود", details: String(error) },
+      { status: 500 }
+    );
+  }
+}
+
 export async function DELETE(request: NextRequest) {
   try {
     const { fileUrls } = await request.json();
@@ -78,7 +122,7 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ message: "فایل‌ها با موفقیت حذف شدند" });
   } catch (error) {
-    console.error("❌ خطا در حذف:", error);
+    console.error("خطا در حذف:", error);
     return NextResponse.json(
       { error: "حذف ناموفق", details: error },
       { status: 500 }

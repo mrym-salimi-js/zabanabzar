@@ -5,9 +5,16 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bin, Download, Edit, More, Visit } from "@/components/Icons";
+import {
+  Bin,
+  Download,
+  Edit,
+  Extraction,
+  More,
+  Visit,
+} from "@/components/Icons";
 import DDBItem from "./toolbar/DDBItem";
-import { useDeleteFiles } from "@/hooks/api/files";
+import { useDeleteFiles, useExtractionText } from "@/hooks/api/files";
 
 type MorActionProp = {
   fileUrl: string;
@@ -15,10 +22,16 @@ type MorActionProp = {
 
 export function TableMoreActions({ fileUrl }: MorActionProp) {
   const deleteMutation = useDeleteFiles();
+  const extractionMutation = useExtractionText();
 
   // Handle delete file
   const handleDeleteFile = () => {
     deleteMutation.mutate([fileUrl]);
+  };
+
+  // Handle extraction text from file
+  const handleExtractionText = () => {
+    extractionMutation.mutate(fileUrl);
   };
   return (
     <DropdownMenu>
@@ -31,8 +44,13 @@ export function TableMoreActions({ fileUrl }: MorActionProp) {
       >
         <DropdownMenuGroup className=" flex flex-col">
           <DropdownMenuItem className="justify-end p-0 ">
-            {/* Visit or extraction */}
+            {/* Visit or Extraction */}
             {/* <DDBItem  icon={Visit} label="متن" /> */}
+            <DDBItem
+              handleAction={handleExtractionText}
+              icon={Extraction}
+              label="استخراج"
+            />
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Delete */}

@@ -4,28 +4,27 @@ import {
 } from "@/lib/indexedDB";
 import { deleteFileFromDBService } from "@/services/files/deleteFileFromDBService";
 import { deleteFileFromStorageService } from "@/services/files/deleteFileFromStorageService";
+import { downloadFileFromStorageService } from "@/services/files/downloadFileFromStorageService";
+import { saveFileToDBService } from "@/services/files/saveFileToDBService";
 import { uploadFileToStorageService } from "@/services/files/uploadFileToStorageService";
 import { useUploadStore } from "@/store/uploadFileStore";
 import { CleanFileType } from "@/types/file";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 
-// Helper function to delete files from API + S3
-const deleteFilesApi = async (files: string[]) => {
-  const res = await deleteFileFromDBService(files);
-
-  await deleteFileFromStorageService(files);
-
-  if (!res.ok) throw new Error("خطا در حذف");
-  return res.json();
-};
-
 // Delete Files custom hook
 export const useDeleteFiles = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteFilesApi,
+    mutationFn: async (files: string[]) => {
+      const res = await deleteFileFromDBService(files);
+
+      await deleteFileFromStorageService(files);
+
+      if (!res.ok) throw new Error("خطا در حذف");
+      return res.json();
+    },
     onSuccess: () => {
       toast.success("حذف باموفقیت انجام شد");
       queryClient.invalidateQueries({ queryKey: ["files"] });
@@ -62,17 +61,14 @@ export const useUploadFile = () => {
   });
 };
 
+// Save files to database
 export const useSaveFileToDB = () => {
   const { clearFiles } = useUploadStore.getState();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (files: CleanFileType[]) => {
-      const res = await fetch("/api/files", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(files),
-      });
+      const res = await saveFileToDBService(files);
       if (!res.ok) throw new Error("خطا در ذخیره ");
       return res.json();
     },
@@ -88,6 +84,17 @@ export const useSaveFileToDB = () => {
   });
 };
 
+// Download files from s3
 export const useDownloadFile = () => {
   return useMutation({});
+};
+export const useExtractionText = () => {
+  return useMutation({
+    mutationFn: async (fileUrl: string) => {
+      const res = await downloadFileFromStorageService(fileUrl);
+      if (!res.ok) throw "خطا در دانلود";
+
+      return res;
+    },
+  });
 };
