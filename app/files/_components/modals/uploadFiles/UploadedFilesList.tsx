@@ -2,12 +2,13 @@ import { Bin, FileWithName, Retry } from "@/components/Icons";
 import React, { ReactElement } from "react";
 import { ProgressBar } from "./ProgressBar";
 import { useUploadStore, UploadFilePersist } from "@/store/uploadFileStore";
-import { deleteFile } from "@/services/deleteFile";
-import { uploadFile } from "@/services/uploadFile";
+import { deleteFile } from "@/utils/files/deleteFile";
 import { fileTypeColorClasses } from "@/constants/fileTypeColorClasses";
+import { useUploadFile } from "@/hooks/api/files";
 
 export default function UploadedFilesList(): ReactElement {
   const { files } = useUploadStore();
+  const uploadMutation = useUploadFile();
 
   const handleRemoveFile = async (file: UploadFilePersist) => {
     const status = file.status;
@@ -35,7 +36,7 @@ export default function UploadedFilesList(): ReactElement {
                   <div className="w-full flex flex-col gap-1">
                     <div className="w-full flex justify-between items-center">
                       <div className="w-full flex flex-col ">
-                        <p className="w-[80%] truncate dark:text-white text-[0.7rem]">
+                        <p className="w-[150px] truncate dark:text-white text-[0.7rem]">
                           {file.name}
                         </p>
                         <div className="flex gap-1  text-[0.6rem]">
@@ -62,7 +63,7 @@ export default function UploadedFilesList(): ReactElement {
                       </div>
                       {file.status === "error" && (
                         <div
-                          onClick={() => uploadFile(file.id)}
+                          onClick={() => uploadMutation.mutate(file.id)}
                           className="w-5 h-5 flex items-center justify-center rounded-full cursor-pointer hover:opacity-[0.7] mr-2"
                         >
                           <Retry classes="size-4 text-[var(--tertiary)" />

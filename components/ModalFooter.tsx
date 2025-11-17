@@ -3,23 +3,24 @@ import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import React, { ReactElement } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-type ModalFooterProps = {
+
+type ModalFooterProps<TVariables> = {
   handleCancel: () => void;
   handleConfirm: () => void;
-  mutation: UseMutationResult<void, Error, string[]>;
+  mutation: UseMutationResult<void, Error, TVariables>;
   closeRef: React.RefObject<HTMLButtonElement | null>;
   confirmBtnBG: string;
   confirmLabelLoading: string;
 };
 
-export default function ModalFooter({
+export default function ModalFooter<TVariables>({
   handleCancel,
   handleConfirm,
   mutation,
   closeRef,
   confirmBtnBG,
   confirmLabelLoading,
-}: ModalFooterProps): ReactElement {
+}: ModalFooterProps<TVariables>): ReactElement {
   // Create ref for hidden btn, for using closing modal after sending data
 
   return (
@@ -33,7 +34,7 @@ export default function ModalFooter({
           <Button
             onClick={handleCancel}
             variant="outline"
-            className="md:w-[50%] border-0 bg-gray-200 items-center dark:bg-[var(--tertiary-dark)] dark:text-white"
+            className="sm:w-[50%] border-0 bg-gray-200 items-center dark:bg-[var(--tertiary-dark)] dark:text-white"
           >
             انصراف
           </Button>
@@ -41,7 +42,7 @@ export default function ModalFooter({
         <Button
           onClick={handleConfirm}
           variant="outline"
-          className={`md:w-[50%] border-0  items-center text-white ${confirmBtnBG}`}
+          className={`sm:w-[50%] border-0  items-center text-white ${confirmBtnBG}`}
         >
           {mutation.isPending ? (
             <>

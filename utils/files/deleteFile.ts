@@ -1,4 +1,5 @@
 import { deleteFileFromIndexedDB } from "@/lib/indexedDB";
+import { deleteFileFromStorageService } from "@/services/files/deleteFileFromStorageService";
 import { useUploadStore } from "@/store/uploadFileStore";
 import toast from "react-hot-toast";
 
@@ -20,11 +21,7 @@ export const deleteFile = async (
   try {
     const fileUrls = [fileUrl];
 
-    const res = await fetch("/api/files/storage", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fileUrls }),
-    });
+    const res = await deleteFileFromStorageService(fileUrls);
 
     if (!res.ok) toast.error("حذف فایل از سرور موفق نبود");
 

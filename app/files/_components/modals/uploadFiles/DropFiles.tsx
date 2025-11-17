@@ -1,10 +1,15 @@
 import { Upload } from "@/components/Icons";
 import React, { DragEvent, ReactElement, useState } from "react";
 import FilePicker from "./FilePicker";
-import { processAndUploadFiles } from "@/services/processAndUploadFiles";
+import { useUploadStore } from "@/store/uploadFileStore";
+import { saveFileToIndexedDB } from "@/lib/indexedDB";
+import { useUploadFile } from "@/hooks/api/files";
 
 export default function DropFiles(): ReactElement {
   const [isOver, setIsOver] = useState<boolean>(false);
+  const uploadMutation = useUploadFile();
+
+  const { addFiles } = useUploadStore();
 
   // Handle onDrop events
   const handleOnDrop = (e: DragEvent<HTMLDivElement>) => {
@@ -15,7 +20,23 @@ export default function DropFiles(): ReactElement {
     if (!files) return;
 
     // Create formData for each selected files
-    processAndUploadFiles(files);
+
+    Array.from(files).forEach(async (file) => {
+      const id = crypto.randomUUID();
+
+      await saveFileToIndexedDB(id, file);
+
+      addFiles({
+        id,
+        name: file.name,
+        size: file.size,
+        status: "uploading",
+        progress: 0,
+        url: undefined,
+      });
+
+      uploadMutation.mutate(id);
+    });
   };
 
   // Handle onDragOver events

@@ -7,42 +7,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Bin, Download, Edit, More, Visit } from "@/components/Icons";
 import DDBItem from "./toolbar/DDBItem";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import toast from "react-hot-toast";
-import { deleteFromStorage } from "@/services/deleteFromStorage";
+import { useDeleteFiles } from "@/hooks/api/files";
 
 type MorActionProp = {
   fileUrl: string;
 };
 
 export function TableMoreActions({ fileUrl }: MorActionProp) {
-  const queryClient = useQueryClient();
-
-  // Delete file mutation
-  const mutation = useMutation<void, Error, string[]>({
-    mutationFn: async (file: string[]) => {
-      const res = await fetch("/api/files", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(file),
-      });
-      // Delete file from storage (s3)
-      await deleteFromStorage(file);
-      if (!res.ok) throw new Error("خطا در حذف فایل ");
-      return res.json();
-    },
-    onSuccess: () => {
-      toast.success("فایل حذف شد");
-
-      // Update files list
-      queryClient.invalidateQueries({ queryKey: ["files"] });
-    },
-    onError: () => toast.error("حذف ناموفق بود"),
-  });
+  const deleteMutation = useDeleteFiles();
 
   // Handle delete file
   const handleDeleteFile = () => {
-    mutation.mutate([fileUrl]);
+    deleteMutation.mutate([fileUrl]);
   };
   return (
     <DropdownMenu>

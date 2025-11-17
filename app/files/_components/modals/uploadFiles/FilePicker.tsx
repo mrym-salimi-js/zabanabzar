@@ -2,10 +2,15 @@
 
 import { useRef, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { processAndUploadFiles } from "@/services/processAndUploadFiles";
+import { useUploadFile } from "@/hooks/api/files";
+import { useUploadStore } from "@/store/uploadFileStore";
+import { saveFileToIndexedDB } from "@/lib/indexedDB";
 
 export default function FilePicker() {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const uploadMutation = useUploadFile();
+
+  const { addFiles } = useUploadStore();
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     //Get selected files
@@ -15,7 +20,22 @@ export default function FilePicker() {
     if (!files) return;
 
     // Create formData for each selected files
-    processAndUploadFiles(files);
+    Array.from(files).forEach(async (file) => {
+      const id = crypto.randomUUID();
+
+      await saveFileToIndexedDB(id, file);
+
+      addFiles({
+        id,
+        name: file.name,
+        size: file.size,
+        status: "uploading",
+        progress: 0,
+        url: undefined,
+      });
+
+      uploadMutation.mutate(id);
+    });
 
     e.target.value = "";
   };

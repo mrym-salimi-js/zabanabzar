@@ -11,3 +11,11 @@ export interface FileItem {
 }
 
 export type FileListResponse = FileItem[];
+
+export type CleanFileType = {
+  name: string;
+  size: number;
+  url: string | undefined;
+  ext: string;
+  userId: number;
+};

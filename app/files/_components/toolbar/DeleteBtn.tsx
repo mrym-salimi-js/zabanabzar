@@ -5,37 +5,25 @@ import { ReactElement, useRef } from "react";
 import { Bin } from "@/components/Icons";
 import { TriggerBtn } from "@/components/TriggerBtn";
 import ModalFooter from "@/components/ModalFooter";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import ModalContent from "@/components/ModalContent";
 import { useFileCheckStore } from "@/store/fileCheckStore";
-import { deleteFromStorage } from "@/services/deleteFromStorage";
+import { useDeleteFiles } from "@/hooks/api/files";
 
 export function DeleteBtn(): ReactElement {
   const selectedUrls = useFileCheckStore((state) => state.selectedUrls);
-  const queryClient = useQueryClient();
   const closeRef = useRef<HTMLButtonElement>(null);
-  // Delete data from database
-  const mutation = useMutation<void, Error, string[]>({
-    mutationFn: async (files: string[]) => {
-      const resDB = await fetch("/api/files", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(files),
-      });
-      // Delete file from storage (s3)
-      await deleteFromStorage(files);
-      return resDB.json();
-    },
-    onSuccess: () => {
-      toast.success("حذف با موفقیت انجام شد");
-      // Update files list
-      queryClient.invalidateQueries({ queryKey: ["files"] });
-      // Click on hidden closing btn after sending data
-      closeRef.current?.click();
-    },
-    onError: () => toast.error("حذف ناموفق بود"),
-  });
+
+  const deleteMutation = useDeleteFiles();
+
+  // Handle delete file
+  const handleConfirm = () => {
+    deleteMutation.mutate(selectedUrls, {
+      onSuccess: () => {
+        closeRef.current?.click();
+      },
+    });
+  };
 
   // Handle trigger click
   const handleTriggerClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -44,12 +32,10 @@ export function DeleteBtn(): ReactElement {
       toast.error("فایلی انتخاب نشده");
     }
   };
-  //Handle enents after click on "انصراف" Btn
+
+  // Handle cancle
   const handleCancel = () => {};
-  //Handle enents after click on "تایید" Btn
-  const handleConfirm = () => {
-    mutation.mutate(selectedUrls);
-  };
+
   return (
     <Dialog>
       <form className="w-full">
@@ -71,10 +57,10 @@ export function DeleteBtn(): ReactElement {
             mainColor="text-[var(--primary)]"
           />
           {/*Modal footer */}
-          <ModalFooter
+          <ModalFooter<string[]>
             handleCancel={handleCancel}
             handleConfirm={handleConfirm}
-            mutation={mutation}
+            mutation={deleteMutation}
             closeRef={closeRef}
             confirmBtnBG="bg-[var(--primary)]"
             confirmLabelLoading="در حال حذف"
