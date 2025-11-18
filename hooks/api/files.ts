@@ -4,7 +4,9 @@ import {
 } from "@/lib/indexedDB";
 import { deleteFileFromDBService } from "@/services/files/deleteFileFromDBService";
 import { deleteFileFromStorageService } from "@/services/files/deleteFileFromStorageService";
+import { extractTextFromFileService } from "@/services/files/extractTextFromFileService";
 import { saveFileToDBService } from "@/services/files/saveFileToDBService";
+import { updateExTextInDBService } from "@/services/files/updateExTextInDBService";
 import { uploadFileToStorageService } from "@/services/files/uploadFileToStorageService";
 import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 import { useUploadStore } from "@/store/uploadFileStore";
@@ -94,31 +96,40 @@ export const useExtractionText = () => {
     fileUrl: string;
     fileId: number;
   };
+  const queryClient = useQueryClient();
   const { updateStatus, removeExtraction } = useExtractTextStore();
+
   return useMutation({
     mutationFn: async ({ fileUrl, fileId }: ExtractPayload) => {
       updateStatus(fileId, "extracting");
 
-      const res = await fetch("/api/files/extract", {
-        method: "POST",
-        body: JSON.stringify({ fileUrl }),
-        headers: { "Content-Type": "application/json" },
-      });
+      const res = await extractTextFromFileService(fileUrl);
 
-      const text = await res.text(); // متن پاسخ سرور را بگیر
+      const text = await res.text();
 
       if (!res.ok) throw new Error(`خطای استخراج فایل: ${text}`);
 
       const data = JSON.parse(text);
-
+      console.log(data);
       return data;
     },
-    onSuccess: (data, variables: ExtractPayload) => {
+    onSuccess: async (data, variables: ExtractPayload) => {
       updateStatus(variables.fileId, "success");
 
+      const id = variables.fileId;
+      const text = data.text;
+
+      const res = await updateExTextInDBService(id, text);
+
+      if (!res.ok) toast.error("خطا در ذخیره متن  استخراج شده");
+
+      toast.success("متن استخراج شده ذخیره شد");
+      queryClient.invalidateQueries({ queryKey: ["files"] });
+
+      // Hide notification after success mode
       const timer = setTimeout(() => {
         removeExtraction(variables.fileId);
-      }, 2000);
+      }, 1000);
 
       return () => clearTimeout(timer);
     },

@@ -5,7 +5,7 @@ import { UseMutationResult } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
 type ModalFooterProps<TVariables> = {
-  handleCancel: () => void;
+  handleCancel?: () => void;
   handleConfirm: () => void;
   mutation: UseMutationResult<void, Error, TVariables>;
   closeRef: React.RefObject<HTMLButtonElement | null>;

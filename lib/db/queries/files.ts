@@ -22,9 +22,15 @@ export async function getFileById(id: number) {
   return result[0];
 }
 
-// Edit special file
-export async function updateFile(id: number, data: Partial<FileInsertType>) {
-  return await db.update(files).set(data).where(eq(files.id, id)).returning();
+// Update special file
+export async function updateFile(id: number, text: string) {
+  return db
+    .update(files)
+    .set({
+      exText: text,
+    })
+    .where(eq(files.id, id))
+    .returning();
 }
 
 // Delete files in array

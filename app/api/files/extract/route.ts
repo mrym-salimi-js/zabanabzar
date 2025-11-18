@@ -28,7 +28,7 @@ export async function POST(req: Request) {
 
     // گرفتن buffer فایل
     const buffer = Buffer.from(await res.arrayBuffer());
-    console.dir(buffer);
+
     // تشخیص نوع فایل
     const contentType = res.headers.get("Content-Type") || "";
 
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
       fileUrl.toLowerCase().endsWith(".pdf")
     ) {
       const data = await pdfParse(buffer);
-      console.dir(data);
+
       const text = data.text || "";
       return new Response(JSON.stringify({ text }), {
         headers: { "Content-Type": "application/json" },

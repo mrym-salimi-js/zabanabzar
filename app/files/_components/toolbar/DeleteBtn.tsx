@@ -58,7 +58,6 @@ export function DeleteBtn(): ReactElement {
           />
           {/*Modal footer */}
           <ModalFooter<string[]>
-            handleCancel={handleCancel}
             handleConfirm={handleConfirm}
             mutation={deleteMutation}
             closeRef={closeRef}

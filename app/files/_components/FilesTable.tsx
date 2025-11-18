@@ -8,6 +8,8 @@ import { fileTypeColorClasses } from "@/constants/fileTypeColorClasses";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import FilesTableSkeleton from "@/components/skeletons/FilesTableSkeleton";
 import { useFileCheckStore } from "@/store/fileCheckStore";
+import { useDeleteFiles } from "@/hooks/api/files";
+import ThreePointsLoading from "@/components/ThreePointsLoading";
 
 // Table props type
 type TableProps = {
@@ -89,6 +91,7 @@ export function FileRow({
   selectedUrls,
   handleCheckSingle,
 }: TableRowProps) {
+  const deleteMutation = useDeleteFiles();
   return filesList?.map((file, index) => (
     <div
       key={file.id}
@@ -150,7 +153,15 @@ export function FileRow({
       </div>
 
       <div className="text-start truncate min-w-0 cursor-pointer hover:opacity-[0.7]">
-        <TableMoreActions fileUrl={file.url} fileId={file.id} />
+        {deleteMutation.isPending ? (
+          <ThreePointsLoading circleColor="bg-black" />
+        ) : (
+          <TableMoreActions
+            fileUrl={file.url}
+            fileId={file.id}
+            fileEx={file.exText}
+          />
+        )}
       </div>
     </div>
   ));

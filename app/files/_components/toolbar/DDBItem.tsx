@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 interface DDBItemProps {
   icon: React.ElementType;
   label: string;
-  handleAction: () => void;
+  handleAction?: () => void;
 }
 export default function DDBItem({
   icon: Icon,

@@ -20,9 +20,10 @@ import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 type MorActionProp = {
   fileUrl: string;
   fileId: number;
+  fileEx: string | null;
 };
 
-export function TableMoreActions({ fileUrl, fileId }: MorActionProp) {
+export function TableMoreActions({ fileUrl, fileId, fileEx }: MorActionProp) {
   const deleteMutation = useDeleteFiles();
   const extractionMutation = useExtractionText();
   const { addExtraction } = useExtractTextStore();
@@ -52,12 +53,19 @@ export function TableMoreActions({ fileUrl, fileId }: MorActionProp) {
         <DropdownMenuGroup className=" flex flex-col">
           <DropdownMenuItem className="justify-end p-0 ">
             {/* Visit or Extraction */}
-            {/* <DDBItem  icon={Visit} label="متن" /> */}
-            <DDBItem
-              handleAction={handleExtractionText}
-              icon={Extraction}
-              label="استخراج"
-            />
+            {fileEx ? (
+              <DDBItem
+                // handleAction={handleExtractionText}
+                icon={Visit}
+                label="متن"
+              />
+            ) : (
+              <DDBItem
+                handleAction={handleExtractionText}
+                icon={Extraction}
+                label="استخراج"
+              />
+            )}
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Delete */}

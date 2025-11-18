@@ -1,5 +1,11 @@
 import { GreenCheckBox } from "@/components/GreenCheckBox";
-import { Bin, Clock, FileWithName, Visit } from "@/components/Icons";
+import {
+  Bin,
+  Clock,
+  Extraction,
+  FileWithName,
+  Visit,
+} from "@/components/Icons";
 import { ReactElement } from "react";
 import { CardMoreActions } from "./CardMoreActions";
 import { FileItem, FileListResponse } from "@/types/file";
@@ -7,8 +13,9 @@ import { fileTypeColorClasses } from "@/constants/fileTypeColorClasses";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import moment from "moment-jalaali";
 import FilesCardsSkeleton from "@/components/skeletons/FilesCardsSkeleton";
-import { useDeleteFiles } from "@/hooks/api/files";
+import { useDeleteFiles, useExtractionText } from "@/hooks/api/files";
 import { useFileCheckStore } from "@/store/fileCheckStore";
+import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 
 // Cards list props type
 type CardsProps = {
@@ -44,6 +51,8 @@ export function FileCard({ file }: TableRowProps) {
   const selectedUrls = useFileCheckStore((state) => state.selectedUrls);
   const toggleId = useFileCheckStore((state) => state.toggleId);
   const deleteMutation = useDeleteFiles();
+  const extractionMutation = useExtractionText();
+  const { addExtraction } = useExtractTextStore();
 
   // Handle card checkbox
   const handleCheckSingle = (url: string) => {
@@ -53,6 +62,18 @@ export function FileCard({ file }: TableRowProps) {
   // Handle delete file
   const handleDeleteFile = () => {
     deleteMutation.mutate([file.url]);
+  };
+
+  // Handle extraction text from file
+  const handleExtractionText = () => {
+    const fileUrl = file.url;
+    const fileName = fileUrl.split(`/`)[4];
+    const fileId = file.id;
+
+    addExtraction(fileId, fileName, undefined);
+
+    // We can sen one argument for mutation
+    extractionMutation.mutate({ fileUrl, fileId });
   };
 
   return (
@@ -96,9 +117,19 @@ export function FileCard({ file }: TableRowProps) {
             <Bin classes="size-4 text-[var(--primary)]" />
           </span>
           {/* Visit or extraction */}
-          <span className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--secondary-light)] dark:bg-[var(--secondary-dark)]">
-            <Visit classes="size-4 text-[var(--secondary)]" />
-          </span>
+          {/* Visit or Extraction */}
+          {file.exText ? (
+            <span className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--secondary-light)] dark:bg-[var(--secondary-dark)]">
+              <Visit classes="size-4 text-[var(--secondary)]" />
+            </span>
+          ) : (
+            <span
+              onClick={handleExtractionText}
+              className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--secondary-light)] dark:bg-[var(--secondary-dark)]"
+            >
+              <Extraction classes="size-4 text-[var(--secondary)]" />
+            </span>
+          )}
         </div>
       </div>
       {/* Seprated line */}
