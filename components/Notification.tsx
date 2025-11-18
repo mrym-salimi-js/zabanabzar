@@ -13,7 +13,7 @@ export default function Notification() {
     error: "خطا در استخراج متن از فایل",
   };
   return (
-    <div className="w-full flex  flex-row-reverse items-start">
+    <div className="w-full flex flex-col items-end">
       {extractedFiles.map((i) => {
         return (
           <div
@@ -23,11 +23,18 @@ export default function Notification() {
             <Extraction
               classes={`size-4 ${i.status === "error" ? `text-[var(--primary)]` : `text-[var(--secondary)]`} `}
             />
-            <p
-              className={`text-[0.7rem] ${i.status === "error" ? `text-[var(--primary)]` : `text-[var(--secondary)]`} `}
-            >
-              {status[i.status]}
-            </p>
+            <div className="w-[90%] flex  items-center justify-between">
+              <p
+                className={`text-[0.7rem] ${i.status === "error" ? `text-[var(--primary)]` : `text-[var(--secondary)]`} `}
+              >
+                {status[i.status]}
+              </p>
+              <p
+                className={`text-[0.7rem] ${i.status === "error" ? `text-[var(--primary)]` : `text-[var(--secondary)]`} `}
+              >
+                {i.name}
+              </p>
+            </div>
             {(i.status === "pending" || i.status === "extracting") && (
               <ThreePointsLoading circleColor="bg-[var(--secondary)]" />
             )}

@@ -1,6 +1,7 @@
 // app/api/files/extract/route.ts
 import { downloadFileFromStorageService } from "@/services/files/downloadFileFromStorageService";
 import pdfParse from "pdf-parse";
+import mammoth from "mammoth";
 
 export const runtime = "nodejs";
 
@@ -15,24 +16,24 @@ export async function POST(req: Request) {
       });
     }
 
-    // دانلود فایل
+    // File Download
     const res = await downloadFileFromStorageService(fileUrl);
 
     if (!res.ok) {
-      const text = await res.text(); // متن پاسخ سرور اگر خطا بود
+      const text = await res.text();
       return new Response(
         JSON.stringify({ error: "خطای دانلود فایل", details: text }),
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
 
-    // گرفتن buffer فایل
+    // Get file buffer
     const buffer = Buffer.from(await res.arrayBuffer());
 
-    // تشخیص نوع فایل
+    // Get file type
     const contentType = res.headers.get("Content-Type") || "";
 
-    // فایل متن ساده
+    // Simple file
     if (contentType.startsWith("text/")) {
       const text = buffer.toString("utf8");
       return new Response(JSON.stringify({ text }), {
@@ -40,7 +41,20 @@ export async function POST(req: Request) {
       });
     }
 
-    // فایل PDF
+    // Word
+    if (
+      contentType ===
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    ) {
+      const text = (await mammoth.extractRawText({ buffer })).value;
+      return new Response(JSON.stringify({ text }), {
+        headers: {
+          "Content-Type":
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        },
+      });
+    }
+    // PDF
     if (
       contentType === "application/pdf" ||
       fileUrl.toLowerCase().endsWith(".pdf")

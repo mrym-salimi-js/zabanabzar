@@ -136,7 +136,11 @@ export const useExtractionText = () => {
     onError: (err, variables: ExtractPayload) => {
       updateStatus(variables.fileId, "error");
 
-      console.dir(err);
+      const timer = setTimeout(() => {
+        removeExtraction(variables.fileId);
+      }, 5000);
+
+      return () => clearTimeout(timer);
     },
   });
 };
