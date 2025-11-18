@@ -15,14 +15,17 @@ import {
 } from "@/components/Icons";
 import DDBItem from "./toolbar/DDBItem";
 import { useDeleteFiles, useExtractionText } from "@/hooks/api/files";
+import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 
 type MorActionProp = {
   fileUrl: string;
+  fileId: number;
 };
 
-export function TableMoreActions({ fileUrl }: MorActionProp) {
+export function TableMoreActions({ fileUrl, fileId }: MorActionProp) {
   const deleteMutation = useDeleteFiles();
   const extractionMutation = useExtractionText();
+  const { addExtraction } = useExtractTextStore();
 
   // Handle delete file
   const handleDeleteFile = () => {
@@ -31,7 +34,11 @@ export function TableMoreActions({ fileUrl }: MorActionProp) {
 
   // Handle extraction text from file
   const handleExtractionText = () => {
-    extractionMutation.mutate(fileUrl);
+    const fileName = fileUrl.split(`/`)[4];
+    addExtraction(fileId, fileName, undefined);
+
+    // We can sen one argument for mutation
+    extractionMutation.mutate({ fileUrl, fileId });
   };
   return (
     <DropdownMenu>

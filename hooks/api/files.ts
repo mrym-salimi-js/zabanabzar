@@ -4,9 +4,9 @@ import {
 } from "@/lib/indexedDB";
 import { deleteFileFromDBService } from "@/services/files/deleteFileFromDBService";
 import { deleteFileFromStorageService } from "@/services/files/deleteFileFromStorageService";
-import { downloadFileFromStorageService } from "@/services/files/downloadFileFromStorageService";
 import { saveFileToDBService } from "@/services/files/saveFileToDBService";
 import { uploadFileToStorageService } from "@/services/files/uploadFileToStorageService";
+import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 import { useUploadStore } from "@/store/uploadFileStore";
 import { CleanFileType } from "@/types/file";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -88,13 +88,44 @@ export const useSaveFileToDB = () => {
 export const useDownloadFile = () => {
   return useMutation({});
 };
-export const useExtractionText = () => {
-  return useMutation({
-    mutationFn: async (fileUrl: string) => {
-      const res = await downloadFileFromStorageService(fileUrl);
-      if (!res.ok) throw "خطا در دانلود";
 
-      return res;
+export const useExtractionText = () => {
+  type ExtractPayload = {
+    fileUrl: string;
+    fileId: number;
+  };
+  const { updateStatus, removeExtraction } = useExtractTextStore();
+  return useMutation({
+    mutationFn: async ({ fileUrl, fileId }: ExtractPayload) => {
+      updateStatus(fileId, "extracting");
+
+      const res = await fetch("/api/files/extract", {
+        method: "POST",
+        body: JSON.stringify({ fileUrl }),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const text = await res.text(); // متن پاسخ سرور را بگیر
+
+      if (!res.ok) throw new Error(`خطای استخراج فایل: ${text}`);
+
+      const data = JSON.parse(text);
+
+      return data;
+    },
+    onSuccess: (data, variables: ExtractPayload) => {
+      updateStatus(variables.fileId, "success");
+
+      const timer = setTimeout(() => {
+        removeExtraction(variables.fileId);
+      }, 2000);
+
+      return () => clearTimeout(timer);
+    },
+    onError: (err, variables: ExtractPayload) => {
+      updateStatus(variables.fileId, "error");
+
+      console.dir(err);
     },
   });
 };

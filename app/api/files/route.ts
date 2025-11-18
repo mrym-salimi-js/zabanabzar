@@ -5,7 +5,6 @@ import {
   deleteArryFiles,
   getAllFiles,
 } from "@/lib/db/queries/files";
-import { deleteFromStorage } from "@/services/files/deleteFileFromStorageService";
 import { NextResponse } from "next/server";
 
 export async function GET() {

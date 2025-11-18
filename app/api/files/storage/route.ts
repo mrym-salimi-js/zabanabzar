@@ -64,10 +64,11 @@ export async function GET(request: NextRequest) {
         { status: 400 }
       );
     }
+    const decodedKey = decodeURIComponent(key);
 
     const params = {
       Bucket: process.env.LIARA_BUCKET_NAME!,
-      Key: key,
+      Key: decodedKey,
     };
 
     const data = await client.send(new GetObjectCommand(params));
@@ -79,12 +80,14 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const uint8 = await data.Body.transformToByteArray();
-    const arrayBuffer = new Uint8Array(uint8).buffer;
-
-    return new Response(arrayBuffer, {
+    const uint8 = await data.Body.transformToByteArray(); // تبدیل به Uint8Array
+    const buffer = Buffer.from(uint8); // مناسب برای Response Node.js
+    return new Response(buffer, {
+      status: 200,
       headers: {
         "Content-Type": data.ContentType || "application/octet-stream",
+        "Content-Disposition": `attachment; filename="${decodedKey}"`,
+        "X-File-Size": buffer.byteLength.toString(),
       },
     });
   } catch (error) {

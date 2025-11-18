@@ -150,7 +150,7 @@ export function FileRow({
       </div>
 
       <div className="text-start truncate min-w-0 cursor-pointer hover:opacity-[0.7]">
-        <TableMoreActions fileUrl={file.url} />
+        <TableMoreActions fileUrl={file.url} fileId={file.id} />
       </div>
     </div>
   ));
