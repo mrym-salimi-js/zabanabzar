@@ -21,9 +21,15 @@ type MorActionProp = {
   fileUrl: string;
   fileId: number;
   fileEx: string | null;
+  fileExt: string;
 };
 
-export function TableMoreActions({ fileUrl, fileId, fileEx }: MorActionProp) {
+export function TableMoreActions({
+  fileUrl,
+  fileId,
+  fileEx,
+  fileExt,
+}: MorActionProp) {
   const deleteMutation = useDeleteFiles();
   const extractionMutation = useExtractionText();
   const { addExtraction } = useExtractTextStore();
@@ -39,7 +45,7 @@ export function TableMoreActions({ fileUrl, fileId, fileEx }: MorActionProp) {
     addExtraction(fileId, fileName, undefined);
 
     // We can sen one argument for mutation
-    extractionMutation.mutate({ fileUrl, fileId });
+    extractionMutation.mutate({ fileUrl, fileId, fileExt });
   };
   return (
     <DropdownMenu>

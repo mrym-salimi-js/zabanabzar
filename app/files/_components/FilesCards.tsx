@@ -69,11 +69,12 @@ export function FileCard({ file }: TableRowProps) {
     const fileUrl = file.url;
     const fileName = fileUrl.split(`/`)[4];
     const fileId = file.id;
+    const fileExt = file.ext;
 
     addExtraction(fileId, fileName, undefined);
 
     // We can sen one argument for mutation
-    extractionMutation.mutate({ fileUrl, fileId });
+    extractionMutation.mutate({ fileUrl, fileId, fileExt });
   };
 
   return (

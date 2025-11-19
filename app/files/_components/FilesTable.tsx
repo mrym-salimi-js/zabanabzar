@@ -160,6 +160,7 @@ export function FileRow({
             fileUrl={file.url}
             fileId={file.id}
             fileEx={file.exText}
+            fileExt={file.ext}
           />
         )}
       </div>

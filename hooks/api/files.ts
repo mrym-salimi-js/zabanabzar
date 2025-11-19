@@ -1,3 +1,4 @@
+import { createWorker } from "tesseract.js";
 import {
   deleteAllFilesFromIndexedDB,
   getFileFromIndexedDB,
@@ -95,23 +96,35 @@ export const useExtractionText = () => {
   type ExtractPayload = {
     fileUrl: string;
     fileId: number;
+    fileExt: string | null;
   };
   const queryClient = useQueryClient();
   const { updateStatus, removeExtraction } = useExtractTextStore();
 
   return useMutation({
-    mutationFn: async ({ fileUrl, fileId }: ExtractPayload) => {
+    mutationFn: async ({ fileUrl, fileId, fileExt }: ExtractPayload) => {
       updateStatus(fileId, "extracting");
 
-      const res = await extractTextFromFileService(fileUrl);
+      if (fileExt === "PNG" || fileExt === "JPG" || fileExt === "JPEG") {
+        // Images extraction (work for "eng" language) --> Extract heare because "tesseract.js" package work on client not server
+        const worker = await createWorker("eng");
+        const ret = await worker.recognize(fileUrl);
+        await worker.terminate();
+        const text = ret.data.text;
+        console.log(text);
 
-      const text = await res.text();
+        return { text };
+      } else {
+        const res = await extractTextFromFileService(fileUrl);
 
-      if (!res.ok) throw new Error(`خطای استخراج فایل: ${text}`);
+        const text = await res.text();
 
-      const data = JSON.parse(text);
-      console.log(data);
-      return data;
+        if (!res.ok) throw new Error(`خطای استخراج فایل: ${text}`);
+
+        const data = JSON.parse(text);
+
+        return data;
+      }
     },
     onSuccess: async (data, variables: ExtractPayload) => {
       updateStatus(variables.fileId, "success");
