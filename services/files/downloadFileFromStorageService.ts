@@ -1,5 +1,5 @@
 export async function downloadFileFromStorageService(fileUrl: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  const baseUrl = process.env.BASE_URL || "http://localhost:3000";
   const key = fileUrl.split(`/`)[4];
 
   const res = await fetch(

@@ -14,6 +14,7 @@ import { useUploadStore } from "@/store/uploadFileStore";
 import { CleanFileType } from "@/types/file";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
+import { downloadFileInBrowserService } from "@/services/files/downloadFileInBrowserService";
 
 // Delete Files custom hook
 export const useDeleteFiles = () => {
@@ -21,13 +22,15 @@ export const useDeleteFiles = () => {
 
   return useMutation({
     mutationFn: async (files: string[]) => {
+      // 1) Delete from DB
       const res = await deleteFileFromDBService(files);
 
+      // 2) Delete from Storage
       await deleteFileFromStorageService(files);
 
-      if (!res.ok) throw new Error("خطا در حذف");
-      return res.json();
+      return await res.json();
     },
+
     onSuccess: () => {
       toast.success("حذف باموفقیت انجام شد");
       queryClient.invalidateQueries({ queryKey: ["files"] });
@@ -71,9 +74,7 @@ export const useSaveFileToDB = () => {
 
   return useMutation({
     mutationFn: async (files: CleanFileType[]) => {
-      const res = await saveFileToDBService(files);
-      if (!res.ok) throw new Error("خطا در ذخیره ");
-      return res.json();
+      return await saveFileToDBService(files);
     },
     onSuccess: () => {
       clearFiles();
@@ -89,7 +90,19 @@ export const useSaveFileToDB = () => {
 
 // Download files from s3
 export const useDownloadFile = () => {
-  return useMutation({});
+  return useMutation({
+    mutationFn: async (fileUrl: string[]) => {
+      for (const url of fileUrl) {
+        await downloadFileInBrowserService(url);
+      }
+    },
+    onSuccess: () => {
+      toast.success("دانلود با کوفقیت انجام شد");
+    },
+    onError: () => {
+      toast.error("خطا در دانلود");
+    },
+  });
 };
 
 export const useExtractionText = () => {

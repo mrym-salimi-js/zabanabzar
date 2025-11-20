@@ -7,8 +7,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Download, Edit, More } from "@/components/Icons";
 import { ReactElement } from "react";
+import { useDownloadFile } from "@/hooks/api/files";
+import DDBItem from "./toolbar/DDBItem";
 
-export function CardMoreActions(): ReactElement {
+export function CardMoreActions({
+  fileUrl,
+}: {
+  fileUrl: string;
+}): ReactElement {
+  const downloadMutation = useDownloadFile();
+  // Handle download file
+  const handleDownloadFile = () => {
+    downloadMutation.mutate([fileUrl]);
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
@@ -18,17 +29,15 @@ export function CardMoreActions(): ReactElement {
         <DropdownMenuGroup className=" flex flex-col">
           <DropdownMenuItem className="justify-end p-0">
             {/* Edit */}
-            <div className="w-full hover:bg-[var(--primary-light)] hover:text-[var(--primary)] rounded-md  p-2 flex justify-end gap-2 text-[0.7rem] cursor-pointer">
-              <p>ویرایش</p>
-              <Edit classes="text-black size-5" />
-            </div>
+            <DDBItem icon={Edit} label="ویرایش" />
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Download */}
-            <div className="w-full hover:bg-[var(--primary-light)] hover:text-[var(--primary)] rounded-md  p-2 flex justify-end gap-2 text-[0.7rem] cursor-pointer">
-              <p>دانلود</p>
-              <Download classes="text-black size-5" />
-            </div>
+            <DDBItem
+              handleAction={handleDownloadFile}
+              icon={Download}
+              label="دانلود"
+            />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

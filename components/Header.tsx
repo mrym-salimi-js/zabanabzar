@@ -17,7 +17,7 @@ export default function Header(): ReactElement {
         {/* Hamburger menu icon*/}
         <Sheet>
           <SheetTrigger asChild>
-            <Sort classes="size-8 text-black" />
+            <Sort classes="size-8 text-black dark:text-white" />
           </SheetTrigger>
 
           {/* Nav in mobile mode*/}

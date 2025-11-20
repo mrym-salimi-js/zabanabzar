@@ -14,7 +14,11 @@ import {
   Visit,
 } from "@/components/Icons";
 import DDBItem from "./toolbar/DDBItem";
-import { useDeleteFiles, useExtractionText } from "@/hooks/api/files";
+import {
+  useDeleteFiles,
+  useDownloadFile,
+  useExtractionText,
+} from "@/hooks/api/files";
 import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 import Link from "next/link";
 
@@ -34,6 +38,7 @@ export function TableMoreActions({
   const deleteMutation = useDeleteFiles();
   const extractionMutation = useExtractionText();
   const { addExtraction } = useExtractTextStore();
+  const downloadMutation = useDownloadFile();
 
   // Handle delete file
   const handleDeleteFile = () => {
@@ -47,6 +52,10 @@ export function TableMoreActions({
 
     // We can sen one argument for mutation
     extractionMutation.mutate({ fileUrl, fileId, fileExt });
+  };
+
+  const handleDownloadFile = () => {
+    downloadMutation.mutate([fileUrl]);
   };
   return (
     <DropdownMenu>
@@ -78,11 +87,15 @@ export function TableMoreActions({
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Edit */}
-            {/* <DDBItem icon={Edit} label="ویرایش" /> */}
+            <DDBItem icon={Edit} label="ویرایش" />
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Download */}
-            {/* <DDBItem icon={Download} label="دانلود" /> */}
+            <DDBItem
+              handleAction={handleDownloadFile}
+              icon={Download}
+              label="دانلود"
+            />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

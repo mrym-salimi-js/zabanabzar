@@ -11,22 +11,27 @@ import { useFileCheckStore } from "@/store/fileCheckStore";
 import { useDownloadFile } from "@/hooks/api/files";
 
 export function DownloadBtn(): ReactElement {
-  const selectedIds = useFileCheckStore((state) => state.selectedUrls);
+  const selectedUrls = useFileCheckStore((state) => state.selectedUrls);
   const closeRef = useRef<HTMLButtonElement>(null);
   // Download files from storage
   const downloadMutation = useDownloadFile();
 
   // Handle trigger click
   const handleTriggerClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (selectedIds?.length === 0) {
+    if (selectedUrls?.length === 0) {
       e.preventDefault();
       toast.error("فایلی انتخاب نشده");
     }
   };
-  //Handle enents after click on "انصراف" Btn
-  const handleCancel = () => {};
+
   //Handle enents after click on "تایید" Btn
-  const handleConfirm = () => {};
+  const handleConfirm = () => {
+    downloadMutation.mutate(selectedUrls, {
+      onSuccess: () => {
+        closeRef.current?.click();
+      },
+    });
+  };
   return (
     <Dialog>
       <form className="w-full">
@@ -49,7 +54,6 @@ export function DownloadBtn(): ReactElement {
           />
           {/*Modal footer */}
           <ModalFooter
-            handleCancel={handleCancel}
             handleConfirm={handleConfirm}
             mutation={downloadMutation}
             closeRef={closeRef}

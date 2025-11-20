@@ -4,5 +4,11 @@ export async function deleteFileFromDBService(files: string[]) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(files),
   });
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error?.error || "خطا در حذف فایل از دیتابیس");
+  }
+
   return res;
 }
