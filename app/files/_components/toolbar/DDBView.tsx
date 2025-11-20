@@ -16,7 +16,7 @@ export function DDBView() {
         <TriggerBtn icon={Table} label="نمایش" />
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="w-auto rounded-xl p-2 dark:bg-[var(--tertiary-dark)]"
+        className="w-auto h-auto rounded-xl p-2 dark:bg-[var(--tertiary-dark)]"
         align="start"
       >
         <DropdownMenuGroup className=" flex flex-col ">

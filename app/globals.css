@@ -195,6 +195,20 @@ body {
   background: #a6a6a6;
 }
 
+/* tiptap editor menu bar styles */
+.button-group {
+  display: flex;
+  gap: 4px;
+}
+.control-group .button-group button {
+  width: auto !important;
+  height: auto !important;
+  padding: 6px !important;
+  background-color: white !important;
+  border-radius: 7px !important;
+  cursor: pointer;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
