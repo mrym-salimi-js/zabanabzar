@@ -5,6 +5,7 @@ import {
   DeleteObjectCommand,
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
+import { v4 as uuidv4 } from "uuid";
 
 const client = new S3Client({
   region: "default",
@@ -29,17 +30,18 @@ export async function POST(request: NextRequest) {
 
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
+    const uniqueKey = `${uuidv4()}_${file.name}`;
 
     const uploadParams = {
       Body: buffer,
       Bucket: process.env.LIARA_BUCKET_NAME as string,
-      Key: file.name,
+      Key: uniqueKey,
       ContentType: file.type,
     };
 
     await client.send(new PutObjectCommand(uploadParams));
 
-    const fileUrl = `${process.env.LIARA_ENDPOINT}/${process.env.LIARA_BUCKET_NAME}/${file.name}`;
+    const fileUrl = `${process.env.LIARA_ENDPOINT}/${process.env.LIARA_BUCKET_NAME}/${uniqueKey}`;
 
     return NextResponse.json({
       message: "فایل با موفقیت آپلود شد",

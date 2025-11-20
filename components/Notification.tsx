@@ -13,7 +13,7 @@ export default function Notification() {
     error: "خطا در استخراج متن از فایل",
   };
   return (
-    <div className="w-full flex flex-col items-end">
+    <div className="w-full flex flex-col gap-1 items-end">
       {extractedFiles.map((i) => {
         return (
           <div
