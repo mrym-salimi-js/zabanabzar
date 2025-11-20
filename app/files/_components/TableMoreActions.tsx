@@ -16,6 +16,7 @@ import {
 import DDBItem from "./toolbar/DDBItem";
 import { useDeleteFiles, useExtractionText } from "@/hooks/api/files";
 import { useExtractTextStore } from "@/store/extractTextFromFileStore";
+import Link from "next/link";
 
 type MorActionProp = {
   fileUrl: string;
@@ -60,11 +61,9 @@ export function TableMoreActions({
           <DropdownMenuItem className="justify-end p-0 ">
             {/* Visit or Extraction */}
             {fileEx ? (
-              <DDBItem
-                // handleAction={handleExtractionText}
-                icon={Visit}
-                label="متن"
-              />
+              <Link className="w-full" href={`/files/${fileId}`}>
+                <DDBItem icon={Visit} label="متن" />
+              </Link>
             ) : (
               <DDBItem
                 handleAction={handleExtractionText}

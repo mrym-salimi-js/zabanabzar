@@ -16,6 +16,7 @@ import FilesCardsSkeleton from "@/components/skeletons/FilesCardsSkeleton";
 import { useDeleteFiles, useExtractionText } from "@/hooks/api/files";
 import { useFileCheckStore } from "@/store/fileCheckStore";
 import { useExtractTextStore } from "@/store/extractTextFromFileStore";
+import Link from "next/link";
 
 // Cards list props type
 type CardsProps = {
@@ -117,11 +118,13 @@ export function FileCard({ file }: TableRowProps) {
           >
             <Bin classes="size-4 text-[var(--primary)]" />
           </span>
-          {/* Visit or extraction */}
+
           {/* Visit or Extraction */}
           {file.exText ? (
             <span className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--secondary-light)] dark:bg-[var(--secondary-dark)]">
-              <Visit classes="size-4 text-[var(--secondary)]" />
+              <Link className="w-full h-full" href={`/files/${file.id}`}>
+                <Visit classes="size-4 text-[var(--secondary)]" />
+              </Link>
             </span>
           ) : (
             <span

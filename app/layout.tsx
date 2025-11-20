@@ -6,6 +6,8 @@ import "@/app/globals.css";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./providers";
+import Nav from "@/components/Nav";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -44,7 +46,17 @@ export default function RootLayout({
       >
         <Providers>
           <ThemeProvider attribute="class" enableSystem defaultTheme="system">
-            {children}
+            <div className="w-full h-screen flex flex-row-reverse bg-transparent">
+              {/* Nav */}
+              <div className="w-[250px] hidden lg:block">
+                <Nav />
+              </div>
+              {/* Content */}
+              <div className=" lg:w-[85.3%] w-full h-full flex flex-col gap-1 p-1 bg-transparent">
+                <Header />
+                {children}
+              </div>
+            </div>
 
             <Toaster position="top-center" reverseOrder={false} />
           </ThemeProvider>
