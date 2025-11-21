@@ -9,11 +9,14 @@ import { Download, Edit, More } from "@/components/Icons";
 import { ReactElement } from "react";
 import { useDownloadFile } from "@/hooks/api/files";
 import DDBItem from "./toolbar/DDBItem";
+import Link from "next/link";
 
 export function CardMoreActions({
   fileUrl,
+  fileId,
 }: {
   fileUrl: string;
+  fileId: number;
 }): ReactElement {
   const downloadMutation = useDownloadFile();
   // Handle download file
@@ -29,7 +32,9 @@ export function CardMoreActions({
         <DropdownMenuGroup className=" flex flex-col">
           <DropdownMenuItem className="justify-end p-0">
             {/* Edit */}
-            <DDBItem icon={Edit} label="ویرایش" />
+            <Link className="w-full" href={`/files/${fileId}/edit`}>
+              <DDBItem icon={Edit} label="ویرایش" />
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Download */}

@@ -1,4 +1,7 @@
-export async function updateExTextInDBService(id: number, text: string) {
+export async function updateExTextInDBService(
+  id: number,
+  text: string | undefined
+) {
   const res = await fetch("/api/files", {
     method: "PATCH",
     body: JSON.stringify({ id, text }),

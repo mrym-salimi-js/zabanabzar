@@ -4,7 +4,5 @@ import Editor from "./Editor";
 export async function TextEditorBox({ fileId }: { fileId: string }) {
   const file = await getFileByIdService(fileId);
 
-  console.log(file);
-
-  return <Editor content={file?.exText} />;
+  return <Editor content={file?.exText} fileId={Number(fileId)} />;
 }

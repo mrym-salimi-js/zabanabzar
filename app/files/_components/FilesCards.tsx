@@ -82,7 +82,7 @@ export function FileCard({ file }: TableRowProps) {
     <div className="w-full h-auto flex flex-col p-2 gap-1.5 border-2 border-gray-300 rounded-2xl overflow-hidden bg-white dark:bg-[var(--background-dark)] ">
       {/* Header */}
       <div className="w-full h-10 flex p-2 items-center justify-between dark:bg-[var(--tertiary-dark)] border-b-2 dark:rounded-md">
-        <CardMoreActions fileUrl={file.url} />
+        <CardMoreActions fileUrl={file.url} fileId={file.id} />
         <GreenCheckBox
           checked={selectedUrls.includes(file.url)}
           onChange={() => handleCheckSingle(file.url)}

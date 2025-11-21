@@ -7,7 +7,7 @@ import { Loader2 } from "lucide-react";
 type ModalFooterProps<TVariables> = {
   handleCancel?: () => void;
   handleConfirm: () => void;
-  mutation: UseMutationResult<void, Error, TVariables>;
+  mutation: UseMutationResult<void | Response, Error, TVariables>;
   closeRef: React.RefObject<HTMLButtonElement | null>;
   confirmBtnBG: string;
   confirmLabelLoading: string;

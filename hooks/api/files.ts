@@ -170,3 +170,20 @@ export const useExtractionText = () => {
     },
   });
 };
+export type EditeExTextMutation = {
+  id: number;
+  text: string | undefined;
+};
+export const useEditExtractionText = () => {
+  return useMutation<Response, Error, EditeExTextMutation>({
+    mutationFn: async ({ id, text }) => {
+      return updateExTextInDBService(id, text);
+    },
+    onSuccess: () => {
+      toast.success("متن شما اپدیت شد");
+    },
+    onError: () => {
+      toast.error("خطا در اپدیت متن");
+    },
+  });
+};

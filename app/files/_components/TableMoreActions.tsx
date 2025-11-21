@@ -87,7 +87,9 @@ export function TableMoreActions({
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Edit */}
-            <DDBItem icon={Edit} label="ویرایش" />
+            <Link className="w-full" href={`/files/${fileId}/edit`}>
+              <DDBItem icon={Edit} label="ویرایش" />
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0">
             {/* Download */}
