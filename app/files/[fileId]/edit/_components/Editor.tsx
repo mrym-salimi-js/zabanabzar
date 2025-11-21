@@ -54,7 +54,7 @@ export default function Editor({
   const state = editorState as NonNullable<typeof editorState>;
   return (
     <>
-      <div className="w-full flex gap-1 justify-start flex-row-reverse ">
+      <div className="w-full  flex gap-1 justify-start flex-row-reverse ">
         <div className="w-[80px]">
           <UpdateExTextBtn
             prevText={content}

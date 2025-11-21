@@ -248,7 +248,10 @@ body {
   background: var(--gray-1) !important;
   color: var(--gray-4) !important;
 }
+
 .tiptap {
+  height: 72vh;
+  overflow-y: scroll;
   :first-child {
     margin-top: 0;
   }
@@ -299,7 +302,7 @@ body {
   h4,
   h5,
   h6 {
-    font-size: 1rem;
+    font-size: 1rem !important;
   }
 
   /* Code and preformatted text styles */
