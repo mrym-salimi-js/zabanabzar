@@ -33,9 +33,6 @@ export function DeleteBtn(): ReactElement {
     }
   };
 
-  // Handle cancle
-  const handleCancel = () => {};
-
   return (
     <Dialog>
       <form className="w-full">

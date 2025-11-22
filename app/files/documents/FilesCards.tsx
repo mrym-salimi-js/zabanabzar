@@ -7,7 +7,6 @@ import {
   Visit,
 } from "@/components/Icons";
 import { ReactElement } from "react";
-import { CardMoreActions } from "./CardMoreActions";
 import { FileItem, FileListResponse } from "@/types/file";
 import { fileTypeColorClasses } from "@/constants/fileTypeColorClasses";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
@@ -17,6 +16,7 @@ import { useDeleteFiles, useExtractionText } from "@/hooks/api/files";
 import { useFileCheckStore } from "@/store/fileCheckStore";
 import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 import Link from "next/link";
+import { CardMoreActions } from "../_components/CardMoreActions";
 
 // Cards list props type
 type CardsProps = {

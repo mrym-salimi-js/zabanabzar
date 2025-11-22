@@ -33,7 +33,7 @@ export const useDeleteFiles = () => {
 
     onSuccess: () => {
       toast.success("حذف باموفقیت انجام شد");
-      queryClient.invalidateQueries({ queryKey: ["files"] });
+      queryClient.invalidateQueries({ queryKey: ["documents"] });
     },
     onError: () => toast.error("خطا در حذف"),
   });
@@ -83,18 +83,19 @@ export const useSaveFileToDB = () => {
     onSuccess: (data, variables) => {
       if (variables && variables.length > 0) {
         // Handle success on file mode
-        if (variables[0].type === "file") {
+        if (variables[0].type === "document") {
           clearFiles();
           deleteAllFilesFromIndexedDB();
 
           // Update files list
-          queryClient.invalidateQueries({ queryKey: ["files"] });
+          queryClient.invalidateQueries({ queryKey: ["documents"] });
         }
 
         // Handle success on text mode
         if (variables[0].type === "text") {
           localStorage.setItem("uploaded-text", "");
           // Update texts list
+          queryClient.invalidateQueries({ queryKey: ["texts"] });
         }
       }
 
@@ -166,7 +167,7 @@ export const useExtractionText = () => {
       if (!res.ok) toast.error("خطا در ذخیره متن  استخراج شده");
 
       toast.success("متن استخراج شده ذخیره شد");
-      queryClient.invalidateQueries({ queryKey: ["files"] });
+      queryClient.invalidateQueries({ queryKey: ["documents"] });
 
       // Hide notification after success mode
       const timer = setTimeout(() => {

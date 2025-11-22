@@ -1,6 +1,7 @@
 import { files } from "./../schema/files";
 import { db } from "../index";
 import { eq, inArray } from "drizzle-orm";
+import { FileTypes } from "@/types/file";
 
 export type FileInsertType = typeof files.$inferInsert;
 export type FileSelectType = typeof files.$inferSelect;
@@ -12,8 +13,12 @@ export async function craeteFile(date: FileInsertType[]) {
 }
 
 // Get all files
-export async function getAllFiles() {
-  return await db.select().from(files).orderBy(files.createdAt);
+export async function getAllFiles(type?: FileTypes) {
+  return await db
+    .select()
+    .from(files)
+    .where(type ? eq(files.type, type) : undefined) // فقط وقتی type داریم
+    .orderBy(files.createdAt);
 }
 
 // Get special file

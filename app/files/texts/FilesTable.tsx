@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
 import { Clock, FileWithName } from "@/components/Icons";
-import { TableMoreActions } from "./TableMoreActions";
 import { GreenCheckBox } from "@/components/GreenCheckBox";
 import { FileListResponse } from "@/types/file";
 import moment from "moment-jalaali";
@@ -10,6 +9,7 @@ import FilesTableSkeleton from "@/components/skeletons/FilesTableSkeleton";
 import { useFileCheckStore } from "@/store/fileCheckStore";
 import { useDeleteFiles } from "@/hooks/api/files";
 import ThreePointsLoading from "@/components/ThreePointsLoading";
+import { TableMoreActions } from "../_components/TableMoreActions";
 
 // Table props type
 type TableProps = {
@@ -58,10 +58,8 @@ export default function FilesTable({
           onChange={handleCheckAll}
         />
 
-        <div className="text-start truncate">نام فایل</div>
         <div className="text-start truncate">بارگذاری</div>
         <div className="text-start truncate">ویرایش</div>
-        <div className="text-start truncate">حجم</div>
         <div className="text-start truncate">سایر</div>
       </div>
 
@@ -109,9 +107,8 @@ export function FileRow({
       <div className="flex truncate gap-1 items-start justify-start min-w-0 dark:text-white">
         <FileWithName
           classes={`w-7 h-7 ${fileTypeColorClasses[file.ext] || fileTypeColorClasses.default}`}
-          name={file.ext}
+          name={"text"}
         />
-        <p className="max-w-[80%] truncate">{file.name}</p>
       </div>
 
       <div className="text-start flex flex-col min-w-0">
@@ -144,12 +141,6 @@ export function FileRow({
             )}
           </p>
         </div>
-      </div>
-
-      <div className="text-start truncate min-w-0">
-        {file.size > 1024 * 1024
-          ? `${(file.size / (1024 * 1024)).toFixed(1)} MB`
-          : `${(file.size / 1024).toFixed(1)} KB`}
       </div>
 
       <div className="text-start truncate min-w-0 cursor-pointer hover:opacity-[0.7]">

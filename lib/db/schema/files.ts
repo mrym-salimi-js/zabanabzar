@@ -11,13 +11,18 @@ import {
 import { sql } from "drizzle-orm";
 
 // Upload type (file upload or plain text input)
-export const uploadType = pgEnum("upload_type", ["file", "text"]);
+export const uploadType = pgEnum("upload_type", [
+  "text",
+  "document",
+  "podcast",
+  "video",
+]);
 
 export const files = pgTable("files", {
   id: serial("id").primaryKey(),
 
   // Indicates whether the record is a file upload or a text input
-  type: uploadType("type").notNull().default("file"),
+  type: uploadType("type").notNull(),
 
   // ===== File fields =====
   // File name (nullable for text input)

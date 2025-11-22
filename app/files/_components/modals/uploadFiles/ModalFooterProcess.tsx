@@ -35,7 +35,7 @@ export default function ModalFooterProcess(): ReactElement {
       const nameWithoutExt = parts.join(".");
 
       return {
-        type: "file" as const,
+        type: "document" as const,
         name: nameWithoutExt,
         size: f.size,
         url: f.url,

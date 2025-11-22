@@ -1,3 +1,5 @@
+export type FileTypes = "text" | "document" | "podcast" | "video";
+
 export interface FileItem {
   id: number;
   name: string;
@@ -12,8 +14,8 @@ export interface FileItem {
 
 export type FileListResponse = FileItem[];
 
-export type FileUpload = {
-  type: "file";
+export type DocUpload = {
+  type: "document";
   name: string;
   size: number;
   url: string | undefined;
@@ -27,4 +29,4 @@ export type TextUpload = {
   userId: number;
 };
 
-export type CleanFileType = FileUpload | TextUpload;
+export type CleanFileType = DocUpload | TextUpload;

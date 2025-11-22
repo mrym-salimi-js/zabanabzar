@@ -1,16 +1,19 @@
 "use client";
 import { ReactElement } from "react";
-import FilesTable from "./FilesTable";
-import FilesCards from "./FilesCards";
+import FilesTable from "@/app/files/documents/FilesTable";
+import FilesCards from "@/app/files/documents/FilesCards";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 export function FilesList(): ReactElement {
-  // Get Files list
+  // Get texts list
+  const type = "text" as const;
   const { data, isLoading } = useQuery({
-    queryKey: ["files"],
+    queryKey: ["texts"],
     queryFn: async () => {
-      const res = await axios.get("/api/files");
+      const res = await axios.get("/api/files", {
+        params: [type],
+      });
       return res.data;
     },
     staleTime: Infinity, // Stop auto refetch

@@ -8,10 +8,22 @@ import {
 } from "@/lib/db/queries/files";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const url = new URL(request.url);
+    const typeParam = url.searchParams.get("type");
+
+    const validTypes = ["text", "document", "podcast", "video"] as const;
+    type FileTypes = (typeof validTypes)[number];
+
+    const type: FileTypes | undefined = validTypes.includes(
+      typeParam as FileTypes
+    )
+      ? (typeParam as FileTypes)
+      : undefined;
+
     // Call query from db/queries of files
-    const allFile = await getAllFiles();
+    const allFile = await getAllFiles(type);
 
     return NextResponse.json(allFile, { status: 201 });
   } catch (err) {
