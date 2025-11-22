@@ -9,14 +9,14 @@ import ModalFooterProcess from "./ModalFooterProcess";
 import DDBItem from "@/app/files/_components/toolbar/DDBItem";
 import { Upload } from "@/components/Icons";
 
-export function Modal(): ReactElement {
+export default function Modal(): ReactElement {
   return (
     <Dialog>
       <form className="w-full">
         {/*Upload Btn */}
 
         <DialogTrigger className="w-full">
-          <DDBItem icon={Upload} label="آپلود" />
+          <DDBItem icon={Upload} label="فایل" />
         </DialogTrigger>
 
         {/*Upload modal */}

@@ -5,10 +5,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Modal } from "@/app/files/_components/modals/uploadFiles/Modal";
-import { Pencil, Plus } from "@/components/Icons";
-import DDBItem from "./DDBItem";
+import UploadFileModal from "@/app/files/_components/modals/uploadFiles/Modal";
+import UploadTextModal from "@/app/files/_components/modals/uploadText/Modal";
 import { TriggerBtn } from "@/components/TriggerBtn";
+import { Plus } from "@/components/Icons";
 
 export function DDBUpload() {
   return (
@@ -22,12 +22,12 @@ export function DDBUpload() {
       >
         <DropdownMenuGroup className=" flex flex-col ">
           <DropdownMenuItem asChild className="justify-end p-0 ">
-            {/* Upload item */}
-            <Modal />
+            {/* Upload file */}
+            <UploadFileModal />
           </DropdownMenuItem>
-          <DropdownMenuItem className="justify-end p-0 ">
-            {/* Write item */}
-            <DDBItem icon={Pencil} label="نوشتن" />
+          <DropdownMenuItem asChild className="justify-end p-0 ">
+            {/* Upload text */}
+            <UploadTextModal />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

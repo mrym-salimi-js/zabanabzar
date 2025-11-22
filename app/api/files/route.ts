@@ -23,6 +23,7 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+
     // Call query from db/queries of files
     const newFile = await craeteFile(body);
 

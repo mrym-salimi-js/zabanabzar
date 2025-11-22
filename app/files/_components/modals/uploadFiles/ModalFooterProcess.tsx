@@ -1,10 +1,9 @@
 import { deleteFile } from "@/utils/files/deleteFile";
 import { useUploadStore } from "@/store/uploadFileStore";
-import React, { ReactElement, useRef } from "react";
+import { ReactElement, useRef } from "react";
 import toast from "react-hot-toast";
 import ModalFooter from "@/components/ModalFooter";
 import { useSaveFileToDB } from "@/hooks/api/files";
-import { CleanFileType } from "@/types/file";
 
 export default function ModalFooterProcess(): ReactElement {
   // Create ref for hidden btn, for using closing modal after sending data
@@ -25,7 +24,7 @@ export default function ModalFooterProcess(): ReactElement {
     // Check done status of all files
     const allDone = files.every((f) => f.status === "done");
     if (!allDone) {
-      toast.error("خطا! اپلود را کامل نیست");
+      toast.error("خطا! اپلود فایل ها کامل نشده");
       return;
     }
 
@@ -36,6 +35,7 @@ export default function ModalFooterProcess(): ReactElement {
       const nameWithoutExt = parts.join(".");
 
       return {
+        type: "file" as const,
         name: nameWithoutExt,
         size: f.size,
         url: f.url,
@@ -53,7 +53,7 @@ export default function ModalFooterProcess(): ReactElement {
     });
   };
   return (
-    <ModalFooter<CleanFileType[]>
+    <ModalFooter
       handleCancel={handleClearFiles}
       handleConfirm={handleSendData}
       mutation={saveMutation}

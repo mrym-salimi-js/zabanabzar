@@ -12,10 +12,19 @@ export interface FileItem {
 
 export type FileListResponse = FileItem[];
 
-export type CleanFileType = {
+export type FileUpload = {
+  type: "file";
   name: string;
   size: number;
   url: string | undefined;
   ext: string;
   userId: number;
 };
+
+export type TextUpload = {
+  type: "text";
+  textContent: string;
+  userId: number;
+};
+
+export type CleanFileType = FileUpload | TextUpload;

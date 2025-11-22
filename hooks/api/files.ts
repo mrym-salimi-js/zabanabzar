@@ -67,22 +67,38 @@ export const useUploadFile = () => {
   });
 };
 
+// export type UploadFileOrText = {
+//   files?: CleanFileType[];
+//   text?: object;
+// };
 // Save files to database
 export const useSaveFileToDB = () => {
   const { clearFiles } = useUploadStore.getState();
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (files: CleanFileType[]) => {
-      return await saveFileToDBService(files);
+    mutationFn: async (data: CleanFileType[]) => {
+      return await saveFileToDBService(data);
     },
-    onSuccess: () => {
-      clearFiles();
-      deleteAllFilesFromIndexedDB();
-      toast.success("ذخیره سازی با موفقیت انجام شد");
+    onSuccess: (data, variables) => {
+      if (variables && variables.length > 0) {
+        // Handle success on file mode
+        if (variables[0].type === "file") {
+          clearFiles();
+          deleteAllFilesFromIndexedDB();
 
-      // Update files list
-      queryClient.invalidateQueries({ queryKey: ["files"] });
+          // Update files list
+          queryClient.invalidateQueries({ queryKey: ["files"] });
+        }
+
+        // Handle success on text mode
+        if (variables[0].type === "text") {
+          localStorage.setItem("uploaded-text", "");
+          // Update texts list
+        }
+      }
+
+      toast.success("ذخیره سازی با موفقیت انجام شد");
     },
     onError: () => toast.error("ارسال ناموفق بود"),
   });
