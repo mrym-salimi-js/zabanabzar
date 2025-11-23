@@ -1,23 +1,28 @@
+import { CheckedFile } from "@/types/file";
 import { create } from "zustand";
 
 type FileSelectionStore = {
-  selectedUrls: string[];
-  selectAll: (urls: string[]) => void;
+  CheckedFiles: CheckedFile[];
+  selectAll: (files: CheckedFile[]) => void;
   clearAll: () => void;
-  toggleId: (url: string) => void;
+  toggleId: (file: CheckedFile) => void;
 };
 
 export const useFileCheckStore = create<FileSelectionStore>((set) => ({
-  selectedUrls: [],
+  CheckedFiles: [],
 
-  selectAll: (urls: string[]) => set({ selectedUrls: urls }),
+  selectAll: (files: CheckedFile[]) => set({ CheckedFiles: files }),
 
-  clearAll: () => set({ selectedUrls: [] }),
+  clearAll: () => set({ CheckedFiles: [] }),
 
-  toggleId: (url: string) =>
-    set((state) => ({
-      selectedUrls: state.selectedUrls.includes(url)
-        ? state.selectedUrls.filter((i) => i !== url)
-        : [...state.selectedUrls, url],
-    })),
+  toggleId: (file: CheckedFile) =>
+    set((state) => {
+      const exists = state.CheckedFiles.some((f) => f.id === file.id);
+
+      return {
+        CheckedFiles: exists
+          ? state.CheckedFiles.filter((f) => f.id !== file.id) // remove
+          : [...state.CheckedFiles, file], // add
+      };
+    }),
 }));

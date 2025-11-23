@@ -1,8 +1,5 @@
 import { createWorker } from "tesseract.js";
-import {
-  deleteAllFilesFromIndexedDB,
-  getFileFromIndexedDB,
-} from "@/lib/indexedDB";
+import { getFileFromIndexedDB } from "@/lib/indexedDB";
 import { deleteFileFromDBService } from "@/services/files/deleteFileFromDBService";
 import { deleteFileFromStorageService } from "@/services/files/deleteFileFromStorageService";
 import { extractTextFromFileService } from "@/services/files/extractTextFromFileService";
@@ -11,17 +8,19 @@ import { updateExTextInDBService } from "@/services/files/updateExTextInDBServic
 import { uploadFileToStorageService } from "@/services/files/uploadFileToStorageService";
 import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 import { useUploadStore } from "@/store/uploadFileStore";
-import { CleanFileType } from "@/types/file";
+import { CheckedFile, CleanFileType } from "@/types/file";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { downloadFileInBrowserService } from "@/services/files/downloadFileInBrowserService";
+import { usePathname } from "next/navigation";
 
 // Delete Files custom hook
 export const useDeleteFiles = () => {
   const queryClient = useQueryClient();
+  const path = usePathname();
 
   return useMutation({
-    mutationFn: async (files: string[]) => {
+    mutationFn: async (files: CheckedFile[]) => {
       // 1) Delete from DB
       const res = await deleteFileFromDBService(files);
 
@@ -33,7 +32,7 @@ export const useDeleteFiles = () => {
 
     onSuccess: () => {
       toast.success("حذف باموفقیت انجام شد");
-      queryClient.invalidateQueries({ queryKey: ["documents"] });
+      queryClient.invalidateQueries({ queryKey: ["files"] });
     },
     onError: () => toast.error("خطا در حذف"),
   });
@@ -67,11 +66,6 @@ export const useUploadFile = () => {
   });
 };
 
-// export type UploadFileOrText = {
-//   files?: CleanFileType[];
-//   text?: object;
-// };
-// Save files to database
 export const useSaveFileToDB = () => {
   const { clearFiles } = useUploadStore.getState();
   const queryClient = useQueryClient();
@@ -80,24 +74,9 @@ export const useSaveFileToDB = () => {
     mutationFn: async (data: CleanFileType[]) => {
       return await saveFileToDBService(data);
     },
-    onSuccess: (data, variables) => {
-      if (variables && variables.length > 0) {
-        // Handle success on file mode
-        if (variables[0].type === "document") {
-          clearFiles();
-          deleteAllFilesFromIndexedDB();
-
-          // Update files list
-          queryClient.invalidateQueries({ queryKey: ["documents"] });
-        }
-
-        // Handle success on text mode
-        if (variables[0].type === "text") {
-          localStorage.setItem("uploaded-text", "");
-          // Update texts list
-          queryClient.invalidateQueries({ queryKey: ["texts"] });
-        }
-      }
+    onSuccess: () => {
+      // Update files list
+      queryClient.invalidateQueries({ queryKey: ["files"] });
 
       toast.success("ذخیره سازی با موفقیت انجام شد");
     },
@@ -108,13 +87,14 @@ export const useSaveFileToDB = () => {
 // Download files from s3
 export const useDownloadFile = () => {
   return useMutation({
-    mutationFn: async (fileUrl: string[]) => {
-      for (const url of fileUrl) {
-        await downloadFileInBrowserService(url);
+    mutationFn: async (checkeds: CheckedFile[]) => {
+      for (const item of checkeds) {
+        if (!item.url) return;
+        await downloadFileInBrowserService(item.url);
       }
     },
     onSuccess: () => {
-      toast.success("دانلود با کوفقیت انجام شد");
+      toast.success("دانلود با موفقیت انجام شد");
     },
     onError: () => {
       toast.error("خطا در دانلود");
@@ -167,7 +147,7 @@ export const useExtractionText = () => {
       if (!res.ok) toast.error("خطا در ذخیره متن  استخراج شده");
 
       toast.success("متن استخراج شده ذخیره شد");
-      queryClient.invalidateQueries({ queryKey: ["documents"] });
+      queryClient.invalidateQueries({ queryKey: ["files"] });
 
       // Hide notification after success mode
       const timer = setTimeout(() => {

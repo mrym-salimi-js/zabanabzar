@@ -11,14 +11,14 @@ import { useFileCheckStore } from "@/store/fileCheckStore";
 import { useDownloadFile } from "@/hooks/api/files";
 
 export function DownloadBtn(): ReactElement {
-  const selectedUrls = useFileCheckStore((state) => state.selectedUrls);
+  const checkedFiles = useFileCheckStore((state) => state.CheckedFiles);
   const closeRef = useRef<HTMLButtonElement>(null);
   // Download files from storage
   const downloadMutation = useDownloadFile();
 
   // Handle trigger click
   const handleTriggerClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (selectedUrls?.length === 0) {
+    if (checkedFiles?.length === 0) {
       e.preventDefault();
       toast.error("فایلی انتخاب نشده");
     }
@@ -26,7 +26,7 @@ export function DownloadBtn(): ReactElement {
 
   //Handle enents after click on "تایید" Btn
   const handleConfirm = () => {
-    downloadMutation.mutate(selectedUrls, {
+    downloadMutation.mutate(checkedFiles, {
       onSuccess: () => {
         closeRef.current?.click();
       },

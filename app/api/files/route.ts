@@ -6,25 +6,13 @@ import {
   getAllFiles,
   updateFile,
 } from "@/lib/db/queries/files";
+import { CheckedFile } from "@/types/file";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
-    const url = new URL(request.url);
-    const typeParam = url.searchParams.get("type");
-
-    const validTypes = ["text", "document", "podcast", "video"] as const;
-    type FileTypes = (typeof validTypes)[number];
-
-    const type: FileTypes | undefined = validTypes.includes(
-      typeParam as FileTypes
-    )
-      ? (typeParam as FileTypes)
-      : undefined;
-
     // Call query from db/queries of files
-    const allFile = await getAllFiles(type);
-
+    const allFile = await getAllFiles();
     return NextResponse.json(allFile, { status: 201 });
   } catch (err) {
     console.error(err);
@@ -47,10 +35,13 @@ export async function POST(req: Request) {
 }
 export async function DELETE(req: Request) {
   try {
-    const urls: string[] = await req.json();
+    const checkedFiles: CheckedFile[] = await req.json();
 
+    const arrayIds = checkedFiles.map((f) => {
+      return f.id;
+    });
     // Call query from db/queries of files
-    const deleted = await deleteArryFiles(urls);
+    const deleted = await deleteArryFiles(arrayIds);
 
     return NextResponse.json(deleted, { status: 201 });
   } catch (err) {

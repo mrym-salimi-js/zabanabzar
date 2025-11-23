@@ -1,5 +1,5 @@
 import Notification from "@/components/Notification";
-import { FilesList } from "./FilesList";
+import { FilesList } from "@/app/files/documents/FilesList";
 import Tabs from "../_components/Tabs";
 
 export default function Documents() {

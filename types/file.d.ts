@@ -5,7 +5,9 @@ export interface FileItem {
   name: string;
   size: number;
   exText: string | null;
+  textContent: string | null;
   ext: string;
+  type: FileTypes;
   createdAt: string;
   updatedAt: string;
   url: string;
@@ -14,6 +16,10 @@ export interface FileItem {
 
 export type FileListResponse = FileItem[];
 
+export type CheckedFile = {
+  id: number;
+  url: string;
+};
 export type DocUpload = {
   type: "document";
   name: string;

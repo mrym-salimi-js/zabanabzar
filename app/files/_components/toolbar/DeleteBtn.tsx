@@ -9,16 +9,17 @@ import toast from "react-hot-toast";
 import ModalContent from "@/components/ModalContent";
 import { useFileCheckStore } from "@/store/fileCheckStore";
 import { useDeleteFiles } from "@/hooks/api/files";
+import { CheckedFile } from "@/types/file";
 
 export function DeleteBtn(): ReactElement {
-  const selectedUrls = useFileCheckStore((state) => state.selectedUrls);
+  const checkedFiles = useFileCheckStore((state) => state.CheckedFiles);
   const closeRef = useRef<HTMLButtonElement>(null);
 
   const deleteMutation = useDeleteFiles();
 
   // Handle delete file
   const handleConfirm = () => {
-    deleteMutation.mutate(selectedUrls, {
+    deleteMutation.mutate(checkedFiles, {
       onSuccess: () => {
         closeRef.current?.click();
       },
@@ -27,7 +28,7 @@ export function DeleteBtn(): ReactElement {
 
   // Handle trigger click
   const handleTriggerClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (selectedUrls?.length === 0) {
+    if (checkedFiles?.length === 0) {
       e.preventDefault();
       toast.error("فایلی انتخاب نشده");
     }
@@ -54,7 +55,7 @@ export function DeleteBtn(): ReactElement {
             mainColor="text-[var(--primary)]"
           />
           {/*Modal footer */}
-          <ModalFooter<string[]>
+          <ModalFooter<CheckedFile[]>
             handleConfirm={handleConfirm}
             mutation={deleteMutation}
             closeRef={closeRef}

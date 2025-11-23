@@ -1,8 +1,10 @@
-export async function deleteFileFromDBService(files: string[]) {
+import { CheckedFile } from "@/types/file";
+
+export async function deleteFileFromDBService(checkedFiles: CheckedFile[]) {
   const res = await fetch("/api/files", {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(files),
+    body: JSON.stringify(checkedFiles),
   });
 
   if (!res.ok) {

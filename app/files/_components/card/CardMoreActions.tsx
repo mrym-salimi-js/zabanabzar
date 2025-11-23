@@ -8,7 +8,7 @@ import {
 import { Download, Edit, More } from "@/components/Icons";
 import { ReactElement } from "react";
 import { useDownloadFile } from "@/hooks/api/files";
-import DDBItem from "./toolbar/DDBItem";
+import DDBItem from "@/app/files/_components/toolbar/DDBItem";
 import Link from "next/link";
 
 export function CardMoreActions({
@@ -21,7 +21,7 @@ export function CardMoreActions({
   const downloadMutation = useDownloadFile();
   // Handle download file
   const handleDownloadFile = () => {
-    downloadMutation.mutate([fileUrl]);
+    downloadMutation.mutate([{ id: fileId, url: fileUrl }]);
   };
   return (
     <DropdownMenu>

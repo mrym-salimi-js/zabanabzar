@@ -6,6 +6,7 @@ import {
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
 import { v4 as uuidv4 } from "uuid";
+import { CheckedFile } from "@/types/file";
 
 const client = new S3Client({
   region: "default",
@@ -103,9 +104,9 @@ export async function GET(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const { fileUrls } = await request.json();
+    const { checkedFiles } = await request.json();
 
-    if (!fileUrls || !Array.isArray(fileUrls) || fileUrls.length === 0) {
+    if (!checkedFiles || checkedFiles?.length === 0) {
       return NextResponse.json(
         { error: "هیچ فایلی برای حذف ارسال نشده" },
         { status: 400 }
@@ -113,8 +114,9 @@ export async function DELETE(request: NextRequest) {
     }
 
     // Delete array of files
-    const deletePromises = fileUrls.map((fileUrl: string) => {
-      const key = fileUrl.split("/").pop(); // نام فایل
+    const deletePromises = checkedFiles.map((file: CheckedFile) => {
+      if (!file.url) return;
+      const key = file.url.split("/").pop();
       return client.send(
         new DeleteObjectCommand({
           Bucket: process.env.LIARA_BUCKET_NAME,

@@ -1,19 +1,17 @@
 "use client";
 import { ReactElement } from "react";
-import FilesTable from "@/app/files/documents/FilesTable";
-import FilesCards from "@/app/files/documents/FilesCards";
+import FilesTable from "@/app/files/_components/table/FilesTable";
+import FilesCards from "@/app/files/_components/card/FilesCards";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { FileItem } from "@/types/file";
 
 export function FilesList(): ReactElement {
   // Get Files list
-  const type = "document" as const;
-  const { data, isLoading } = useQuery({
-    queryKey: ["documents"],
+  const { data, isLoading } = useQuery<FileItem[]>({
+    queryKey: ["files"],
     queryFn: async () => {
-      const res = await axios.get("/api/files", {
-        params: { type },
-      });
+      const res = await axios.get("/api/files");
       return res.data;
     },
     staleTime: Infinity, // Stop auto refetch
@@ -21,12 +19,14 @@ export function FilesList(): ReactElement {
     refetchOnReconnect: false,
   });
 
+  const documents = (data ?? []).filter((f) => f.type === "document");
+
   return (
     <>
       {/* Data in table format  */}
-      <FilesTable filesList={data} isLoading={isLoading} />
+      <FilesTable filesList={documents} isLoading={isLoading} />
       {/* Data in card format  */}
-      <FilesCards filesList={data} isLoading={isLoading} />
+      <FilesCards filesList={documents} isLoading={isLoading} />
     </>
   );
 }

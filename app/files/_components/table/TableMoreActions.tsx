@@ -13,7 +13,7 @@ import {
   More,
   Visit,
 } from "@/components/Icons";
-import DDBItem from "./toolbar/DDBItem";
+import DDBItem from "@/app/files/_components/toolbar/DDBItem";
 import {
   useDeleteFiles,
   useDownloadFile,
@@ -42,7 +42,7 @@ export function TableMoreActions({
 
   // Handle delete file
   const handleDeleteFile = () => {
-    deleteMutation.mutate([fileUrl]);
+    deleteMutation.mutate([{ id: fileId, url: fileUrl }]);
   };
 
   // Handle extraction text from file
@@ -55,7 +55,7 @@ export function TableMoreActions({
   };
 
   const handleDownloadFile = () => {
-    downloadMutation.mutate([fileUrl]);
+    downloadMutation.mutate([{ id: fileId, url: fileUrl }]);
   };
   return (
     <DropdownMenu>
@@ -69,7 +69,7 @@ export function TableMoreActions({
         <DropdownMenuGroup className=" flex flex-col">
           <DropdownMenuItem className="justify-end p-0 ">
             {/* Visit or Extraction */}
-            {fileEx ? (
+            {fileEx || !fileUrl ? (
               <Link className="w-full" href={`/files/${fileId}`}>
                 <DDBItem icon={Visit} label="متن" />
               </Link>
