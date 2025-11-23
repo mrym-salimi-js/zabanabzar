@@ -6,6 +6,9 @@ export async function deleteFileFromStorageService(file: CheckedFile[]) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ checkedFiles: file }),
   });
-
-  return res;
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData?.error || "خطا در حذف فایل از استوریج");
+  }
+  return;
 }

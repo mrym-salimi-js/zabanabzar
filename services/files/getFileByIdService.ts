@@ -6,8 +6,13 @@ export async function getFileByIdService(fileId: string) {
       headers: { "Content-Type": "application/json" },
     });
     const data = await res.json();
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      throw new Error(errorData?.error || "خطا در ذخیره فایل‌ها");
+    }
     return data;
   } catch (error) {
     console.dir(error);
+    throw error;
   }
 }

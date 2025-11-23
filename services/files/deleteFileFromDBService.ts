@@ -12,5 +12,5 @@ export async function deleteFileFromDBService(checkedFiles: CheckedFile[]) {
     throw new Error(error?.error || "خطا در حذف فایل از دیتابیس");
   }
 
-  return res;
+  return;
 }

@@ -9,6 +9,9 @@ export async function downloadFileFromStorageService(fileUrl: string) {
       headers: { "Content-Type": "application/json" },
     }
   );
-
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData?.error || "خطا در دانلود فایل");
+  }
   return res;
 }

@@ -8,10 +8,13 @@ export async function saveFileToDBService(data: CleanFileType[]) {
       body: JSON.stringify(data),
     });
 
-    if (!res.ok) throw new Error("خطا در ذخیره ");
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      throw new Error(errorData?.error || "خطا در ذخیره فایل‌ها");
+    }
     return res.json();
   } catch (error) {
     console.dir(error);
-    return error;
+    throw error;
   }
 }
