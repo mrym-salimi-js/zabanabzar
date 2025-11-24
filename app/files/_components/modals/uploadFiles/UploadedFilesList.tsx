@@ -15,7 +15,7 @@ export default function UploadedFilesList(): ReactElement {
     const id = file.id;
     const fileUrl = file.url;
 
-    await deleteFile(status, id, fileUrl);
+    await deleteFile(status, id, { id: Number(id), url: fileUrl });
   };
   return (
     <div className="w-full h-auto p-2 flex flex-col items-end gap-2">

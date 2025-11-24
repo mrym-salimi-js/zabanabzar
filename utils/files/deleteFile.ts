@@ -1,3 +1,4 @@
+import { CheckedFile } from "./../../types/file.d";
 import { deleteFileFromIndexedDB } from "@/lib/indexedDB";
 import { deleteFileFromStorageService } from "@/services/files/deleteFileFromStorageService";
 import { useUploadStore } from "@/store/uploadFileStore";
@@ -6,24 +7,22 @@ import toast from "react-hot-toast";
 export const deleteFile = async (
   status: string,
   id: string,
-  fileUrl: string | undefined
+  checkedFile: CheckedFile
 ) => {
   const { removeFile } = useUploadStore.getState();
 
-  if (status === "error" || fileUrl === undefined) {
+  if (status === "error" || checkedFile === undefined) {
     removeFile(id);
     deleteFileFromIndexedDB(id);
     return;
   }
 
-  if (!fileUrl) return;
+  if (!checkedFile) return;
 
   try {
-    const fileUrls = [fileUrl];
+    const checkedFiles = [checkedFile];
 
-    const res = await deleteFileFromStorageService(fileUrls);
-
-    if (!res.ok) toast.error("حذف فایل از سرور موفق نبود");
+    await deleteFileFromStorageService(checkedFiles);
 
     removeFile(id);
     deleteFileFromIndexedDB(id);

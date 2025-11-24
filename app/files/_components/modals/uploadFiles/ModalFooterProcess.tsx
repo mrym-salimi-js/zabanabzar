@@ -4,6 +4,7 @@ import { ReactElement, useRef } from "react";
 import toast from "react-hot-toast";
 import ModalFooter from "@/components/ModalFooter";
 import { useSaveFileToDB } from "@/hooks/api/files";
+import { FileTypes } from "@/types/file";
 
 export default function ModalFooterProcess(): ReactElement {
   // Create ref for hidden btn, for using closing modal after sending data
@@ -14,8 +15,9 @@ export default function ModalFooterProcess(): ReactElement {
   // Clear all uploaded file after click on "انصراف" btn
   const handleClearFiles = () => {
     if (files.length === 0) return;
-    files.forEach(async (f) => {
-      await deleteFile(f.status, f.id, f.url);
+    files?.forEach(async (f) => {
+      if (!f) return;
+      await deleteFile(f.status, f.id, { id: Number(f.id), url: f.url });
     });
   };
 
@@ -33,9 +35,8 @@ export default function ModalFooterProcess(): ReactElement {
       const parts = f.name.split(".");
       const ext = parts.pop() || "";
       const nameWithoutExt = parts.join(".");
-
       return {
-        type: "document" as const,
+        type: f.type as FileTypes,
         name: nameWithoutExt,
         size: f.size,
         url: f.url,

@@ -1,7 +1,7 @@
 import { use } from "react";
 import TextBox from "./_components/TextBox";
 
-export default function TextView({
+export default function FileIdPage({
   params,
 }: {
   params: Promise<{ fileId: string }>;

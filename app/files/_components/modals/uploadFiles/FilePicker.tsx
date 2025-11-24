@@ -5,6 +5,9 @@ import { Button } from "@/components/ui/button";
 import { useUploadFile } from "@/hooks/api/files";
 import { useUploadStore } from "@/store/uploadFileStore";
 import { saveFileToIndexedDB } from "@/lib/indexedDB";
+import { imageTypes } from "@/constants/imageTypes";
+import { FileTypes } from "@/types/file";
+import { documentTypes } from "@/constants/documentTypes";
 
 export default function FilePicker() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -25,6 +28,18 @@ export default function FilePicker() {
 
       await saveFileToIndexedDB(id, file);
 
+      const parts = file.name.split(".");
+      const ext = parts.pop();
+      let type: FileTypes = "document";
+      if (!ext) return;
+      if (imageTypes.includes(ext)) {
+        type = "image";
+      }
+      if (documentTypes.includes(ext)) {
+        type = "document";
+      }
+
+      // Add other types ???
       addFiles({
         id,
         name: file.name,
@@ -32,6 +47,7 @@ export default function FilePicker() {
         status: "uploading",
         progress: 0,
         url: undefined,
+        type: type,
       });
 
       uploadMutation.mutate(id);

@@ -30,7 +30,7 @@ export default function Notification() {
                 {status[i.status]}
               </p>
               <p
-                className={`text-[0.7rem] ${i.status === "error" ? `text-[var(--primary)]` : `text-[var(--secondary)]`} `}
+                className={`w-[50%] text-[0.7rem] truncate ${i.status === "error" ? `text-[var(--primary)]` : `text-[var(--secondary)]`} `}
               >
                 {i.name}
               </p>

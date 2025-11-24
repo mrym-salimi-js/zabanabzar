@@ -4,6 +4,9 @@ import FilePicker from "./FilePicker";
 import { useUploadStore } from "@/store/uploadFileStore";
 import { saveFileToIndexedDB } from "@/lib/indexedDB";
 import { useUploadFile } from "@/hooks/api/files";
+import { FileTypes } from "@/types/file";
+import { imageTypes } from "@/constants/imageTypes";
+import { documentTypes } from "@/constants/documentTypes";
 
 export default function DropFiles(): ReactElement {
   const [isOver, setIsOver] = useState<boolean>(false);
@@ -25,6 +28,18 @@ export default function DropFiles(): ReactElement {
       const id = crypto.randomUUID();
 
       await saveFileToIndexedDB(id, file);
+      const parts = file.name.split(".");
+      const ext = parts.pop();
+      let type: FileTypes = "document";
+      if (!ext) return;
+      if (imageTypes.includes(ext)) {
+        type = "image";
+      }
+      if (documentTypes.includes(ext)) {
+        type = "document";
+      }
+
+      // Add other types ???
 
       addFiles({
         id,
@@ -33,6 +48,7 @@ export default function DropFiles(): ReactElement {
         status: "uploading",
         progress: 0,
         url: undefined,
+        type: type,
       });
 
       uploadMutation.mutate(id);

@@ -1,4 +1,4 @@
-export type FileTypes = "text" | "document" | "podcast" | "video";
+export type FileTypes = "text" | "document" | "podcast" | "video" | "image";
 
 export interface FileItem {
   id: number;
@@ -18,10 +18,10 @@ export type FileListResponse = FileItem[];
 
 export type CheckedFile = {
   id: number;
-  url: string;
+  url: string | undefined;
 };
-export type DocUpload = {
-  type: "document";
+export type FileUpload = {
+  type: FileTypes;
   name: string;
   size: number;
   url: string | undefined;
@@ -35,4 +35,4 @@ export type TextUpload = {
   userId: number;
 };
 
-export type CleanFileType = DocUpload | TextUpload;
+export type CleanFileType = FileUpload | TextUpload;

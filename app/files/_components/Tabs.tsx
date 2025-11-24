@@ -23,7 +23,7 @@ export default function Tabs(): ReactElement {
         ویدئو
       </Link>
       <Link
-        href={"/files/poscasts"}
+        href={"/files/podcasts"}
         className="w-22 h-full text-center cursor-pointer hover:opacity-[0.7] p-2 "
       >
         پادکست

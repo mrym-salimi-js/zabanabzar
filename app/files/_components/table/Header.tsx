@@ -11,7 +11,7 @@ export default function Header({ filesList }: HeaderProp) {
   const selectAll = useFileCheckStore((state) => state.selectAll);
   const clearAll = useFileCheckStore((state) => state.clearAll);
   const path = usePathname();
-  console.log(path);
+
   // Handle "select all" checkbox
   const handleCheckAll = (checked: boolean) => {
     if (checked) {

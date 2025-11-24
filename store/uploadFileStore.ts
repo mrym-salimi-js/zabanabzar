@@ -1,3 +1,4 @@
+import { FileTypes } from "@/types/file";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -10,6 +11,7 @@ export interface UploadFilePersist {
   progress: number;
   status: StatusFile;
   url?: string | undefined;
+  type: FileTypes;
 }
 
 interface UploadState {

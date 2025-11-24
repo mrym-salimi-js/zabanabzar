@@ -1,5 +1,8 @@
 import { createWorker } from "tesseract.js";
-import { getFileFromIndexedDB } from "@/lib/indexedDB";
+import {
+  deleteAllFilesFromIndexedDB,
+  getFileFromIndexedDB,
+} from "@/lib/indexedDB";
 import { deleteFileFromDBService } from "@/services/files/deleteFileFromDBService";
 import { deleteFileFromStorageService } from "@/services/files/deleteFileFromStorageService";
 import { extractTextFromFileService } from "@/services/files/extractTextFromFileService";
@@ -12,12 +15,10 @@ import { CheckedFile, CleanFileType } from "@/types/file";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { downloadFileInBrowserService } from "@/services/files/downloadFileInBrowserService";
-import { usePathname } from "next/navigation";
 
 // Delete Files custom hook
 export const useDeleteFiles = () => {
   const queryClient = useQueryClient();
-  const path = usePathname();
 
   return useMutation({
     mutationFn: async (files: CheckedFile[]) => {
@@ -65,16 +66,18 @@ export const useUploadFile = () => {
     },
   });
 };
-
+// Save files to DB custom hook
 export const useSaveFileToDB = () => {
-  const { clearFiles } = useUploadStore.getState();
   const queryClient = useQueryClient();
-
+  const { clearFiles } = useUploadStore();
   return useMutation({
     mutationFn: async (data: CleanFileType[]) => {
       return await saveFileToDBService(data);
     },
     onSuccess: () => {
+      clearFiles();
+      deleteAllFilesFromIndexedDB();
+
       // Update files list
       queryClient.invalidateQueries({ queryKey: ["files"] });
 
@@ -84,7 +87,7 @@ export const useSaveFileToDB = () => {
   });
 };
 
-// Download files from s3
+// Download files from s3 custom hook
 export const useDownloadFile = () => {
   return useMutation({
     mutationFn: async (checkeds: CheckedFile[]) => {
