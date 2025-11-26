@@ -1,10 +1,10 @@
 import { GreenCheckBox } from "@/components/GreenCheckBox";
 import { useFileCheckStore } from "@/store/fileCheckStore";
-import { FileListResponse } from "@/types/file";
+import { FileItem } from "@/types/file";
 import { usePathname } from "next/navigation";
 
 type HeaderProp = {
-  filesList: FileListResponse;
+  filesList: FileItem[];
 };
 export default function Header({ filesList }: HeaderProp) {
   const checkedFiles = useFileCheckStore((state) => state.CheckedFiles);

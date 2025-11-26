@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { CheckedFile, FileListResponse } from "@/types/file";
+import { CheckedFile, FileItem } from "@/types/file";
 import FilesTableSkeleton from "@/components/skeletons/FilesTableSkeleton";
 import { useFileCheckStore } from "@/store/fileCheckStore";
 import Header from "@/app/files/_components/table/Header";
@@ -7,7 +7,7 @@ import { FileRow } from "./Row";
 
 // Table props type
 type TableProps = {
-  filesList: FileListResponse;
+  filesList: FileItem[];
   isLoading: boolean;
 };
 

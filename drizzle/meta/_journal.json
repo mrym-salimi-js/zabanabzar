@@ -71,6 +71,13 @@
       "when": 1763836526448,
       "tag": "0009_glamorous_ikaris",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1764171465292,
+      "tag": "0010_curvy_wolf_cub",
+      "breakpoints": true
     }
   ]
 }

@@ -1,5 +1,4 @@
 import ToolBar from "@/app/files/_components/toolbar/ToolBar";
-import { PaginatedList } from "./_components/PaginatedList";
 
 export default function FilesLayout({
   children,
@@ -11,8 +10,6 @@ export default function FilesLayout({
       {/* Toolbar Btns */}
       <ToolBar />
       {children}
-      {/*Pagination */}
-      <PaginatedList />
     </div>
   );
 }

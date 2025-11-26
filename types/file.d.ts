@@ -14,7 +14,14 @@ export interface FileItem {
   userId: number;
 }
 
-export type FileListResponse = FileItem[];
+interface FileListResponse {
+  items: FileItem[];
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasMore: boolean;
+}
 
 export type CheckedFile = {
   id: number;

@@ -16,6 +16,7 @@ export const uploadType = pgEnum("upload_type", [
   "document",
   "podcast",
   "video",
+  "image",
 ]);
 
 export const files = pgTable("files", {

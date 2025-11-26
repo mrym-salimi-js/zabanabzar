@@ -1,44 +1,73 @@
 "use client";
-import { ReactElement } from "react";
+
+import { ReactElement, useState } from "react";
 import FilesTable from "@/app/files/_components/table/FilesTable";
 import FilesCards from "@/app/files/_components/card/FilesCards";
-import { FileItem, FileListResponse } from "@/types/file";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { PaginatedList } from "../_components/PaginatedList";
+import { FileListResponse } from "@/types/file";
 
 type FilesListProps = {
-  initialFiles: FileListResponse;
   fileType: string;
+  initialFiles?: FileListResponse;
 };
 
 export function FilesList({
-  initialFiles,
   fileType,
+  initialFiles,
 }: FilesListProps): ReactElement {
-  //Get Files list in client side for handleing CRUD actions of use in files page
-  const { data = [], isLoading } = useQuery<FileItem[]>({
-    queryKey: ["files"],
+  const type = fileType.slice(0, -1);
+
+  const [view, setView] = useState<"list" | "card">("list");
+  const [page, setPage] = useState(1);
+  const limit = 10;
+
+  // Get data for pagination --> list
+  const listQuery = useQuery<FileListResponse, Error>({
+    queryKey: ["files", type, page, limit],
     queryFn: async () => {
-      const res = await axios.get("/api/files");
+      const res = await axios.get<FileListResponse>("/api/files", {
+        params: { type, page, limit },
+      });
       return res.data;
     },
-    initialData: initialFiles ?? [],
-    staleTime: 0,
+    initialData: initialFiles,
+    staleTime: 5000,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
-  // Remove 's' from lend of fileType string
-  const type = fileType.slice(0, -1);
 
-  // Get data based on type
-  const filesList = data.filter((f) => f.type === type);
-  console.log(data);
+  // Get data for infinite --> card
+  const infiniteQuery = useInfiniteQuery<FileListResponse, Error>({
+    queryKey: ["files-infinite", type, limit],
+    queryFn: async ({ pageParam = 1 }) => {
+      const res = await axios.get<FileListResponse>("/api/files", {
+        params: { type, page: pageParam, limit },
+      });
+      return res.data;
+    },
+    getNextPageParam: (lastPage) =>
+      lastPage.hasMore ? lastPage.page + 1 : undefined,
+    initialPageParam: 1,
+    enabled: view === "card",
+  });
+
+  //  Finall data
+  const files =
+    view === "list"
+      ? (listQuery.data?.items ?? [])
+      : (infiniteQuery.data?.pages.flatMap((p) => p.items) ?? []);
+
   return (
     <>
-      {/* Data in table format  */}
-      <FilesTable filesList={filesList} isLoading={isLoading} />
-      {/* Data in card format  */}
-      <FilesCards filesList={filesList} isLoading={isLoading} />
+      {view === "list" ? (
+        <FilesTable filesList={files} isLoading={listQuery.isLoading} />
+      ) : (
+        <FilesCards filesList={files} isLoading={infiniteQuery.isLoading} />
+      )}
+      {/*Pagination */}
+      <PaginatedList />
     </>
   );
 }

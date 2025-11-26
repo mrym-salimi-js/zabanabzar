@@ -1,6 +1,7 @@
 import { files } from "./../schema/files";
 import { db } from "../index";
-import { eq, inArray } from "drizzle-orm";
+import { eq, inArray, sql } from "drizzle-orm";
+import { FileTypes } from "@/types/file";
 
 export type FileInsertType = typeof files.$inferInsert;
 export type FileSelectType = typeof files.$inferSelect;
@@ -11,9 +12,34 @@ export async function craeteFile(date: FileInsertType[]) {
   return result[0];
 }
 
-// Get all files
-export async function getAllFiles() {
-  return await db.select().from(files).orderBy(files.createdAt);
+// Get all files by limit for pagination
+export async function getAllFiles(
+  type: FileTypes,
+  page: number,
+  limit: number
+) {
+  const items = await db
+    .select()
+    .from(files)
+    .where(eq(files.type, type))
+    .limit(limit)
+    .offset((page - 1) * limit);
+
+  const countResult = await db
+    .select({ count: sql<number>`count(*)`.mapWith(Number) })
+    .from(files)
+    .where(eq(files.type, type));
+
+  const total = countResult[0]?.count ?? 0;
+
+  return {
+    items,
+    page,
+    limit,
+    total,
+    totalPages: Math.ceil(total / limit),
+    hasMore: page * limit < total,
+  };
 }
 
 // Get special file

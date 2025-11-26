@@ -1,6 +1,6 @@
 import { GreenCheckBox } from "@/components/GreenCheckBox";
 import { useDeleteFiles } from "@/hooks/api/files";
-import { CheckedFile, FileListResponse } from "@/types/file";
+import { CheckedFile, FileItem, FileListResponse } from "@/types/file";
 import NameColumn from "./NameColumn";
 import CreateAtColumn from "./CreateAtColumn";
 import UpdatedAtColumn from "./UpdatedAtColumn";
@@ -9,7 +9,7 @@ import { TableMoreActions } from "./TableMoreActions";
 
 // Row props type
 type TableRowProps = {
-  filesList: FileListResponse;
+  filesList: FileItem[];
   checkedFiles: CheckedFile[];
   handleCheckSingle: (file: CheckedFile) => void;
 };

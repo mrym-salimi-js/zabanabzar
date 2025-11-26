@@ -1,11 +1,11 @@
 import { ReactElement } from "react";
-import { FileListResponse } from "@/types/file";
+import { FileItem } from "@/types/file";
 import FilesCardsSkeleton from "@/components/skeletons/FilesCardsSkeleton";
 import { FileCard } from "./Card";
 
 // Cards list props type
 type CardsProps = {
-  filesList: FileListResponse;
+  filesList: FileItem[];
   isLoading: boolean;
 };
 

@@ -6,13 +6,27 @@ import {
   getAllFiles,
   updateFile,
 } from "@/lib/db/queries/files";
-import { CheckedFile } from "@/types/file";
+import { CheckedFile, FileTypes } from "@/types/file";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const { searchParams } = new URL(req.url);
+
+    const type = searchParams.get("type") as FileTypes;
+    const page = Number(searchParams.get("page") ?? 1);
+    const limit = Number(searchParams.get("limit") ?? 5);
+
+    if (!type) {
+      return NextResponse.json(
+        { error: "نوع فایل مشخص نشده" },
+        { status: 400 }
+      );
+    }
+
     // Call query from db/queries of files
-    const allFile = await getAllFiles();
+    const allFile = await getAllFiles(type, page, limit);
+
     return NextResponse.json(allFile, { status: 201 });
   } catch (err) {
     console.error(err);
