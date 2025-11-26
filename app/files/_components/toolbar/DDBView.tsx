@@ -1,3 +1,4 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,8 +9,17 @@ import {
 import { ListItems, SquaredItems, Table } from "@/components/Icons";
 import DDBItem from "./DDBItem";
 import { TriggerBtn } from "@/components/TriggerBtn";
+import { useViewFiles } from "@/store/changeFilesView";
 
 export function DDBView() {
+  const { setView } = useViewFiles();
+
+  const handleListView = () => {
+    setView("list");
+  };
+  const handleCardView = () => {
+    setView("card");
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -22,11 +32,19 @@ export function DDBView() {
         <DropdownMenuGroup className=" flex flex-col ">
           <DropdownMenuItem asChild className="justify-end p-0">
             {/* Table item */}
-            <DDBItem icon={ListItems} label="لیستی" />
+            <DDBItem
+              handleAction={handleListView}
+              icon={ListItems}
+              label="لیستی"
+            />
           </DropdownMenuItem>
           <DropdownMenuItem className="justify-end p-0 ">
             {/* Card item */}
-            <DDBItem icon={SquaredItems} label="کارتی" />
+            <DDBItem
+              handleAction={handleCardView}
+              icon={SquaredItems}
+              label="کارتی"
+            />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

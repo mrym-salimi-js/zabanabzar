@@ -24,7 +24,7 @@ export default async function FileTypePage({ params }: FileTypeParams) {
     `${baseUrl}/api/files?type=${type}&page=${1}&limit=${5}`
   );
   const files: FileListResponse = await res.json();
-  console.log(files);
+
   return (
     <div className="w-full h-auto flex flex-col gap-2 rounded-sm md:border-[1px] items-end">
       <Tabs />

@@ -27,7 +27,7 @@ export default function FilesTable({
   return (
     <div
       dir="rtl"
-      className="w-full h-auto p-1 md:flex flex-col gap-1 hidden bg-white dark:bg-[var(--background-dark)] rounded-2xl"
+      className="w-full h-auto p-1 flex flex-col gap-1  bg-white dark:bg-[var(--background-dark)] rounded-2xl"
     >
       {/* Table header */}
       <Header filesList={filesList} />

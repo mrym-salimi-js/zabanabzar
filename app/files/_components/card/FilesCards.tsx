@@ -15,7 +15,7 @@ export default function FilesCards({
   isLoading,
 }: CardsProps): ReactElement {
   return (
-    <div className="w-full h-auto md:hidden flex flex-col gap-1.5 ">
+    <div className="w-full h-auto  flex flex-col gap-1.5 ">
       {isLoading ? (
         <FilesCardsSkeleton skeletonCount={4} />
       ) : (
