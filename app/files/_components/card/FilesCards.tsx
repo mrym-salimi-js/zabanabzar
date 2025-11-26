@@ -1,27 +1,53 @@
-import { ReactElement } from "react";
+"use client";
+
+import { ReactElement, useEffect } from "react";
 import { FileItem } from "@/types/file";
 import FilesCardsSkeleton from "@/components/skeletons/FilesCardsSkeleton";
 import { FileCard } from "./Card";
+import { useInView } from "react-intersection-observer";
 
-// Cards list props type
-type CardsProps = {
+type FilesCardsProps = {
   filesList: FileItem[];
   isLoading: boolean;
+  onLoadMore?: () => void;
 };
 
-// Cards list
 export default function FilesCards({
   filesList,
   isLoading,
-}: CardsProps): ReactElement {
+  onLoadMore,
+}: FilesCardsProps): ReactElement {
+  // Flatten all pages
+
+  // Intersection Observer برای لود صفحات بعدی
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView && onLoadMore) {
+      onLoadMore();
+    }
+  }, [inView, onLoadMore]);
+
   return (
-    <div className="w-full h-auto  flex flex-col gap-1.5 ">
-      {isLoading ? (
+    <div className="w-full h-auto flex flex-col gap-1.5">
+      {isLoading && !filesList.length ? (
+        // Skeleton for first page
         <FilesCardsSkeleton skeletonCount={4} />
       ) : (
-        filesList?.map((file) => {
-          return <FileCard key={file.id} file={file} />;
-        })
+        <>
+          {/* files */}
+          {filesList.map((file) => (
+            <FileCard key={file.id} file={file} />
+          ))}
+
+          {/* Skeleton of end of list for scrolling */}
+          {isLoading && filesList.length > 0 && (
+            <FilesCardsSkeleton skeletonCount={2} />
+          )}
+
+          {/* Sentinel for scroll */}
+          <div ref={ref}></div>
+        </>
       )}
     </div>
   );

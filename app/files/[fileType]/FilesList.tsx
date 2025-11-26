@@ -51,7 +51,6 @@ export function FilesList({
     getNextPageParam: (lastPage) =>
       lastPage.hasMore ? lastPage.page + 1 : undefined,
     initialPageParam: 1,
-    enabled: view === "card",
   });
 
   //  Finall data
@@ -69,7 +68,11 @@ export function FilesList({
           <PaginatedList files={listQuery.data ?? undefined} />
         </>
       ) : (
-        <FilesCards filesList={files} isLoading={infiniteQuery.isLoading} />
+        <FilesCards
+          filesList={files}
+          isLoading={infiniteQuery.isFetching}
+          onLoadMore={() => infiniteQuery.fetchNextPage()}
+        />
       )}
     </>
   );

@@ -10,15 +10,20 @@ import { ReactElement } from "react";
 import { useDownloadFile } from "@/hooks/api/files";
 import DDBItem from "@/app/files/_components/toolbar/DDBItem";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
+type CardMoreActionsProp = {
+  fileUrl: string;
+  fileId: number;
+  fileEx: string | null;
+};
 export function CardMoreActions({
   fileUrl,
   fileId,
-}: {
-  fileUrl: string;
-  fileId: number;
-}): ReactElement {
+  fileEx,
+}: CardMoreActionsProp): ReactElement {
   const downloadMutation = useDownloadFile();
+  const path = usePathname();
   // Handle download file
   const handleDownloadFile = () => {
     downloadMutation.mutate([{ id: fileId, url: fileUrl }]);
@@ -30,12 +35,15 @@ export function CardMoreActions({
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-auto rounded-xl p-2" align="start">
         <DropdownMenuGroup className=" flex flex-col">
-          <DropdownMenuItem className="justify-end p-0">
-            {/* Edit */}
-            <Link className="w-full" href={`/files/${fileId}/edit`}>
-              <DDBItem icon={Edit} label="ویرایش" />
-            </Link>
-          </DropdownMenuItem>
+          {fileEx && (
+            <DropdownMenuItem className="justify-end p-0">
+              {/* Edit */}
+              <Link className="w-full" href={`${path}/${fileId}/edit`}>
+                <DDBItem icon={Edit} label="ویرایش" />
+              </Link>
+            </DropdownMenuItem>
+          )}
+
           <DropdownMenuItem className="justify-end p-0">
             {/* Download */}
             <DDBItem

@@ -1,6 +1,6 @@
 import { files } from "./../schema/files";
 import { db } from "../index";
-import { eq, inArray, sql } from "drizzle-orm";
+import { desc, eq, inArray, sql } from "drizzle-orm";
 import { FileTypes } from "@/types/file";
 
 export type FileInsertType = typeof files.$inferInsert;
@@ -21,6 +21,7 @@ export async function getAllFiles(
   const items = await db
     .select()
     .from(files)
+    .orderBy(desc(files.createdAt))
     .where(eq(files.type, type))
     .limit(limit)
     .offset((page - 1) * limit);

@@ -8,6 +8,7 @@ import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 import { CheckedFile, FileItem } from "@/types/file";
 import { CardMoreActions } from "./CardMoreActions";
 import { GreenCheckBox } from "@/components/GreenCheckBox";
+import { usePathname } from "next/navigation";
 
 // Card props type
 type TableRowProps = {
@@ -21,6 +22,7 @@ export function FileCard({ file }: TableRowProps) {
   const deleteMutation = useDeleteFiles();
   const extractionMutation = useExtractionText();
   const { addExtraction } = useExtractTextStore();
+  const path = usePathname();
 
   // Handle card checkbox
   const handleCheckSingle = (checked: CheckedFile) => {
@@ -49,7 +51,11 @@ export function FileCard({ file }: TableRowProps) {
     <div className="w-full h-auto flex flex-col p-2 gap-1.5 border-2 border-gray-300 rounded-2xl overflow-hidden bg-white dark:bg-[var(--background-dark)] ">
       {/* Header */}
       <div className="w-full h-10 flex p-2 items-center justify-between dark:bg-[var(--tertiary-dark)] border-b-2 dark:rounded-md">
-        <CardMoreActions fileUrl={file.url} fileId={file.id} />
+        <CardMoreActions
+          fileUrl={file.url}
+          fileId={file.id}
+          fileEx={file.exText}
+        />
         <GreenCheckBox
           checked={checkedFiles.some((i) => i.id === file.id)}
           onChange={() => handleCheckSingle({ id: file.id, url: file.url })}
@@ -88,7 +94,7 @@ export function FileCard({ file }: TableRowProps) {
           {/* Visit or Extraction */}
           {file.exText || file.type === "text" ? (
             <span className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--secondary-light)] dark:bg-[var(--secondary-dark)]">
-              <Link className="w-full h-full" href={`/files/${file.id}`}>
+              <Link className="w-full h-full" href={`${path}/${file.id}`}>
                 <Visit classes="size-4 text-[var(--secondary)]" />
               </Link>
             </span>

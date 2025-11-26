@@ -21,6 +21,7 @@ import {
 } from "@/hooks/api/files";
 import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type MorActionProp = {
   fileUrl: string;
@@ -39,6 +40,7 @@ export function TableMoreActions({
   const extractionMutation = useExtractionText();
   const { addExtraction } = useExtractTextStore();
   const downloadMutation = useDownloadFile();
+  const path = usePathname();
 
   // Handle delete file
   const handleDeleteFile = () => {
@@ -57,6 +59,7 @@ export function TableMoreActions({
   const handleDownloadFile = () => {
     downloadMutation.mutate([{ id: fileId, url: fileUrl }]);
   };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
@@ -70,7 +73,7 @@ export function TableMoreActions({
           <DropdownMenuItem className="justify-end p-0 ">
             {/* Visit or Extraction */}
             {fileEx || !fileUrl ? (
-              <Link className="w-full" href={`/files/${fileId}`}>
+              <Link className="w-full" href={`${path}/${fileId}`}>
                 <DDBItem icon={Visit} label="متن" />
               </Link>
             ) : (
@@ -85,12 +88,15 @@ export function TableMoreActions({
             {/* Delete */}
             <DDBItem handleAction={handleDeleteFile} icon={Bin} label="حذف" />
           </DropdownMenuItem>
-          <DropdownMenuItem className="justify-end p-0">
-            {/* Edit */}
-            <Link className="w-full" href={`/files/${fileId}/edit`}>
-              <DDBItem icon={Edit} label="ویرایش" />
-            </Link>
-          </DropdownMenuItem>
+          {fileEx && (
+            <DropdownMenuItem className="justify-end p-0">
+              {/* Edit */}
+              <Link className="w-full" href={`${path}/${fileId}/edit`}>
+                <DDBItem icon={Edit} label="ویرایش" />
+              </Link>
+            </DropdownMenuItem>
+          )}
+
           <DropdownMenuItem className="justify-end p-0">
             {/* Download */}
             <DDBItem
