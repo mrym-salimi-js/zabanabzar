@@ -9,7 +9,7 @@ import {
 import { ListItems, SquaredItems, Table } from "@/components/Icons";
 import DDBItem from "./DDBItem";
 import { TriggerBtn } from "@/components/TriggerBtn";
-import { useViewFiles } from "@/store/changeFilesView";
+import { useViewFiles } from "@/store/updateFilesViewStore";
 
 export function DDBView() {
   const { setView } = useViewFiles();

@@ -48,11 +48,11 @@ export default function RootLayout({
           <ThemeProvider attribute="class" enableSystem defaultTheme="system">
             <div className="w-full h-screen flex flex-row-reverse bg-transparent">
               {/* Nav */}
-              <div className="w-[250px] hidden lg:block">
+              <div className="w-[250px] hidden lg:block fixed top-0 right-0 h-screen">
                 <Nav />
               </div>
               {/* Content */}
-              <div className=" lg:w-[85.3%] w-full h-full flex flex-col gap-1 p-1 bg-transparent">
+              <div className="lg:mr-[250px] w-full h-full flex flex-col gap-1 p-1">
                 <Header />
                 {children}
               </div>

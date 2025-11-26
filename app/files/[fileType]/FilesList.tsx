@@ -7,7 +7,8 @@ import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { PaginatedList } from "../_components/PaginatedList";
 import { FileListResponse } from "@/types/file";
-import { useViewFiles } from "@/store/changeFilesView";
+import { useViewFiles } from "@/store/updateFilesViewStore";
+import { useFilesPage } from "@/store/upadteFilesPageStore";
 
 type FilesListProps = {
   fileType: string;
@@ -20,7 +21,7 @@ export function FilesList({
 }: FilesListProps): ReactElement {
   const type = fileType.slice(0, -1);
   const { view } = useViewFiles();
-  const [page, setPage] = useState(1);
+  const { page } = useFilesPage();
   const limit = 10;
 
   // Get data for pagination --> list
@@ -62,12 +63,14 @@ export function FilesList({
   return (
     <>
       {view === "list" ? (
-        <FilesTable filesList={files} isLoading={listQuery.isLoading} />
+        <>
+          <FilesTable filesList={files} isLoading={listQuery.isLoading} />
+          {/*Pagination */}
+          <PaginatedList files={listQuery.data ?? undefined} />
+        </>
       ) : (
         <FilesCards filesList={files} isLoading={infiniteQuery.isLoading} />
       )}
-      {/*Pagination */}
-      <PaginatedList />
     </>
   );
 }

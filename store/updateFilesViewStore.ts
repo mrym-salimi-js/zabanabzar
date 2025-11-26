@@ -17,7 +17,7 @@ export const useViewFiles = create<ViewState>()(
       },
     }),
     {
-      name: "files-ui-view", // Key of local storage
+      name: "files-page", // Key of local storage
       storage: createJSONStorage(() => localStorage), // We can use session storage
     }
   )

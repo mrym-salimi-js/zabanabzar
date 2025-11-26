@@ -4,16 +4,30 @@ import {
   PaginationContent,
   PaginationItem,
 } from "@/components/ui/pagination";
+import { useFilesPage } from "@/store/upadteFilesPageStore";
+import { FileListResponse } from "@/types/file";
 import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useMemo } from "react";
+type PaginatedListProp = {
+  files: FileListResponse | undefined;
+};
 
-export function PaginatedList() {
+export function PaginatedList({ files }: PaginatedListProp) {
   // CurrentPage
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const {
+    page: currentPage,
+    setPage: setCurrentPage,
+    setNextPage,
+    setPrevPage,
+  } = useFilesPage();
+
+  const path = usePathname();
+
   // TotalPage
-  const totalPages = 3;
+  const totalPages = files?.totalPages || 1;
 
   // Get 3 visible pages by every changing currentPage and totalPages
   const visiblePages = useMemo(() => {
@@ -28,23 +42,37 @@ export function PaginatedList() {
 
     // Get 3 visible number
     const pages: number[] = [];
-    for (let i = start; i <= end; i++) pages.push(i);
+    for (let i = start; i <= end; i++) {
+      if (start === -1) {
+        return [1];
+      }
+      if (start === 0) {
+        return [1, 2];
+      }
+      if (start > 0) {
+        pages.push(i);
+      }
+    }
 
     return pages;
   }, [currentPage, totalPages]);
 
   return (
-    <div className="w-full h-auto mt-4 flex py-3 items-center justify-center text-[0.9rem]">
+    <div className="w-full h-auto flex py-3 items-center justify-center text-[0.9rem]">
       <Pagination>
         <PaginationContent>
           <PaginationItem className={currentPage === 1 ? "hidden" : "block"}>
             <Link
-              href={`/files/page${Math.max(1, currentPage - 1)}`}
-              onClick={() => setCurrentPage((cp) => Math.max(1, cp - 1))}
+              href={
+                currentPage - 1 === 1
+                  ? path
+                  : `${path}?page${Math.max(1, currentPage - 1)}`
+              }
+              onClick={() => setNextPage()}
               className="px-3 py-2 flex gap-1 items-center rounded-md hover:bg-[var(--primary-light)] dark:hover:bg-[var(--primary-light)]"
             >
-              <p className="tet-[var(--primary)]">قبلی</p>
-              <ChevronLeft className="w-4 h-4 bg-[var(--primary)]" />
+              <ChevronLeft className="w-4 h-4 text-[var(--primary)]" />
+              <p className="text-[var(--primary)]">قبلی</p>
             </Link>
           </PaginationItem>
 
@@ -52,7 +80,7 @@ export function PaginatedList() {
             return (
               <PaginationItem key={p} onClick={() => setCurrentPage(p)}>
                 <Link
-                  href={p === 1 ? `/files` : `/files/page${p}`}
+                  href={p === 1 ? path : `${path}?page${p}`}
                   onClick={() => setCurrentPage(p)}
                   className={`px-4 py-2 rounded-md text-black dark:text-white ${
                     currentPage === p
@@ -70,10 +98,8 @@ export function PaginatedList() {
             className={currentPage === totalPages ? "hidden" : "block"}
           >
             <Link
-              href={`/files/page${Math.min(totalPages, currentPage + 1)}`}
-              onClick={() =>
-                setCurrentPage((cp) => Math.min(cp + 1, totalPages))
-              }
+              href={`${path}?page${Math.min(totalPages, currentPage + 1)}`}
+              onClick={() => setPrevPage(totalPages)}
               className="px-3 py-2  flex gap-1 items-center rounded-md hover:bg-[var(--primary-light)] dark:hover:bg-[var(--primary-dark)]"
             >
               <p className="text-[var(--primary)]">بعدی</p>

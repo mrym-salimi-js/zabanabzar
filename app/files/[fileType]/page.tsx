@@ -2,7 +2,7 @@ import Notification from "@/components/Notification";
 import { FilesList } from "@/app/files/[fileType]/FilesList";
 import Tabs from "../_components/Tabs";
 import { notFound } from "next/navigation";
-import { FileItem, FileListResponse } from "@/types/file";
+import { FileListResponse } from "@/types/file";
 import { fileTypes } from "@/constants/fileTypes";
 
 interface FileTypeParams {
@@ -21,7 +21,7 @@ export default async function FileTypePage({ params }: FileTypeParams) {
   // Get data in server side by first loading page
   const baseUrl = process.env.BASE_URL || "http://localhost:3000";
   const res = await fetch(
-    `${baseUrl}/api/files?type=${type}&page=${1}&limit=${5}`
+    `${baseUrl}/api/files?type=${type}&page=${1}&limit=${10}`
   );
   const files: FileListResponse = await res.json();
 
