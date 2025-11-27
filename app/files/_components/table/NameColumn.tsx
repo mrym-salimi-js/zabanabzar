@@ -13,7 +13,7 @@ export default function NameColumn({ file }: NameColumnProp) {
         classes={`w-7 h-7 ${fileTypeColorClasses[file.ext] || fileTypeColorClasses.default}`}
         name={file.type !== "text" ? file.ext : "text"}
       />
-      {<p className="max-w-[80%] truncate">{file.name}</p>}
+      <p className="max-w-[80%] truncate">{file.name}</p>
     </div>
   );
 }

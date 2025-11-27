@@ -60,7 +60,6 @@ export default function ModalFooterProcess(): ReactElement {
       mutation={saveMutation}
       closeRef={closeRef}
       confirmBtnBG="bg-[var(--secondary)]"
-      confirmLabelLoading="در حال ارسال"
     />
   );
 }

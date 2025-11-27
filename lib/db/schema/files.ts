@@ -47,11 +47,6 @@ export const files = pgTable("files", {
   userId: integer("user_id").notNull(),
 
   // Timestamps
-  createdAt: timestamp("created_at")
-    .default(sql`now()`)
-    .notNull(),
-
-  updatedAt: timestamp("updated_at")
-    .default(sql`now()`)
-    .notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

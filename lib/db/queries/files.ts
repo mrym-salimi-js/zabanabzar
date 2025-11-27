@@ -55,6 +55,7 @@ export async function updateFile(id: number, text: string) {
     .update(files)
     .set({
       exText: text,
+      updatedAt: new Date(),
     })
     .where(eq(files.id, id))
     .returning();

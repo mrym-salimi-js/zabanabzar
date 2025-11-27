@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import React, { ReactElement } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
 import ThreePointsLoading from "./ThreePointsLoading";
 
 type ModalFooterProps<TVariables> = {

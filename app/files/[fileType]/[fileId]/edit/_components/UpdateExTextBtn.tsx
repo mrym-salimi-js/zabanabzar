@@ -26,7 +26,6 @@ export function UpdateExTextBtn({
 
   // Handle trigger click
   const handleTriggerClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log(prevText, nextText);
     // Check changes of text
     if (prevText === nextText) {
       e.preventDefault();

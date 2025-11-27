@@ -70,7 +70,6 @@ export default function Modal(): ReactElement {
             handleConfirm={handleSendData}
             mutation={saveMutation}
             confirmBtnBG="bg-[var(--secondary)]"
-            confirmLabelLoading="در حال ارسال"
           />
         </DialogContent>
       </form>
