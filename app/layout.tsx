@@ -45,7 +45,12 @@ export default function RootLayout({
         className={`${iranSans.variable} ${geistSans.variable} antialiased dark:bg-[var(--tertiary-dark)] bg-[#F9FAFB]`}
       >
         <Providers>
-          <ThemeProvider attribute="class" enableSystem defaultTheme="system">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             <div className="w-full h-screen flex flex-row-reverse bg-transparent">
               {/* Nav */}
               <div className="w-[250px] hidden lg:block fixed top-0 right-0 h-screen">

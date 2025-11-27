@@ -48,6 +48,8 @@ export function FilesList({ fileType }: FilesListProps): ReactElement {
       lastPage.hasMore ? lastPage.page + 1 : undefined,
     initialPageParam: 1,
     enabled: view === "card",
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 
   //  Finall data
@@ -67,8 +69,10 @@ export function FilesList({ fileType }: FilesListProps): ReactElement {
       ) : (
         <FilesCards
           filesList={files}
-          isLoading={infiniteQuery.isFetching}
-          onLoadMore={() => infiniteQuery.fetchNextPage()}
+          isLoading={
+            infiniteQuery.isFetchingNextPage || infiniteQuery.isFetching
+          }
+          onLoadMore={infiniteQuery.fetchNextPage}
         />
       )}
     </>

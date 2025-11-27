@@ -5,7 +5,6 @@ import { ChevronRightMini, Moon, Search, Sort, Sun, User } from "./Icons";
 import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Nav from "./Nav";
-import { Logo } from "./Logo";
 import { usePathname, useRouter } from "next/navigation";
 import { getHeaderMeta } from "@/utils/files/getHeaderMeta";
 

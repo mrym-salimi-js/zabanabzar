@@ -17,8 +17,6 @@ export default function FilesCards({
   isLoading,
   onLoadMore,
 }: FilesCardsProps): ReactElement {
-  // Flatten all pages
-
   // Next page loading
   const { ref, inView } = useInView();
 

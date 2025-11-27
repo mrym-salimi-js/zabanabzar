@@ -57,6 +57,7 @@ export function PaginatedList({ files }: PaginatedListProp) {
     return pages;
   }, [currentPage, totalPages]);
 
+  if (totalPages === 1) return;
   return (
     <div className="w-full h-auto flex py-3 items-center justify-center text-[0.9rem]">
       <Pagination>

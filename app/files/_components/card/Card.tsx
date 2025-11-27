@@ -84,28 +84,22 @@ export function FileCard({ file }: TableRowProps) {
           </div>
         </div>
         {/* Actions icon */}
-        <div className="flex gap-1 items-center">
+        <div className="flex  items-center">
           {/* Delete */}
-          <span
-            onClick={handleDeleteFile}
-            className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--primary-light)] dark:bg-[var(--primary-dark)]"
-          >
-            <Bin classes="size-4 text-[var(--primary)]" />
+          <span onClick={handleDeleteFile} className="w-auto h-auto p-2">
+            <Bin classes="size-5 text-[var(--primary)]" />
           </span>
 
           {/* Visit or Extraction */}
           {file.exText || file.type === "text" ? (
-            <span className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--secondary-light)] dark:bg-[var(--secondary-dark)]">
+            <span className="w-auto h-auto ">
               <Link className="w-full h-full" href={`${path}/${file.id}`}>
-                <Visit classes="size-4 text-[var(--secondary)]" />
+                <Visit classes="size-5 text-[var(--secondary)]" />
               </Link>
             </span>
           ) : (
-            <span
-              onClick={handleExtractionText}
-              className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--secondary-light)] dark:bg-[var(--secondary-dark)]"
-            >
-              <Extraction classes="size-4 text-[var(--secondary)] stroke-3" />
+            <span onClick={handleExtractionText} className="w-auto h-auto p-2 ">
+              <Extraction classes="size-5 text-[var(--secondary)] stroke-3" />
             </span>
           )}
         </div>

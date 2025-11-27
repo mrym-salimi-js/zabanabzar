@@ -17,7 +17,7 @@ export default async function FileTypePage({ params }: FileTypeParams) {
   }
 
   return (
-    <div className="w-full h-auto flex flex-col gap-2 rounded-sm md:border-[1px] items-end">
+    <div className="w-full h-auto flex flex-col gap-2 rounded-sm  items-end pb-2">
       {/* Toolbar Btns */}
       <ToolBar />
       <Tabs />
