@@ -74,7 +74,7 @@ export function TableMoreActions({
             {/* Visit or Extraction */}
             {fileEx || !fileUrl ? (
               <Link className="w-full" href={`${path}/${fileId}`}>
-                <DDBItem icon={Visit} label="متن" />
+                <DDBItem icon={Visit} label="مطالعه" />
               </Link>
             ) : (
               <DDBItem

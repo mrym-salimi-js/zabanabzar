@@ -48,9 +48,9 @@ export function FileCard({ file }: TableRowProps) {
   };
 
   return (
-    <div className="w-full h-auto flex flex-col p-2 gap-1.5 border-2 border-gray-300 rounded-2xl overflow-hidden bg-white dark:bg-[var(--background-dark)] ">
+    <div className="w-full md:w-[400px] lg:w-[414px] h-auto flex flex-col p-2 gap-1.5 shadow-lg border-gray-300 rounded-2xl overflow-hidden bg-white dark:bg-[var(--background-dark)] ">
       {/* Header */}
-      <div className="w-full h-10 flex p-2 items-center justify-between dark:bg-[var(--tertiary-dark)] border-b-2 dark:rounded-md">
+      <div className="w-full h-10 flex p-2 items-center justify-between dark:bg-[var(--tertiary-dark)] border-b-[1px] dark:rounded-md">
         <CardMoreActions
           fileUrl={file.url}
           fileId={file.id}
@@ -68,17 +68,19 @@ export function FileCard({ file }: TableRowProps) {
           {/*File ext icon */}
           <FileWithName
             classes={`w-8 h-8 ${fileTypeColorClasses[file.ext] || fileTypeColorClasses.default}`}
-            name={file.ext}
+            name={file.ext || "text"}
           />
           <div className="w-auto flex flex-col items-end">
             {/*File name */}
             <p className="max-w-[150px] truncate text-[0.8rem] ">{file.name}</p>
             {/* Size */}
-            <p className="text-[0.7rem] text-gray-300 dark:text-[var(--tertiary)]">
-              {file.size > 1024 * 1024
-                ? `${(file.size / (1024 * 1024)).toFixed(1)} MB`
-                : `${(file.size / 1024).toFixed(1)} KB`}
-            </p>
+            {!file.textContent && (
+              <p className="text-[0.7rem] text-gray-300 dark:text-[var(--tertiary)]">
+                {file.size > 1024 * 1024
+                  ? `${(file.size / (1024 * 1024)).toFixed(1)} MB`
+                  : `${(file.size / 1024).toFixed(1)} KB`}
+              </p>
+            )}
           </div>
         </div>
         {/* Actions icon */}
@@ -103,7 +105,7 @@ export function FileCard({ file }: TableRowProps) {
               onClick={handleExtractionText}
               className="w-auto h-auto p-2 rounded-full cursor-pointer hover:opacity-[0.7] bg-[var(--secondary-light)] dark:bg-[var(--secondary-dark)]"
             >
-              <Extraction classes="size-4 text-[var(--secondary)]" />
+              <Extraction classes="size-4 text-[var(--secondary)] stroke-3" />
             </span>
           )}
         </div>
@@ -113,9 +115,9 @@ export function FileCard({ file }: TableRowProps) {
       {/* Dates  */}
       <div className="flex flex-col">
         {/*File createAt */}
-        <DateAntdTime date={file?.createdAt} />
+        <DateAntdTime date={file?.createdAt} label={"بارگذاری"} />
         {/*File update */}
-        <DateAntdTime date={file?.updatedAt} />
+        <DateAntdTime date={file?.updatedAt} label={"ویرایش"} />
       </div>
     </div>
   );

@@ -2,8 +2,8 @@ import Notification from "@/components/Notification";
 import { FilesList } from "@/app/files/[fileType]/FilesList";
 import Tabs from "../_components/Tabs";
 import { notFound } from "next/navigation";
-import { FileListResponse } from "@/types/file";
 import { fileTypes } from "@/constants/fileTypes";
+import ToolBar from "../_components/toolbar/ToolBar";
 
 interface FileTypeParams {
   params: Promise<{ fileType: string }>;
@@ -15,21 +15,14 @@ export default async function FileTypePage({ params }: FileTypeParams) {
   if (!fileTypes.includes(fileType)) {
     notFound();
   }
-  // // Remove 's' from lend of fileType string
-  const type = fileType?.slice(0, -1);
-
-  // Get data in server side by first loading page
-  const baseUrl = process.env.BASE_URL || "http://localhost:3000";
-  const res = await fetch(
-    `${baseUrl}/api/files?type=${type}&page=${1}&limit=${10}`
-  );
-  const files: FileListResponse = await res.json();
 
   return (
     <div className="w-full h-auto flex flex-col gap-2 rounded-sm md:border-[1px] items-end">
+      {/* Toolbar Btns */}
+      <ToolBar />
       <Tabs />
       <Notification />
-      <FilesList initialFiles={files} fileType={fileType} />
+      <FilesList fileType={fileType} />
     </div>
   );
 }

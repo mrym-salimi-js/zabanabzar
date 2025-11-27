@@ -19,7 +19,7 @@ export default function FilesCards({
 }: FilesCardsProps): ReactElement {
   // Flatten all pages
 
-  // Intersection Observer برای لود صفحات بعدی
+  // Next page loading
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function FilesCards({
   }, [inView, onLoadMore]);
 
   return (
-    <div className="w-full h-auto flex flex-col gap-1.5">
+    <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-around">
       {isLoading && !filesList.length ? (
         // Skeleton for first page
         <FilesCardsSkeleton skeletonCount={4} />

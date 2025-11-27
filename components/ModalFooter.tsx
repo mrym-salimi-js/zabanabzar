@@ -3,6 +3,7 @@ import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 import React, { ReactElement } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
+import ThreePointsLoading from "./ThreePointsLoading";
 
 type ModalFooterProps<TVariables> = {
   handleCancel?: () => void;
@@ -10,7 +11,6 @@ type ModalFooterProps<TVariables> = {
   mutation: UseMutationResult<void | Response, Error, TVariables>;
   closeRef: React.RefObject<HTMLButtonElement | null>;
   confirmBtnBG: string;
-  confirmLabelLoading: string;
 };
 
 export default function ModalFooter<TVariables>({
@@ -19,7 +19,6 @@ export default function ModalFooter<TVariables>({
   mutation,
   closeRef,
   confirmBtnBG,
-  confirmLabelLoading,
 }: ModalFooterProps<TVariables>): ReactElement {
   // Create ref for hidden btn, for using closing modal after sending data
 
@@ -46,8 +45,7 @@ export default function ModalFooter<TVariables>({
         >
           {mutation.isPending ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              {confirmLabelLoading}
+              <ThreePointsLoading circleColor="bg-white" />
             </>
           ) : (
             "تایید"

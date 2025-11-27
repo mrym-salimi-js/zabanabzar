@@ -34,8 +34,7 @@ export default function FilePicker() {
       if (!ext) return;
       if (imageTypes.includes(ext)) {
         type = "image";
-      }
-      if (documentTypes.includes(ext)) {
+      } else if (documentTypes.includes(ext)) {
         type = "document";
       }
 

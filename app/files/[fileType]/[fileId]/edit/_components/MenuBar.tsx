@@ -52,6 +52,12 @@ export function MenuBar({ editor }: { editor: Editor | null }) {
           Paragraph
         </button>
         <button
+          onClick={() => editor.chain().focus().toggleHighlight().run()}
+          className={editor.isActive("highlight") ? "is-active" : ""}
+        >
+          Highlight
+        </button>
+        <button
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 1 }).run()
           }

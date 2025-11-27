@@ -3,9 +3,10 @@ import { toPersianNumbers } from "@/utils/toPersianNumbers";
 import moment from "moment-jalaali";
 type DateAntdTimeProp = {
   date?: string | Date | null;
+  label: string;
 };
 
-export default function DateAntdTime({ date }: DateAntdTimeProp) {
+export default function DateAntdTime({ date, label }: DateAntdTimeProp) {
   return (
     <div className="w-full h-auto  p-2 flex  items-center justify-between">
       <div className=" text-start flex text-[0.8rem] text-gray-400 dark:text-[var(--tertiary)] items-center gap-1 min-w-0 ">
@@ -22,7 +23,7 @@ export default function DateAntdTime({ date }: DateAntdTimeProp) {
           </p>
         </div>
       </div>
-      <p className="text-[0.8rem] mr-1 dark:text-[var(--tertiary)]">بارگذاری</p>
+      <p className="text-[0.8rem] mr-1 dark:text-[var(--tertiary)]">{label}</p>
     </div>
   );
 }

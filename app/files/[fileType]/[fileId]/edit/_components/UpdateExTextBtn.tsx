@@ -72,7 +72,6 @@ export function UpdateExTextBtn({
             mutation={editExTextMutation}
             closeRef={closeRef}
             confirmBtnBG="bg-[var(--secondary)]"
-            confirmLabelLoading="در حال ذخیره"
           />
         </DialogContent>
       </form>

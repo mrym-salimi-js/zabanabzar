@@ -1,1 +1,1 @@
-export const documentTypes = ["PNG", "JPG", "JPEG"];
+export const documentTypes = ["txt", "pdf", "docx"];

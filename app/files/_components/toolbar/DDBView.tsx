@@ -30,7 +30,7 @@ export function DDBView() {
         align="start"
       >
         <DropdownMenuGroup className=" flex flex-col ">
-          <DropdownMenuItem asChild className="justify-end p-0">
+          <DropdownMenuItem className="justify-end p-0">
             {/* Table item */}
             <DDBItem
               handleAction={handleListView}

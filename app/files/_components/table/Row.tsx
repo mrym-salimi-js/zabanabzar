@@ -1,6 +1,6 @@
 import { GreenCheckBox } from "@/components/GreenCheckBox";
 import { useDeleteFiles } from "@/hooks/api/files";
-import { CheckedFile, FileItem, FileListResponse } from "@/types/file";
+import { CheckedFile, FileItem } from "@/types/file";
 import NameColumn from "./NameColumn";
 import CreateAtColumn from "./CreateAtColumn";
 import UpdatedAtColumn from "./UpdatedAtColumn";

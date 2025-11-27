@@ -1,9 +1,14 @@
+"use client";
 import { getFileByIdService } from "@/services/files/getFileByIdService";
+import { useQuery } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 
-export default async function TextBox({ fileId }: { fileId: string }) {
-  const file = await getFileByIdService(fileId);
-  if (!file) notFound();
+export default function TextBox({ fileId }: { fileId: string }) {
+  const { data: file, error } = useQuery({
+    queryKey: ["file", fileId],
+    queryFn: async () => await getFileByIdService(fileId),
+  });
+  if (error) notFound();
 
   return (
     <div className="w-full h-auto flex items-center justify-between ">

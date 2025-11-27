@@ -20,8 +20,21 @@ export default function Header(): ReactElement {
     <header className="w-full h-18 flex bg-white flex-row-reverse justify-between  dark:bg-[var(--background-dark)] p-2 px-4 border rounded-sm">
       {/* Right items */}
       <div className="w-auto h-full flex gap-2 flex-row-reverse items-center">
+        <div className="w-auto h-full flex gap-2 items-center lg:hidden ">
+          {/* Hamburger menu icon*/}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Sort classes="size-8 text-black dark:text-white" />
+            </SheetTrigger>
+
+            {/* Nav in mobile mode*/}
+            <SheetContent side="right" className="p-0 w-[70%] sm:w-[300px]">
+              <Nav />
+            </SheetContent>
+          </Sheet>
+        </div>
         {/* Header Meta and back btn */}
-        <div className="w-auto h-full gap-2 flex-row-reverse hidden lg:flex items-center">
+        <div className="w-auto h-full gap-2 flex-row-reverse flex items-center">
           {/* Go back link */}
           <div
             onClick={() => router.back()}
@@ -38,23 +51,6 @@ export default function Header(): ReactElement {
               {meta.desc}
             </p>
           </div>
-        </div>
-
-        <div className="w-auto h-full flex gap-2 flex-row-reverse items-center lg:hidden ">
-          {/* Hamburger menu icon*/}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Sort classes="size-8 text-black dark:text-white" />
-            </SheetTrigger>
-
-            {/* Nav in mobile mode*/}
-            <SheetContent side="right" className="p-0 w-[70%] sm:w-[300px]">
-              <Nav />
-            </SheetContent>
-          </Sheet>
-
-          {/* Logo */}
-          <Logo />
         </div>
       </div>
 

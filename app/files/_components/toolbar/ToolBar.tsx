@@ -1,5 +1,5 @@
 import { DDBUpload } from "@/app/files/_components/toolbar/DDBUpload";
-import { DDBFilter } from "@/app/files/_components/toolbar/DDBFilter";
+// import { DDBFilter } from "@/app/files/_components/toolbar/DDBFilter";
 import { DDBSort } from "@/app/files/_components/toolbar/DDBSort";
 import { DeleteBtn } from "@/app/files/_components/toolbar/DeleteBtn";
 import { DownloadBtn } from "@/app/files/_components/toolbar/DownloadBtn";
@@ -13,7 +13,7 @@ export default function ToolBar() {
       <ScrollWrapper>
         <DDBView />
         <DDBUpload />
-        <DDBFilter />
+        {/* <DDBFilter /> */}
         <DDBSort />
         <DeleteBtn />
         <DownloadBtn />

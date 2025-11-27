@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactElement, useState } from "react";
+import { ReactElement } from "react";
 import FilesTable from "@/app/files/_components/table/FilesTable";
 import FilesCards from "@/app/files/_components/card/FilesCards";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
@@ -12,13 +12,9 @@ import { useFilesPage } from "@/store/upadteFilesPageStore";
 
 type FilesListProps = {
   fileType: string;
-  initialFiles?: FileListResponse;
 };
 
-export function FilesList({
-  fileType,
-  initialFiles,
-}: FilesListProps): ReactElement {
+export function FilesList({ fileType }: FilesListProps): ReactElement {
   const type = fileType.slice(0, -1);
   const { view } = useViewFiles();
   const { page } = useFilesPage();
@@ -33,10 +29,10 @@ export function FilesList({
       });
       return res.data;
     },
-    initialData: initialFiles,
     staleTime: 5000,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
+    enabled: view === "list",
   });
 
   // Get data for infinite --> card
@@ -51,6 +47,7 @@ export function FilesList({
     getNextPageParam: (lastPage) =>
       lastPage.hasMore ? lastPage.page + 1 : undefined,
     initialPageParam: 1,
+    enabled: view === "card",
   });
 
   //  Finall data
