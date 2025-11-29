@@ -2,18 +2,20 @@
 
 import React, { ReactElement } from "react";
 import { ChevronRightMini, Moon, Search, Sort, Sun, User } from "./Icons";
-import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Nav from "./Nav";
 import { usePathname, useRouter } from "next/navigation";
 import { getHeaderMeta } from "@/utils/files/getHeaderMeta";
+import { useThemeStore } from "@/store/themStore";
+import ThreePointsLoading from "./ThreePointsLoading";
 
 export default function Header(): ReactElement {
-  const { theme, setTheme } = useTheme();
+  const { theme, toggle } = useThemeStore();
   const router = useRouter();
   const pathname = usePathname();
 
   const meta = getHeaderMeta(pathname);
+  console.log(theme);
 
   return (
     <header className="w-full h-18 flex bg-white flex-row-reverse justify-between  dark:bg-[var(--background-dark)] p-2 px-4 border rounded-sm">
@@ -59,13 +61,17 @@ export default function Header(): ReactElement {
           <User classes="size-5 text-[var(--tertiary)]" />
         </div>
         <div
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          onClick={() => toggle()}
           className="w-10 h-10 p-2 flex justify-center cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl"
         >
-          {theme === "dark" ? (
-            <Sun classes="size-5 text-[var(--tertiary)]" />
+          {theme ? (
+            theme !== "light" ? (
+              <Sun classes="size-5 text-[var(--tertiary)]" />
+            ) : (
+              <Moon classes="size-5 text-[var(--tertiary)]" />
+            )
           ) : (
-            <Moon classes="size-5 text-[var(--tertiary)]" />
+            <ThreePointsLoading circleColor="bg-[var(--tertiary)] " />
           )}
         </div>
         <div className="w-10 h-10 p-2 flex justify-center cursor-pointer hover:opacity-[0.7] bg-gray-50 dark:bg-[var(--tertiary-dark)] items-center rounded-xl">

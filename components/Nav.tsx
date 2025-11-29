@@ -12,15 +12,15 @@ import {
 } from "./Icons";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import { Logo } from "./Logo";
+import { useThemeStore } from "@/store/themStore";
 
 export default function Nav(): ReactElement {
   const path = usePathname();
   const handleLogout = () => {
     console.log("logout");
   };
-  const { theme } = useTheme();
+  const { theme } = useThemeStore();
 
   const navItems = [
     { href: "/dashboard", icon: Dashboard, label: "داشبورد" },
@@ -55,7 +55,7 @@ export default function Nav(): ReactElement {
                 }`}
               >
                 <i.icon
-                  classes={`size-5 ${theme === "dark" ? `stroke-white` : `${path?.includes(i.href) ? `text-[var(--primary)]` : `stroke-black`}`} `}
+                  classes={`size-5 ${theme && (theme === "dark" ? `stroke-white` : `${path?.includes(i.href) ? `text-[var(--primary)]` : `stroke-black`}`)} `}
                 />
                 <p className={`text-[0.8rem] `}>{i.label}</p>
               </Link>

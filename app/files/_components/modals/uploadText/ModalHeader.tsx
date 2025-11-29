@@ -6,11 +6,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useTheme } from "next-themes";
+import { useThemeStore } from "@/store/themStore";
+// import { useTheme } from "next-themes";
 import React, { ReactElement } from "react";
 
 export default function ModalHeader(): ReactElement {
-  const { theme } = useTheme();
+  const { theme } = useThemeStore();
   return (
     <DialogHeader className="gap-3 items-end">
       <div className="flex gap-3 items-center">
