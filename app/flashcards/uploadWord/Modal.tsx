@@ -3,13 +3,14 @@
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ReactElement, useRef } from "react";
 import ModalHeader from "./ModalHeader";
-import DDBItem from "@/app/files/_components/toolbar/DDBItem";
-import { Pencil } from "@/components/Icons";
+import { Plus } from "@/components/Icons";
 import ModalContent from "./ModalContent";
 import ModalFooter from "@/components/ModalFooter";
 import toast from "react-hot-toast";
 import { useSaveFileToDB } from "@/hooks/api/files";
 import { useUploadTextStore } from "@/store/uploadTextStore";
+import { TriggerBtn } from "@/components/TriggerBtn";
+import { DDBWordType } from "./DDBWordType";
 
 export default function Modal(): ReactElement {
   // Create ref for hidden btn, for using closing modal after sending data
@@ -54,14 +55,14 @@ export default function Modal(): ReactElement {
       <form className="w-full">
         {/*Upload Btn */}
         <DialogTrigger className="w-full">
-          <DDBItem icon={Pencil} label="متن" />
+          <TriggerBtn icon={Plus} label="افزودن" />
         </DialogTrigger>
 
         {/*Upload modal */}
         <DialogContent className="sm:max-w-[425px] rounded-2xl">
           {/*Modal header */}
           <ModalHeader />
-          {/* Text box */}
+          {/* Input and texterea box */}
           <ModalContent />
           {/* Modal footer */}
           <ModalFooter

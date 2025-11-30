@@ -19,7 +19,7 @@ export default function UploadedFilesList(): ReactElement {
   };
   return (
     <div className="w-full h-auto p-2 flex flex-col items-end gap-2">
-      <p className="dark:text-white text-[0.8rem]">فایل های اپلود شده</p>
+      <p className="dark:text-white text-[0.8rem]">فایل های باگذاری شده ...</p>
       <div className="w-full h-24 overflow-hidden overflow-y-scroll p-1">
         <ul className="w-full flex flex-col gap-2 p-0 m-0">
           {files.map((file, index) => {

@@ -20,7 +20,7 @@ export default function ModalContent() {
       />
       <textarea
         onChange={handleOnChangeContent}
-        className="w-full h-full p-2  rounded-md border-[1px] !border-[var(--tertiary-light)] 
+        className="w-full h-full p-2 outline-0 rounded-md border-[1px] !border-[var(--tertiary-light)] 
             !dark:border-[var(--tertiary-dark)] placeholder:text-gray-300"
         placeholder="text"
       ></textarea>
