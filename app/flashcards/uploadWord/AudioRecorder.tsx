@@ -70,9 +70,10 @@ export default function AudioRecorder() {
       onSuccess: (data) => {
         toast.success("فایل صوتی ذخیره شد");
         setWordAudioUrl(data);
+        prevAudioIdRef.current = undefined;
       },
     });
-  }, [currentWord?.audioId]);
+  }, [currentWord.audioId]);
 
   // Delete recorded Audio
   const handleDeleteAudio = async () => {

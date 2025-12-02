@@ -4,7 +4,7 @@ import AudioRecorder from "./AudioRecorder";
 import { DDBWordReview } from "./DDBWordReview";
 
 export default function ModalContent() {
-  const { setWord, setDescription, setTranslation, setExample } =
+  const { currentWord, setWord, setDescription, setTranslation, setExample } =
     useFlashCardStore();
   const handleOnChangeDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const desc = e.target.value;
@@ -38,12 +38,14 @@ export default function ModalContent() {
             !dark:border-[var(--tertiary-dark)] p-2  placeholder:text-gray-300"
         placeholder="word"
         onChange={handleOnChangeWord}
+        value={currentWord?.word}
       />
       <input
         className="w-full h-12 outline-0 rounded-md border-[1px] !border-[var(--tertiary-light)] 
             !dark:border-[var(--tertiary-dark)] p-2  placeholder:text-gray-300"
         placeholder="translation"
         onChange={handleOnChangeTranslate}
+        value={currentWord?.translation}
       />
 
       <textarea
@@ -51,12 +53,14 @@ export default function ModalContent() {
         className="w-full h-18 p-2 outline-0 rounded-md border-[1px] !border-[var(--tertiary-light)] 
             !dark:border-[var(--tertiary-dark)] placeholder:text-gray-300"
         placeholder="example"
+        value={currentWord?.example}
       ></textarea>
       <textarea
         onChange={handleOnChangeDesc}
         className="w-full h-18 p-2 outline-0  rounded-md border-[1px] !border-[var(--tertiary-light)] 
             !dark:border-[var(--tertiary-dark)] placeholder:text-gray-300"
         placeholder="description"
+        value={currentWord?.description}
       ></textarea>
     </div>
   );

@@ -25,9 +25,10 @@ export default function Modal(): ReactElement {
 
   // Handle events after click on "تایید" btn
   const handleSendData = async () => {
-    // Create text obj
+    // Delete some unnessesary items
     const userId = 1;
-
+    delete currentWord.id;
+    delete currentWord.audioId;
     // Send Text into server by mutate
     saveMutation.mutate(
       { data: { ...currentWord, userId } },

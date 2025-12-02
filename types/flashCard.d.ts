@@ -1,13 +1,18 @@
+export type WordType =
+  | "Noun"
+  | "Pronoun"
+  | "Verb"
+  | "Adjective"
+  | "Adverb"
+  | "Unknown";
 export interface WordData {
-  id: string;
   word: string;
   translation: string;
   example: string;
   description: string;
-  type: string;
-  audioId?: string;
+  type: WordType;
   audioUrl?: string;
-  repeat: string;
+  repeatEvery: string;
 }
 export interface CleanWordType extends WordData {
   userId: number;

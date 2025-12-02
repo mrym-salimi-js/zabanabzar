@@ -120,6 +120,20 @@
       "when": 1764678105340,
       "tag": "0016_natural_captain_cross",
       "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1764687053315,
+      "tag": "0017_silly_kabuki",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1764687337448,
+      "tag": "0018_silent_hex",
+      "breakpoints": true
     }
   ]
 }

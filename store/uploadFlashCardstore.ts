@@ -8,16 +8,21 @@ import {
   deleteAllFilesFromIndexedDB,
   deleteFileFromIndexedDB,
 } from "@/lib/indexedDB";
-import { WordData } from "@/types/flashCard";
+import { WordData, WordType } from "@/types/flashCard";
+
+interface CurrentWordType extends WordData {
+  id?: string;
+  audioId?: string;
+}
 
 interface UploadFlashCard {
-  currentWord: WordData;
+  currentWord: CurrentWordType;
   status: "idle" | "recording" | "recorded";
   setWord: (word: string) => void;
   setTranslation: (translation: string) => void;
   setDescription: (word: string) => void;
   setExample: (word: string) => void;
-  setWordType: (word: string) => void;
+  setWordType: (type: WordType) => void;
   startRecording: () => void;
   stopRecording: (blob: Blob) => Promise<void>;
   getWordAudio: () => Promise<File | null>;
@@ -25,14 +30,14 @@ interface UploadFlashCard {
   clearStore: () => Promise<void>;
   clearAudio: (audioId: string) => void;
 }
-const getInitialWord = (): WordData => ({
+const getInitialWord = (): CurrentWordType => ({
   id: crypto.randomUUID(),
   word: "",
   translation: "",
   example: "",
   description: "",
   type: "Unknown",
-  repeat: "3",
+  repeatEvery: "3",
 });
 
 export const useFlashCardStore = create<UploadFlashCard>()(

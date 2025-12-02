@@ -9,11 +9,12 @@ import {
 } from "drizzle-orm/pg-core";
 
 export const wordType = pgEnum("word_type", [
-  "text",
-  "document",
-  "podcast",
-  "video",
-  "image",
+  "Noun",
+  "Pronoun",
+  "Verb",
+  "Adjective",
+  "Adverb",
+  "Unknown",
 ]);
 
 export const flashCards = pgTable("flashCards", {
@@ -27,6 +28,6 @@ export const flashCards = pgTable("flashCards", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
   repeatEvery: varchar("repeatEvery", { length: 255 }),
-  lastReviewed: timestamp("created_at").notNull(),
-  nextReview: timestamp("created_at").notNull(),
+  lastReviewed: timestamp("lastReviewed"),
+  nextReview: timestamp("nextReview"),
 });

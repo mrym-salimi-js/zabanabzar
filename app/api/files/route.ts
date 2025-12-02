@@ -52,8 +52,9 @@ export async function DELETE(req: Request) {
     const checkedFiles: CheckedFile[] = await req.json();
 
     const arrayIds = checkedFiles.map((f) => {
-      return f.id;
+      return +f.id;
     });
+
     // Call query from db/queries of files
     const deleted = await deleteArryFiles(arrayIds);
 
