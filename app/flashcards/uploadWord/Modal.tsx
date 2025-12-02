@@ -6,49 +6,37 @@ import ModalHeader from "./ModalHeader";
 import { Plus } from "@/components/Icons";
 import ModalContent from "./ModalContent";
 import ModalFooter from "@/components/ModalFooter";
-import toast from "react-hot-toast";
-import { useSaveFileToDB } from "@/hooks/api/files";
-import { useUploadTextStore } from "@/store/uploadTextStore";
 import { TriggerBtn } from "@/components/TriggerBtn";
-import { DDBWordType } from "./DDBWordType";
+import { useFlashCardStore } from "@/store/uploadFlashCardstore";
+import { useUpladeFlashCard } from "@/hooks/api/flashCards";
 
 export default function Modal(): ReactElement {
   // Create ref for hidden btn, for using closing modal after sending data
   const closeRef = useRef<HTMLButtonElement>(null);
-  const saveMutation = useSaveFileToDB();
+  const saveMutation = useUpladeFlashCard();
 
-  const { clearTextStorage, text } = useUploadTextStore();
+  const { clearStore, currentWord } = useFlashCardStore();
 
   // Clear all uploaded file after click on "انصراف" btn
   const handleClearText = () => {
     // Clear saved text in localStorage
-    clearTextStorage();
+    clearStore();
   };
 
   // Handle events after click on "تایید" btn
   const handleSendData = async () => {
-    // Check saved text in loacalStorage
-    if (!text || text?.content === "") {
-      toast.error("متنی وجود ندارد");
-      return;
-    }
-
     // Create text obj
-    const currentUserId = 1; // از session یا auth context بگیر
-
-    const textUpload = {
-      type: text.type,
-      textContent: text.content,
-      name: text.title,
-      userId: currentUserId,
-    };
+    const userId = 1;
 
     // Send Text into server by mutate
-    saveMutation.mutate([textUpload], {
-      onSuccess: () => {
-        closeRef.current?.click();
-      },
-    });
+    saveMutation.mutate(
+      { data: { ...currentWord, userId } },
+      {
+        onSuccess: () => {
+          closeRef.current?.click();
+        },
+      }
+    );
   };
   return (
     <Dialog>

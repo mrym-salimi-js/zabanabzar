@@ -3,10 +3,10 @@ import React, { DragEvent, ReactElement, useState } from "react";
 import FilePicker from "./FilePicker";
 import { useUploadStore } from "@/store/uploadFileStore";
 import { saveFileToIndexedDB } from "@/lib/indexedDB";
-import { useUploadFile } from "@/hooks/api/files";
 import { FileTypes } from "@/types/file";
 import { imageTypes } from "@/constants/imageTypes";
 import { documentTypes } from "@/constants/documentTypes";
+import { useUploadFile } from "@/hooks/api/uploadFileToStorage";
 
 export default function DropFiles(): ReactElement {
   const [isOver, setIsOver] = useState<boolean>(false);

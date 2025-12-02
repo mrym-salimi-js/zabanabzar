@@ -1,32 +1,28 @@
 import { createWorker } from "tesseract.js";
-import {
-  deleteAllFilesFromIndexedDB,
-  getFileFromIndexedDB,
-} from "@/lib/indexedDB";
+import { deleteAllFilesFromIndexedDB } from "@/lib/indexedDB";
 import { deleteFileFromDBService } from "@/services/files/deleteFileFromDBService";
-import { deleteFileFromStorageService } from "@/services/files/deleteFileFromStorageService";
 import { extractTextFromFileService } from "@/services/files/extractTextFromFileService";
 import { saveFileToDBService } from "@/services/files/saveFileToDBService";
 import { updateExTextInDBService } from "@/services/files/updateExTextInDBService";
-import { uploadFileToStorageService } from "@/services/files/uploadFileToStorageService";
 import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 import { useUploadStore } from "@/store/uploadFileStore";
 import { CheckedFile, CleanFileType } from "@/types/file";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { downloadFileInBrowserService } from "@/services/files/downloadFileInBrowserService";
+import { useDeleteFilesFromStorage } from "./deleteFileFromStorage";
 
 // Delete Files custom hook
 export const useDeleteFiles = () => {
   const queryClient = useQueryClient();
-
+  const deleteFileFromStorageMutation = useDeleteFilesFromStorage();
   return useMutation({
     mutationFn: async (files: CheckedFile[]) => {
       // 1) Delete from DB
       const res = await deleteFileFromDBService(files);
 
       // 2) Delete from Storage
-      await deleteFileFromStorageService(files);
+      deleteFileFromStorageMutation.mutate(files);
 
       return await res.json();
     },
@@ -43,33 +39,6 @@ export const useDeleteFiles = () => {
   });
 };
 
-// Upload files custom hook
-export const useUploadFile = () => {
-  const { updateProgress, updateStatus } = useUploadStore.getState();
-
-  return useMutation({
-    mutationFn: async (id: string) => {
-      const file = await getFileFromIndexedDB(id);
-      if (!file) throw new Error("فایلی یافت نشد!");
-
-      updateStatus(id, "uploading");
-
-      const fileUrl = await uploadFileToStorageService(file, (percent) => {
-        updateProgress(id, percent);
-      });
-
-      updateStatus(id, "done", fileUrl);
-      return fileUrl;
-    },
-    onError: (err, id: string) => {
-      updateStatus(id, "error");
-      toast.error("خطا در بارگذاری فایل");
-    },
-    onMutate: (id: string) => {
-      updateProgress(id, 0);
-    },
-  });
-};
 // Save files to DB custom hook
 export const useSaveFileToDB = () => {
   const queryClient = useQueryClient();

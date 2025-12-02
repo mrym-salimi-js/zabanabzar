@@ -24,7 +24,7 @@ interface FileListResponse {
 }
 
 export type CheckedFile = {
-  id: number;
+  id: number | string;
   url: string | undefined;
 };
 export type FileUpload = {

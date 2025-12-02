@@ -4,7 +4,7 @@ import { ProgressBar } from "./ProgressBar";
 import { useUploadStore, UploadFilePersist } from "@/store/uploadFileStore";
 import { deleteFile } from "@/utils/files/deleteFile";
 import { fileTypeColorClasses } from "@/constants/fileTypeColorClasses";
-import { useUploadFile } from "@/hooks/api/files";
+import { useUploadFile } from "@/hooks/api/uploadFileToStorage";
 
 export default function UploadedFilesList(): ReactElement {
   const { files } = useUploadStore();

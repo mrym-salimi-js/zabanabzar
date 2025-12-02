@@ -8,32 +8,32 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { TriggerBtn } from "@/components/TriggerBtn";
-import { Swatch } from "@/components/Icons";
+import { UTurnLeft } from "@/components/Icons";
 import { useFlashCardStore } from "@/store/uploadFlashCardstore";
-import { wordTypes } from "@/constants/wordTypes";
+import { wordRepeat } from "@/constants/wordRepeat";
 
-export function DDBWordType() {
+export function DDBWordReview() {
   const { setWordType, currentWord } = useFlashCardStore();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <TriggerBtn icon={Swatch} label="نوع واژه" />
+        <TriggerBtn icon={UTurnLeft} label="تکرار واژه" />
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-auto p-2 rounded-xl dark:bg-[var(--tertiary-dark)]">
         <DropdownMenuRadioGroup
           className="flex flex-col"
-          value={currentWord?.type || "Unknown"}
+          value={currentWord?.repeat || "3"}
           onValueChange={setWordType}
         >
-          {wordTypes?.map((t, i) => {
+          {wordRepeat?.map((r, i) => {
             return (
               <DropdownMenuRadioItem
                 key={i}
                 className="justify-end text-[0.8rem] dark:text-white dark:hover:text-[var(--primary)] dark:hover:bg-[var(--primary-dark)]"
-                value={t}
+                value={r.day}
               >
-                {t}
+                {r.status}
               </DropdownMenuRadioItem>
             );
           })}

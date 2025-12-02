@@ -1,6 +1,7 @@
 import { useFlashCardStore } from "@/store/uploadFlashCardstore";
 import { DDBWordType } from "./DDBWordType";
 import AudioRecorder from "./AudioRecorder";
+import { DDBWordReview } from "./DDBWordReview";
 
 export default function ModalContent() {
   const { setWord, setDescription, setTranslation, setExample } =
@@ -22,12 +23,14 @@ export default function ModalContent() {
     setExample(example);
   };
   return (
-    <div className="w-full h-[300px] text-[0.8rem] flex flex-col gap-1 items-end justify-center ">
-      <div className="w-full h-auto flex gap-1 py-2 justify-end">
-        {/*Audio DDB */}
-        <AudioRecorder />
+    <div className="w-full h-[300px] overflow-hidden text-[0.8rem] flex flex-col gap-1 items-end justify-center ">
+      <div className="w-full h-auto flex flex-row-reverse gap-1 py-2 overflow-x-scroll">
         {/* Word types DDB */}
         <DDBWordType />
+        {/* Word review */}
+        <DDBWordReview />
+        {/*Audio DDB */}
+        <AudioRecorder />
       </div>
 
       <input

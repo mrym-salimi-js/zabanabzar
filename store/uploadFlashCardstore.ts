@@ -8,16 +8,7 @@ import {
   deleteAllFilesFromIndexedDB,
   deleteFileFromIndexedDB,
 } from "@/lib/indexedDB";
-
-export interface WordData {
-  id: string;
-  word: string;
-  translation: string;
-  example: string;
-  description: string;
-  type: string;
-  audioId?: string;
-}
+import { WordData } from "@/types/flashCard";
 
 interface UploadFlashCard {
   currentWord: WordData;
@@ -30,6 +21,7 @@ interface UploadFlashCard {
   startRecording: () => void;
   stopRecording: (blob: Blob) => Promise<void>;
   getWordAudio: () => Promise<File | null>;
+  setWordAudioUrl: (url: string) => void;
   clearStore: () => Promise<void>;
   clearAudio: (audioId: string) => void;
 }
@@ -40,7 +32,9 @@ const getInitialWord = (): WordData => ({
   example: "",
   description: "",
   type: "Unknown",
+  repeat: "3",
 });
+
 export const useFlashCardStore = create<UploadFlashCard>()(
   persist(
     (set, get) => ({
@@ -104,6 +98,14 @@ export const useFlashCardStore = create<UploadFlashCard>()(
         const word = get().currentWord;
         if (!word?.audioId) return null;
         return getFileFromIndexedDB(word.audioId);
+      },
+
+      setWordAudioUrl: (url) => {
+        const word = get().currentWord;
+        if (!word) return;
+        set({
+          currentWord: { ...word, audioUrl: url },
+        });
       },
 
       clearStore: async () => {

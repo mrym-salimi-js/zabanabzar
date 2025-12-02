@@ -2,12 +2,12 @@
 
 import { useRef, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
-import { useUploadFile } from "@/hooks/api/files";
 import { useUploadStore } from "@/store/uploadFileStore";
 import { saveFileToIndexedDB } from "@/lib/indexedDB";
 import { imageTypes } from "@/constants/imageTypes";
 import { FileTypes } from "@/types/file";
 import { documentTypes } from "@/constants/documentTypes";
+import { useUploadFile } from "@/hooks/api/uploadFileToStorage";
 
 export default function FilePicker() {
   const fileInputRef = useRef<HTMLInputElement>(null);

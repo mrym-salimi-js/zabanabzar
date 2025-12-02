@@ -1,9 +1,12 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TriggerBtn } from "@/components/TriggerBtn";
 import { Microphone, Bin, Voice } from "@/components/Icons";
 import { useFlashCardStore } from "@/store/uploadFlashCardstore";
+import toast from "react-hot-toast";
+import { useDeleteFilesFromStorage } from "@/hooks/api/deleteFileFromStorage";
+import { useUploadFile } from "@/hooks/api/uploadFileToStorage";
 
 export default function AudioRecorder() {
   const {
@@ -13,10 +16,16 @@ export default function AudioRecorder() {
     stopRecording,
     getWordAudio,
     clearAudio,
+    setWordAudioUrl,
   } = useFlashCardStore();
 
+  const deleteFileFromStorageMutation = useDeleteFilesFromStorage();
+  const uploadFileMutation = useUploadFile();
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
+  const prevAudioIdRef = useRef<string | undefined>(undefined);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   // Start recoring Audio
   const handleStart = async () => {
@@ -48,15 +57,35 @@ export default function AudioRecorder() {
     mediaRecorderRef?.current?.stop();
   };
 
-  // Delete recorded Audio
-  const handleDeleteAudio = () => {
+  // Upload audio file to s3 storage
+  useEffect(() => {
     const audioId = currentWord?.audioId;
+    if (!audioId) return;
+
+    // Prevent mutate whene modal opend
+    if (prevAudioIdRef.current === audioId) return;
+    prevAudioIdRef.current = audioId;
+
+    uploadFileMutation.mutate(audioId, {
+      onSuccess: (data) => {
+        toast.success("فایل صوتی ذخیره شد");
+        setWordAudioUrl(data);
+      },
+    });
+  }, [currentWord?.audioId]);
+
+  // Delete recorded Audio
+  const handleDeleteAudio = async () => {
+    const audioId = currentWord?.audioId;
+    const audioUrl = currentWord?.audioUrl;
     if (audioId) clearAudio(audioId);
+
+    if (!audioId) return;
+    //  Delete from Storage
+    deleteFileFromStorageMutation.mutate([{ id: audioId, url: audioUrl }]);
   };
 
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  const [isPlaying, setIsPlaying] = useState(false);
+  // Play and pause recorded audio
   const handlePlayPause = async () => {
     if (!audioRef.current) {
       const file = await getWordAudio();
