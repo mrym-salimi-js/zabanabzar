@@ -34,6 +34,7 @@ export default function Modal(): ReactElement {
       { data: { ...currentWord, userId } },
       {
         onSuccess: () => {
+          clearStore();
           closeRef.current?.click();
         },
       }
