@@ -6,15 +6,14 @@ import { FlashCardMoreActions } from "./FlashCardMoreActions";
 import { UTurnLeft, Voice } from "@/components/Icons";
 import { useState } from "react";
 import clsx from "clsx";
-import { wordsTypes } from "@/constants/wordsTypes";
-import { wordsRepeat } from "@/constants/wordsRepeat";
+import { wordRepeatDay, wordTypesColored } from "@/constants/flashCards";
 
 export default function CardsList() {
   const checkedFiles = useFileCheckStore((state) => state.CheckedFiles);
   const [flipped, setFlipped] = useState(false);
 
   return (
-    <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-around">
+    <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-evenly">
       <div
         className={clsx(
           "w-full h-[240px] md:w-[400px] lg:w-[414px] p-2  shadow-lg border-gray-300 rounded-2xl overflow-hidden bg-white dark:bg-[var(--background-dark)]  perspective  duration-500 preserve-3d",
@@ -29,7 +28,7 @@ export default function CardsList() {
               onClick={() => {
                 setFlipped(!flipped);
               }}
-              className="py-1 px-3 rounded-full flex items-center justify-center cursor-pointer bg-[var(--primary)] absolute bottom-[40%] right-[-19px] hover:opacity-[0.7]"
+              className="py-2 px-3 rounded-full flex items-center justify-center cursor-pointer bg-[var(--secondary)] absolute bottom-[40%] right-[-19px] hover:opacity-[0.7]"
             >
               <UTurnLeft classes="size-4.5 text-white rotate-[180deg]" />
             </div>
@@ -53,16 +52,16 @@ export default function CardsList() {
                 <div className="flex gap-2">
                   {/*Word type */}
                   <span
-                    className={`px-2 py-1 rounded-md ${wordsTypes["Noun"]}`}
+                    className={`px-2 py-1 rounded-md ${wordTypesColored["Noun"]}`}
                   >
                     <p className="text-[0.7rem] text-white">Noun</p>
                   </span>
                   {/*Word repeat */}
                   <span
-                    className={`px-2 py-1 rounded-md ${wordsRepeat["1"].bg}`}
+                    className={`px-2 py-1 rounded-md ${wordRepeatDay["1"].bg}`}
                   >
                     <p className="text-[0.7rem] text-white">
-                      {wordsRepeat["1"].label}
+                      {wordRepeatDay["1"].label}
                     </p>
                   </span>
                 </div>
@@ -94,7 +93,7 @@ export default function CardsList() {
               onClick={() => {
                 setFlipped(!flipped);
               }}
-              className="py-1 px-3 rounded-full flex items-center justify-center cursor-pointer bg-[var(--primary)] absolute bottom-[40%] left-[-19px] hover:opacity-[0.7]"
+              className="py-2 px-3 rounded-full flex items-center justify-center cursor-pointer bg-[var(--secondary)] absolute bottom-[40%] left-[-19px] hover:opacity-[0.7]"
             >
               <UTurnLeft classes="size-4.5 text-white " />
             </div>

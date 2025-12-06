@@ -10,10 +10,10 @@ import {
 import { TriggerBtn } from "@/components/TriggerBtn";
 import { UTurnLeft } from "@/components/Icons";
 import { useFlashCardStore } from "@/store/uploadFlashCardstore";
-import { wordRepeat } from "@/constants/wordRepeat";
-
+import { RepeatedEveryTypes } from "@/types/flashcard";
+import { SecndParam, wordRepeatDay } from "@/constants/flashCards";
 export function DDBWordReview() {
-  const { setWordType, currentWord } = useFlashCardStore();
+  const { setWordRepeat, currentWord } = useFlashCardStore();
 
   return (
     <DropdownMenu>
@@ -23,17 +23,19 @@ export function DDBWordReview() {
       <DropdownMenuContent className="w-auto p-2 rounded-xl dark:bg-[var(--tertiary-dark)]">
         <DropdownMenuRadioGroup
           className="flex flex-col"
-          value={currentWord?.repeat || "3"}
-          onValueChange={setWordType}
+          value={currentWord?.repeatEvery || "3"}
         >
-          {wordRepeat?.map((r, i) => {
+          {(
+            Object.entries(wordRepeatDay) as [RepeatedEveryTypes, SecndParam][]
+          )?.map(([key, item]) => {
             return (
               <DropdownMenuRadioItem
-                key={i}
+                onChange={() => setWordRepeat(key)}
+                key={key}
                 className="justify-end text-[0.8rem] dark:text-white dark:hover:text-[var(--primary)] dark:hover:bg-[var(--primary-dark)]"
-                value={r.day}
+                value={key}
               >
-                {r.status}
+                {item.label}
               </DropdownMenuRadioItem>
             );
           })}

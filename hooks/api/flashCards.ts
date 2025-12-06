@@ -1,4 +1,4 @@
-import { CleanWordType } from "@/types/flashCard";
+import { CleanWordType } from "@/types/flashcard";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 

@@ -1,7 +1,7 @@
 import { desc, eq, inArray, sql } from "drizzle-orm";
 import { db } from "../index";
 import { flashCards } from "../schema/flashCards";
-import { CleanWordType } from "@/types/flashCard";
+import { CleanWordType } from "@/types/flashcard";
 
 export type FileInsertType = typeof flashCards.$inferInsert;
 export type flashCardselectType = typeof flashCards.$inferSelect;

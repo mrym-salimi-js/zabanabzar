@@ -2,11 +2,12 @@ import Notification from "@/components/Notification";
 import { FilesList } from "@/app/files/[fileType]/FilesList";
 import Tabs from "../_components/Tabs";
 import { notFound } from "next/navigation";
-import { fileTypes } from "@/constants/fileTypes";
 import ToolBar from "../_components/toolbar/ToolBar";
+import { FileTypes } from "@/types/file";
+import { fileTypes } from "@/constants/files";
 
 interface FileTypeParams {
-  params: Promise<{ fileType: string }>;
+  params: Promise<{ fileType: FileTypes }>;
 }
 
 export default async function FileTypePage({ params }: FileTypeParams) {

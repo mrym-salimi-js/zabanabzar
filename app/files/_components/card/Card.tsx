@@ -1,7 +1,6 @@
 import Link from "next/link";
 import DateAntdTime from "./DateAntdTime";
 import { Bin, Extraction, FileWithName, Visit } from "@/components/Icons";
-import { fileTypeColorClasses } from "@/constants/fileTypeColorClasses";
 import { useFileCheckStore } from "@/store/fileCheckStore";
 import { useDeleteFiles, useExtractionText } from "@/hooks/api/files";
 import { useExtractTextStore } from "@/store/extractTextFromFileStore";
@@ -9,6 +8,7 @@ import { CheckedFile, FileItem } from "@/types/file";
 import { CardMoreActions } from "./CardMoreActions";
 import { GreenCheckBox } from "@/components/GreenCheckBox";
 import { usePathname } from "next/navigation";
+import { fileTypeColorClasses } from "@/constants/files";
 
 // Card props type
 type TableRowProps = {

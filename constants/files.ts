@@ -1,4 +1,13 @@
-// Colore of deferent file types
+export const fileTypes = [
+  "document",
+  "text",
+  "image",
+  "video",
+  "podcast",
+] as const;
+export const imageTypes = ["PNG", "JPG", "JPEG"] as const;
+export const documentTypes = ["txt", "pdf", "docx"] as const;
+
 export const fileTypeColorClasses: Record<string, string> = {
   // Images
   png: "text-[var(--secondary)]",

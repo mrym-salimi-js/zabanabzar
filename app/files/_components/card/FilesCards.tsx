@@ -27,7 +27,7 @@ export default function FilesCards({
   }, [inView, onLoadMore]);
 
   return (
-    <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-around">
+    <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-evenly">
       {isLoading && !filesList.length ? (
         // Skeleton for first page
         <FilesCardsSkeleton skeletonCount={4} />

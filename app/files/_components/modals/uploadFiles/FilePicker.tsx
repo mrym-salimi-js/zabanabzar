@@ -4,10 +4,9 @@ import { useRef, ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { useUploadStore } from "@/store/uploadFileStore";
 import { saveFileToIndexedDB } from "@/lib/indexedDB";
-import { imageTypes } from "@/constants/imageTypes";
-import { FileTypes } from "@/types/file";
-import { documentTypes } from "@/constants/documentTypes";
+import { DocumentTypes, FileTypes, ImageTypes } from "@/types/file";
 import { useUploadFile } from "@/hooks/api/uploadFileToStorage";
+import { documentTypes, imageTypes } from "@/constants/files";
 
 export default function FilePicker() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -29,12 +28,15 @@ export default function FilePicker() {
       await saveFileToIndexedDB(id, file);
 
       const parts = file.name.split(".");
-      const ext = parts.pop();
+      const extImg = parts.pop() as ImageTypes;
+      const extDoc = parts.pop() as DocumentTypes;
+
       let type: FileTypes = "document";
-      if (!ext) return;
-      if (imageTypes.includes(ext)) {
+
+      if (extImg && imageTypes.includes(extImg)) {
         type = "image";
-      } else if (documentTypes.includes(ext)) {
+      }
+      if (extDoc && documentTypes.includes(extDoc)) {
         type = "document";
       }
 

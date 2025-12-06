@@ -1,4 +1,8 @@
-export type FileTypes = "text" | "document" | "podcast" | "video" | "image";
+import { documentTypes, fileTypes, imageTypes } from "@/constants/files";
+
+export type FileTypes = (typeof fileTypes)[number]; // [number] pointedt to index of array
+export type DocumentTypes = (typeof documentTypes)[number];
+export type ImageTypes = (typeof imageTypes)[number];
 
 export interface FileItem {
   id: number;

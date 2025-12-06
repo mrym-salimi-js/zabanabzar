@@ -1,5 +1,5 @@
 import { FileWithName } from "@/components/Icons";
-import { fileTypeColorClasses } from "@/constants/fileTypeColorClasses";
+import { fileTypeColorClasses } from "@/constants/files";
 import { FileItem } from "@/types/file";
 
 type NameColumnProp = {

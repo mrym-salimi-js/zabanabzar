@@ -1,5 +1,7 @@
 "use client";
 
+import { Swatch } from "@/components/Icons";
+import { TriggerBtn } from "@/components/TriggerBtn";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,10 +9,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { TriggerBtn } from "@/components/TriggerBtn";
-import { Swatch } from "@/components/Icons";
+import { wordTypes } from "@/constants/flashCards";
 import { useFlashCardStore } from "@/store/uploadFlashCardstore";
-import { wordTypes } from "@/constants/wordTypes";
 
 export function DDBWordType() {
   const { setWordType, currentWord } = useFlashCardStore();
@@ -24,7 +24,6 @@ export function DDBWordType() {
         <DropdownMenuRadioGroup
           className="flex flex-col"
           value={currentWord?.type || "Unknown"}
-          onValueChange={setWordType}
         >
           {wordTypes?.map((t, i) => {
             return (
@@ -32,6 +31,7 @@ export function DDBWordType() {
                 key={i}
                 className="justify-end text-[0.8rem] dark:text-white dark:hover:text-[var(--primary)] dark:hover:bg-[var(--primary-dark)]"
                 value={t}
+                onChange={() => setWordType(t)}
               >
                 {t}
               </DropdownMenuRadioItem>

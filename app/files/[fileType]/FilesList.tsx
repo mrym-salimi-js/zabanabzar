@@ -15,7 +15,7 @@ type FilesListProps = {
 };
 
 export function FilesList({ fileType }: FilesListProps): ReactElement {
-  const type = fileType.slice(0, -1);
+  const type = fileType;
   const { view } = useViewFiles();
   const { page } = useFilesPage();
   const limit = 10;
@@ -29,7 +29,7 @@ export function FilesList({ fileType }: FilesListProps): ReactElement {
       });
       return res.data;
     },
-    staleTime: 5000,
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     enabled: view === "list",
@@ -47,6 +47,7 @@ export function FilesList({ fileType }: FilesListProps): ReactElement {
     getNextPageParam: (lastPage) =>
       lastPage.hasMore ? lastPage.page + 1 : undefined,
     initialPageParam: 1,
+    staleTime: Infinity,
     enabled: view === "card",
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

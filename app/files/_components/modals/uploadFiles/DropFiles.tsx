@@ -3,10 +3,9 @@ import React, { DragEvent, ReactElement, useState } from "react";
 import FilePicker from "./FilePicker";
 import { useUploadStore } from "@/store/uploadFileStore";
 import { saveFileToIndexedDB } from "@/lib/indexedDB";
-import { FileTypes } from "@/types/file";
-import { imageTypes } from "@/constants/imageTypes";
-import { documentTypes } from "@/constants/documentTypes";
+import { DocumentTypes, FileTypes, ImageTypes } from "@/types/file";
 import { useUploadFile } from "@/hooks/api/uploadFileToStorage";
+import { documentTypes, imageTypes } from "@/constants/files";
 
 export default function DropFiles(): ReactElement {
   const [isOver, setIsOver] = useState<boolean>(false);
@@ -29,13 +28,15 @@ export default function DropFiles(): ReactElement {
 
       await saveFileToIndexedDB(id, file);
       const parts = file.name.split(".");
-      const ext = parts.pop();
+      const extImg = parts.pop() as ImageTypes;
+      const extDoc = parts.pop() as DocumentTypes;
+
       let type: FileTypes = "document";
-      if (!ext) return;
-      if (imageTypes.includes(ext)) {
+
+      if (extImg && imageTypes.includes(extImg)) {
         type = "image";
       }
-      if (documentTypes.includes(ext)) {
+      if (extDoc && documentTypes.includes(extDoc)) {
         type = "document";
       }
 
