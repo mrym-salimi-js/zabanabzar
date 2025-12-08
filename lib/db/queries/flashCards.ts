@@ -49,7 +49,7 @@ export async function getAllFlashCards(page: number, limit: number) {
   };
 }
 
-// Get special file
+// Get special flashCard
 export async function getFlashCardsById(id: number) {
   const result = await db
     .select()
@@ -58,7 +58,7 @@ export async function getFlashCardsById(id: number) {
   return result[0];
 }
 
-// Update special file
+// Update special flashCard
 export async function updateflashCards(id: number) {
   return db
     .update(flashCards)

@@ -134,6 +134,20 @@
       "when": 1764687337448,
       "tag": "0018_silent_hex",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1765187708094,
+      "tag": "0019_amused_angel",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1765187767747,
+      "tag": "0020_steep_magdalene",
+      "breakpoints": true
     }
   ]
 }

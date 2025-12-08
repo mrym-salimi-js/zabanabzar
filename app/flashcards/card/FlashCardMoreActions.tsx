@@ -9,8 +9,11 @@ import { Bin, Edit, More } from "@/components/Icons";
 import DDBItem from "@/app/files/_components/toolbar/DDBItem";
 
 export function FlashCardMoreActions() {
-  // Handle download file
-  const handleDownloadFile = () => {};
+  // Handle delete flashCard
+  const handleDeleteBtn = () => {};
+
+  // Handle edit flashCard
+  const handleEditBtn = () => {};
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
@@ -21,14 +24,17 @@ export function FlashCardMoreActions() {
           {
             <DropdownMenuItem className="justify-end p-0">
               {/* Edit */}
-
-              <DDBItem icon={Edit} label="ویرایش" />
+              <DDBItem
+                handleAction={handleEditBtn}
+                icon={Edit}
+                label="ویرایش"
+              />
             </DropdownMenuItem>
           }
 
           <DropdownMenuItem className="justify-end p-0">
-            {/* Download */}
-            <DDBItem handleAction={handleDownloadFile} icon={Bin} label="حذف" />
+            {/* Delete */}
+            <DDBItem handleAction={handleDeleteBtn} icon={Bin} label="حذف" />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

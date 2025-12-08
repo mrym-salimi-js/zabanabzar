@@ -23,7 +23,7 @@ export function DDBWordType() {
       <DropdownMenuContent className="w-auto p-2 rounded-xl dark:bg-[var(--tertiary-dark)]">
         <DropdownMenuRadioGroup
           className="flex flex-col"
-          value={currentWord?.type || "Unknown"}
+          value={currentWord?.type}
         >
           {wordTypes?.map((t, i) => {
             return (
@@ -31,7 +31,7 @@ export function DDBWordType() {
                 key={i}
                 className="justify-end text-[0.8rem] dark:text-white dark:hover:text-[var(--primary)] dark:hover:bg-[var(--primary-dark)]"
                 value={t}
-                onChange={() => setWordType(t)}
+                onClick={() => setWordType(t)}
               >
                 {t}
               </DropdownMenuRadioItem>

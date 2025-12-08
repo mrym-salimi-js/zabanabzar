@@ -21,6 +21,7 @@ export const flashCards = pgTable("flashCards", {
   id: serial("id").primaryKey(),
   type: wordType("type").notNull(),
   word: varchar("name", { length: 255 }),
+  translation: varchar("translation", { length: 255 }),
   audioUrl: text("audioUrl"),
   description: text("description"),
   example: text("example"),

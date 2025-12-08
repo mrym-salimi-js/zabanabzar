@@ -15,3 +15,21 @@ export interface WordData {
 export interface CleanWordType extends WordData {
   userId: number;
 }
+
+export interface FlashCardItem extends WordData {
+  id: number;
+  lastReviewed: string;
+  nextReview: string;
+  createdAt: string;
+  updatedAt: string;
+  userId: number;
+}
+
+export interface FlashCardstResponse {
+  items: FlashCardItem[];
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  hasMore: boolean;
+}
