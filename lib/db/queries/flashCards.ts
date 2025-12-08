@@ -1,7 +1,7 @@
 import { desc, eq, inArray, sql } from "drizzle-orm";
 import { db } from "../index";
 import { flashCards } from "../schema/flashCards";
-import { CleanWordType } from "@/types/flashcard";
+import { CleanWordType, WordData } from "@/types/flashcard";
 
 export type FileInsertType = typeof flashCards.$inferInsert;
 export type flashCardselectType = typeof flashCards.$inferSelect;
@@ -59,10 +59,11 @@ export async function getFlashCardsById(id: number) {
 }
 
 // Update special flashCard
-export async function updateflashCards(id: number) {
+export async function updateflashCard(id: number, data: CleanWordType) {
   return db
     .update(flashCards)
     .set({
+      ...data,
       updatedAt: new Date(),
     })
     .where(eq(flashCards.id, id))

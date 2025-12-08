@@ -1,11 +1,40 @@
 import { useFlashCardStore } from "@/store/uploadFlashCardstore";
 import { DDBWordType } from "./DDBWordType";
-import AudioRecorder from "./AudioRecorder";
 import { DDBWordReview } from "./DDBWordReview";
+import AudioRecorder from "./AudioRecorder";
+import { FlashCardItem } from "@/types/flashcard";
+import { useEffect } from "react";
 
-export default function ModalContent() {
-  const { currentWord, setWord, setDescription, setTranslation, setExample } =
-    useFlashCardStore();
+export default function ModalContent({
+  flashCard,
+}: {
+  flashCard?: FlashCardItem;
+}) {
+  const {
+    currentWord,
+    setWord,
+    setDescription,
+    setTranslation,
+    setExample,
+    setWordRepeat,
+    setWordAudioUrl,
+    setWordType,
+  } = useFlashCardStore();
+
+  // Handle get word detail for adding to flashCard store
+  useEffect(() => {
+    if (!flashCard) return;
+    console.log(currentWord);
+    if (!flashCard) return;
+    setWord(flashCard.word);
+    setDescription(flashCard.description);
+    setTranslation(flashCard.translation);
+    setExample(flashCard.example);
+    if (flashCard.audioUrl) setWordAudioUrl(flashCard.audioUrl);
+    setWordRepeat(flashCard.repeatEvery);
+    setWordType(flashCard.type);
+  }, []);
+
   const handleOnChangeDesc = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const desc = e.target.value;
     setDescription(desc);

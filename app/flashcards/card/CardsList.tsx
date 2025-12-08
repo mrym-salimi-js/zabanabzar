@@ -8,7 +8,7 @@ import Card from "./Card";
 export default function CardsList() {
   const limit = 10;
   const infiniteQuery = useInfiniteQuery<FlashCardstResponse, Error>({
-    queryKey: ["files-infinite", limit],
+    queryKey: ["flashCards-infinite", limit],
     queryFn: async ({ pageParam = 1 }) => {
       const res = await axios.get("/api/flashCards", {
         params: { page: pageParam, limit },

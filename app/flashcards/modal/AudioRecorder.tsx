@@ -89,11 +89,11 @@ export default function AudioRecorder() {
   // Play and pause recorded audio
   const handlePlayPause = async () => {
     if (!audioRef.current) {
-      const file = await getWordAudio();
-      if (!file) return;
-
-      const url = URL.createObjectURL(file);
-      audioRef.current = new Audio(url);
+      // const file = await getWordAudio();
+      // const storedUrl = currentWord.audioUrl;
+      // if (!file) return;
+      // const url = URL.createObjectURL(file);
+      audioRef.current = new Audio(currentWord.audioUrl);
       audioRef.current.onended = () => setIsPlaying(false);
     }
     if (isPlaying) {
@@ -107,7 +107,7 @@ export default function AudioRecorder() {
 
   return (
     <div>
-      {status === "idle" && (
+      {status === "idle" && !currentWord.audioUrl && (
         <div onClick={handleStart}>
           <TriggerBtn icon={Microphone} label="ضبط" />
         </div>
@@ -124,7 +124,7 @@ export default function AudioRecorder() {
         </div>
       )}
 
-      {status === "recorded" && (
+      {(status === "recorded" || currentWord.audioUrl) && (
         <div className="flex flex-row-reverse gap-1">
           <div onClick={handleDeleteAudio}>
             <TriggerBtn icon={Bin} label="حذف صدا" />

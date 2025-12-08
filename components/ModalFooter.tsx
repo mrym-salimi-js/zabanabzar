@@ -4,23 +4,21 @@ import React, { ReactElement } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 import ThreePointsLoading from "./ThreePointsLoading";
 
-type ModalFooterProps<TVariables> = {
+type ModalFooterProps<TData, TError, TVariables> = {
   handleCancel?: () => void;
   handleConfirm: () => void;
-  mutation: UseMutationResult<void | Response, Error, TVariables>;
+  mutation: UseMutationResult<TData, TError, TVariables>;
   closeRef: React.RefObject<HTMLButtonElement | null>;
   confirmBtnBG: string;
 };
 
-export default function ModalFooter<TVariables>({
+export default function ModalFooter<TData, TError, TVariables>({
   handleCancel,
   handleConfirm,
   mutation,
   closeRef,
   confirmBtnBG,
-}: ModalFooterProps<TVariables>): ReactElement {
-  // Create ref for hidden btn, for using closing modal after sending data
-
+}: ModalFooterProps<TData, TError, TVariables>): ReactElement {
   return (
     <>
       <DialogClose asChild>
@@ -37,15 +35,14 @@ export default function ModalFooter<TVariables>({
             انصراف
           </Button>
         </DialogClose>
+
         <Button
           onClick={handleConfirm}
           variant="outline"
-          className={`sm:w-[50%] border-0  items-center text-white ${confirmBtnBG}`}
+          className={`sm:w-[50%] border-0 items-center text-white ${confirmBtnBG}`}
         >
           {mutation.isPending ? (
-            <>
-              <ThreePointsLoading circleColor="bg-white" />
-            </>
+            <ThreePointsLoading circleColor="bg-white" />
           ) : (
             "تایید"
           )}

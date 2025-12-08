@@ -1,4 +1,8 @@
-import { createFlashCard, getAllFlashCards } from "@/lib/db/queries/flashCards";
+import {
+  createFlashCard,
+  getAllFlashCards,
+  updateflashCard,
+} from "@/lib/db/queries/flashCards";
 
 import { NextResponse } from "next/server";
 
@@ -32,6 +36,29 @@ export async function GET(req: Request) {
     console.error(err);
     return NextResponse.json(
       { error: "خطا در دریافت فش کارت" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PATCH(req: Request) {
+  try {
+    const { id, ...data } = await req.json();
+    if (!id) {
+      return NextResponse.json(
+        { error: "شناسه فایل ارسال نشده" },
+        { status: 400 }
+      );
+    }
+
+    // Call query from db/queries of files
+    const updated = await updateflashCard(id, data);
+
+    return NextResponse.json(updated, { status: 200 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json(
+      { error: "خطا در اپدیت اطلاعات فلش کارت" },
       { status: 500 }
     );
   }

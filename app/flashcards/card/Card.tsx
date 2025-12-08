@@ -55,7 +55,7 @@ export default function Card({ flashCard }: CardProps) {
           </div>
           {/* Header */}
           <div className="w-full h-10 flex p-2 items-center justify-between dark:bg-[var(--tertiary-dark)] border-b-[1px] dark:rounded-md">
-            <FlashCardMoreActions />
+            <FlashCardMoreActions flashCard={flashCard} />
             <GreenCheckBox
               checked={checkedFiles.some((i) => i.id === flashCard.id)}
               onChange={() =>
@@ -123,7 +123,7 @@ export default function Card({ flashCard }: CardProps) {
           </div>
           {/* Header */}
           <div className="w-full h-10 flex p-2 items-center justify-between dark:bg-[var(--tertiary-dark)] border-b-[1px] dark:rounded-md">
-            <FlashCardMoreActions />
+            <FlashCardMoreActions flashCard={flashCard} />
             <GreenCheckBox
               checked={checkedFiles.some((i) => i.id === flashCard.id)}
               onChange={() =>
