@@ -1,5 +1,5 @@
-import CardsList from "./card/CardsList";
-import ToolBar from "./ToolBar";
+import CardsList from "./_components/card/CardsList";
+import ToolBar from "@/app/flashcards/_components/ToolBar";
 
 export default function FlashCardsPage() {
   return (

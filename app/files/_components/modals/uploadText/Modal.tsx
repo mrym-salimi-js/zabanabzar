@@ -6,7 +6,7 @@ import ModalHeader from "./ModalHeader";
 import DDBItem from "@/app/files/_components/toolbar/DDBItem";
 import { Pencil } from "@/components/Icons";
 import ModalContent from "./ModalContent";
-import ModalFooter from "@/components/ModalFooter";
+import ModalFooter from "@/components/modals/ModalFooter";
 import toast from "react-hot-toast";
 import { useSaveFileToDB } from "@/hooks/api/files";
 import { useUploadTextStore } from "@/store/uploadTextStore";

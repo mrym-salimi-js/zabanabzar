@@ -1,15 +1,15 @@
 "use client";
 
 import { ScrollWrapper } from "@/components/ScrollWrapper";
-import Modal from "./modal/Modal";
 import { TriggerBtn } from "@/components/TriggerBtn";
 import { Plus } from "@/components/Icons";
 import { useFlashCardStore } from "@/store/uploadFlashCardstore";
 import { useUpladeFlashCard } from "@/hooks/api/flashCards";
 import { useRef } from "react";
-import { DDBSort } from "../files/_components/toolbar/DDBSort";
-import { DeleteBtn } from "../files/_components/toolbar/DeleteBtn";
-import { DownloadBtn } from "../files/_components/toolbar/DownloadBtn";
+import Modal from "./modal/Modal";
+import { DDBSort } from "@/app/files/_components/toolbar/DDBSort";
+import { DeleteBtn } from "@/app/files/_components/toolbar/DeleteBtn";
+import { DownloadBtn } from "@/app/files/_components/toolbar/DownloadBtn";
 
 export default function ToolBar() {
   const saveMutation = useUpladeFlashCard();

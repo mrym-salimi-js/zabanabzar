@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Bin, Edit, More } from "@/components/Icons";
 import DDBItem from "@/app/files/_components/toolbar/DDBItem";
-import Modal from "@/app/flashcards/modal/Modal";
+import Modal from "@/app/flashcards/_components/modal/Modal";
 import { useRef } from "react";
 import { useEditFlashCard } from "@/hooks/api/flashCards";
 import { FlashCardItem } from "@/types/flashcard";

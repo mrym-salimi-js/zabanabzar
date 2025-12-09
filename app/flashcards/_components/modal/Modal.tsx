@@ -2,7 +2,7 @@
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { ReactElement, RefObject } from "react";
-import ModalFooter from "@/components/ModalFooter";
+import ModalFooter from "@/components/modals/ModalFooter";
 import ModalHeader from "./ModalHeader";
 import ModalContent from "./ModalContent";
 import { UseMutationResult } from "@tanstack/react-query";

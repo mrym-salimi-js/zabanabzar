@@ -2,7 +2,7 @@ import { deleteFile } from "@/utils/files/deleteFile";
 import { useUploadStore } from "@/store/uploadFileStore";
 import { ReactElement, useRef } from "react";
 import toast from "react-hot-toast";
-import ModalFooter from "@/components/ModalFooter";
+import ModalFooter from "@/components/modals/ModalFooter";
 import { useSaveFileToDB } from "@/hooks/api/files";
 import { FileTypes } from "@/types/file";
 
