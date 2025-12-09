@@ -1,8 +1,10 @@
 import {
   createFlashCard,
+  deleteArryFlashCards,
   getAllFlashCards,
   updateflashCard,
 } from "@/lib/db/queries/flashCards";
+import { CheckedFile } from "@/types/file";
 
 import { NextResponse } from "next/server";
 
@@ -61,5 +63,23 @@ export async function PATCH(req: Request) {
       { error: "خطا در اپدیت اطلاعات فلش کارت" },
       { status: 500 }
     );
+  }
+}
+
+export async function DELETE(req: Request) {
+  try {
+    const checkedFiles: CheckedFile[] = await req.json();
+
+    const arrayIds = checkedFiles.map((f) => {
+      return +f.id;
+    });
+
+    // Call query from db/queries of files
+    const deleted = await deleteArryFlashCards(arrayIds);
+
+    return NextResponse.json(deleted, { status: 201 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "خطا در حذف فلش کارت" }, { status: 500 });
   }
 }

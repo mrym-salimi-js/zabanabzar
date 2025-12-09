@@ -7,10 +7,10 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Download, Edit, More } from "@/components/Icons";
 import { ReactElement } from "react";
-import { useDownloadFile } from "@/hooks/api/files";
 import DDBItem from "@/app/files/_components/toolbar/DDBItem";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useDownloadFiles } from "@/hooks/api/downloadFileFromStorage";
 
 type CardMoreActionsProp = {
   fileUrl: string;
@@ -22,7 +22,7 @@ export function CardMoreActions({
   fileId,
   fileEx,
 }: CardMoreActionsProp): ReactElement {
-  const downloadMutation = useDownloadFile();
+  const downloadMutation = useDownloadFiles();
   const path = usePathname();
   // Handle download file
   const handleDownloadFile = () => {

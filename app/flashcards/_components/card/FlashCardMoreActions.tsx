@@ -6,13 +6,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Bin, Edit, More } from "@/components/Icons";
+import { Bin, Download, Edit, More } from "@/components/Icons";
 import DDBItem from "@/app/files/_components/toolbar/DDBItem";
 import Modal from "@/app/flashcards/_components/modal/Modal";
 import { useRef } from "react";
-import { useEditFlashCard } from "@/hooks/api/flashCards";
+import { useDeleteFlashCards, useEditFlashCard } from "@/hooks/api/flashCards";
 import { FlashCardItem } from "@/types/flashcard";
 import { useFlashCardStore } from "@/store/uploadFlashCardstore";
+import { useDownloadFiles } from "@/hooks/api/downloadFileFromStorage";
 
 type FlashCardMoreActionsProps = {
   flashCard: FlashCardItem;
@@ -21,9 +22,28 @@ export function FlashCardMoreActions({ flashCard }: FlashCardMoreActionsProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const editeMutation = useEditFlashCard();
   const { currentWord } = useFlashCardStore();
+  const deleteMutation = useDeleteFlashCards();
 
-  // Handle delete flashCard
-  const handleDeleteBtn = () => {};
+  const downloadMutation = useDownloadFiles();
+  // Handle download file (audio of flashcard)
+  const handleDownloadBtn = () => {
+    const flashCards = [{ id: flashCard.id, url: flashCard.audioUrl }];
+    downloadMutation.mutate(flashCards, {
+      onSuccess: () => {
+        closeRef.current?.click();
+      },
+    });
+  };
+
+  // Handle delete flashcards
+  const handleDeleteBtn = () => {
+    const flashCards = [{ id: flashCard.id, url: flashCard.audioUrl }];
+    deleteMutation.mutate(flashCards, {
+      onSuccess: () => {
+        closeRef.current?.click();
+      },
+    });
+  };
 
   // Handle edit flashCard
   const handleEditBtn = () => {
@@ -72,6 +92,14 @@ export function FlashCardMoreActions({ flashCard }: FlashCardMoreActionsProps) {
           <DropdownMenuItem className="justify-end p-0">
             {/* Delete */}
             <DDBItem handleAction={handleDeleteBtn} icon={Bin} label="حذف" />
+          </DropdownMenuItem>
+          <DropdownMenuItem className="justify-end p-0">
+            {/* Download */}
+            <DDBItem
+              handleAction={handleDownloadBtn}
+              icon={Download}
+              label="دانلود"
+            />
           </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>

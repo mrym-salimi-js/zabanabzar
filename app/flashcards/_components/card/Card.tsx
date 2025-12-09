@@ -68,9 +68,15 @@ export default function Card({ flashCard }: CardProps) {
             <div className="w-full flex flex-row-reverse justify-between items-center p-2">
               <div className="flex flex-row-reverse gap-2 items-center">
                 {/*Word Audio */}
-                <div onClick={handlePlayPause} className="w-auto h-auto flex ">
-                  <Voice classes="size-5 cursor-pointer rotate-[180deg] dark:text-[var(--tertiary)] hover:text-[var(--primary)]" />
-                </div>
+                {flashCard.audioUrl && (
+                  <div
+                    onClick={handlePlayPause}
+                    className="w-auto h-auto flex "
+                  >
+                    <Voice classes="size-5 cursor-pointer rotate-[180deg] dark:text-[var(--tertiary)] hover:text-[var(--primary)]" />
+                  </div>
+                )}
+
                 {/*Word */}
                 <p className="text-sm dark:text-white">{flashCard.word}</p>
               </div>

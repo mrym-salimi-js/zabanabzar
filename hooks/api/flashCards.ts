@@ -1,3 +1,4 @@
+import { CheckedFile } from "@/types/file";
 import {
   CleanWordType,
   FlashCardItem,
@@ -9,6 +10,8 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import { useDeleteFilesFromStorage } from "./deleteFileFromStorage";
+import { deleteFlashCardsFromDBService } from "@/services/flashCards/deleteFlashCardsFromDBService";
 
 type Variables = { data: CleanWordType };
 
@@ -21,7 +24,7 @@ export const useUpladeFlashCard = (): UseMutationResult<
   return useMutation<FlashCardstResponse, Error, Variables>({
     mutationFn: async ({ data }: Variables) => {
       try {
-        const res = await fetch("/api/flashCards", {
+        const res = await fetch("/api/flashcards", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
@@ -56,7 +59,7 @@ export const useEditFlashCard = (): UseMutationResult<
   return useMutation<FlashCardItem, Error, Variables>({
     mutationFn: async ({ data }: Variables) => {
       try {
-        const res = await fetch("/api/flashCards", {
+        const res = await fetch("/api/flashcards", {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
@@ -79,5 +82,28 @@ export const useEditFlashCard = (): UseMutationResult<
     onError: () => {
       toast.error("خطا در ویرایش فلش کارت");
     },
+  });
+};
+
+// Delete flashCards custom hook
+export const useDeleteFlashCards = () => {
+  const queryClient = useQueryClient();
+  const deleteFileFromStorageMutation = useDeleteFilesFromStorage();
+  return useMutation({
+    mutationFn: async (flashCards: CheckedFile[]) => {
+      // 1) Delete from DB
+      const res = await deleteFlashCardsFromDBService(flashCards);
+
+      // 2) Delete from Storage
+      deleteFileFromStorageMutation.mutate(flashCards);
+
+      return await res.json();
+    },
+
+    onSuccess: () => {
+      toast.success("حذف باموفقیت انجام شد");
+      queryClient.invalidateQueries({ queryKey: ["flashCards-infinite"] });
+    },
+    onError: () => toast.error("خطا در حذف"),
   });
 };

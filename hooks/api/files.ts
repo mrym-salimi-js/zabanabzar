@@ -64,24 +64,6 @@ export const useSaveFileToDB = () => {
   });
 };
 
-// Download files from s3 custom hook
-export const useDownloadFile = () => {
-  return useMutation({
-    mutationFn: async (checkeds: CheckedFile[]) => {
-      for (const item of checkeds) {
-        if (!item.url) return;
-        await downloadFileInBrowserService(item.url);
-      }
-    },
-    onSuccess: () => {
-      toast.success("دانلود با موفقیت انجام شد");
-    },
-    onError: () => {
-      toast.error("خطا در دانلود");
-    },
-  });
-};
-
 export const useExtractionText = () => {
   type ExtractPayload = {
     fileUrl: string;

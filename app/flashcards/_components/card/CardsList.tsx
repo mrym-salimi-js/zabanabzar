@@ -10,7 +10,7 @@ export default function CardsList() {
   const infiniteQuery = useInfiniteQuery<FlashCardstResponse, Error>({
     queryKey: ["flashCards-infinite", limit],
     queryFn: async ({ pageParam = 1 }) => {
-      const res = await axios.get("/api/flashCards", {
+      const res = await axios.get("/api/flashcards", {
         params: { page: pageParam, limit },
       });
       return res.data;
@@ -23,11 +23,11 @@ export default function CardsList() {
     refetchOnReconnect: false,
   });
 
-  //  Finall data
+  // Finall data
   const flashCards = infiniteQuery.data?.pages.flatMap((p) => p.items) ?? [];
 
   return (
-    <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-evenly">
+    <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-end">
       {flashCards.map((f) => {
         return <Card key={f.id} flashCard={f} />;
       })}

@@ -14,14 +14,11 @@ import {
   Visit,
 } from "@/components/Icons";
 import DDBItem from "@/app/files/_components/toolbar/DDBItem";
-import {
-  useDeleteFiles,
-  useDownloadFile,
-  useExtractionText,
-} from "@/hooks/api/files";
+import { useDeleteFiles, useExtractionText } from "@/hooks/api/files";
 import { useExtractTextStore } from "@/store/extractTextFromFileStore";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useDownloadFiles } from "@/hooks/api/downloadFileFromStorage";
 
 type MorActionProp = {
   fileUrl: string;
@@ -39,7 +36,7 @@ export function TableMoreActions({
   const deleteMutation = useDeleteFiles();
   const extractionMutation = useExtractionText();
   const { addExtraction } = useExtractTextStore();
-  const downloadMutation = useDownloadFile();
+  const downloadMutation = useDownloadFiles();
   const path = usePathname();
 
   // Handle delete file

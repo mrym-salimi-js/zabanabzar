@@ -17,7 +17,7 @@ export function DownloadBtn(): ReactElement {
   const handleTriggerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (checkedFiles?.length === 0) {
       e.preventDefault();
-      toast.error("فایلی انتخاب نشده");
+      toast.error("فلش کارتی انتخاب نشده");
     }
   };
 
