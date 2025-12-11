@@ -2,10 +2,10 @@
 
 import { ReactElement } from "react";
 import FilesTable from "@/app/files/_components/table/FilesTable";
-import FilesCards from "@/app/files/_components/card/FilesCards";
+import CardsList from "@/app/files/_components/card/CardsList";
 import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { PaginatedList } from "../_components/PaginatedList";
+import { PaginatedList } from "./PaginatedList";
 import { FileListResponse } from "@/types/file";
 import { useViewFiles } from "@/store/updateFilesViewStore";
 import { useFilesPage } from "@/store/upadteFilesPageStore";
@@ -68,7 +68,7 @@ export function FilesList({ fileType }: FilesListProps): ReactElement {
           <PaginatedList files={listQuery.data ?? undefined} />
         </>
       ) : (
-        <FilesCards
+        <CardsList
           filesList={files}
           isLoading={
             infiniteQuery.isFetchingNextPage || infiniteQuery.isFetching

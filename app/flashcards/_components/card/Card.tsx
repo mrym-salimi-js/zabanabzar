@@ -37,7 +37,7 @@ export default function Card({ flashCard }: CardProps) {
   return (
     <div
       className={clsx(
-        "w-full h-[240px] md:w-[400px] lg:w-[414px] p-2  shadow-lg border-gray-300 rounded-2xl overflow-hidden bg-white dark:bg-[var(--background-dark)]  perspective  duration-500 preserve-3d",
+        "w-full h-[240px] md:max-w-[400px] p-2  shadow-lg border-gray-300 rounded-2xl overflow-hidden bg-white dark:bg-[var(--background-dark)]  perspective  duration-500 preserve-3d",
         flipped && "rotate-y-180"
       )}
     >

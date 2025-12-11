@@ -1,5 +1,5 @@
 import Notification from "@/components/Notification";
-import { FilesList } from "@/app/files/[fileType]/FilesList";
+import { FilesList } from "@/app/files/_components/FilesList";
 import Tabs from "../_components/Tabs";
 import { notFound } from "next/navigation";
 import ToolBar from "../_components/toolbar/ToolBar";

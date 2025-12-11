@@ -29,24 +29,25 @@ export default function FilesCards({
   }, [inView, onLoadMore]);
 
   return (
-    <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-evenly">
-      {status === "pending" ? (
-        // Skeleton for first page
-        <FilesCardsSkeleton skeletonCount={4} />
-      ) : (
-        <>
-          {/* files */}
-          {filesList.map((file, index) => (
-            <FileCard key={index} file={file} />
-          ))}
+    <>
+      <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-evenly">
+        {status === "pending" ? (
+          // Skeleton for first page
+          <FilesCardsSkeleton skeletonCount={4} />
+        ) : (
+          <>
+            {/* files */}
+            {filesList.map((file, index) => (
+              <FileCard key={index} file={file} />
+            ))}
 
-          {/* Skeleton for end of list for scrolling */}
-          {isLoading && <FilesCardsSkeleton skeletonCount={2} />}
-
-          {/* Sentinel for scroll */}
-          <div ref={ref}></div>
-        </>
-      )}
-    </div>
+            {/* Skeleton for end of list for scrolling */}
+            {isLoading && <FilesCardsSkeleton skeletonCount={2} />}
+          </>
+        )}
+      </div>
+      {/* Sentinel for scroll */}
+      <div ref={ref}></div>
+    </>
   );
 }

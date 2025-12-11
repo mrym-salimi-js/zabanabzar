@@ -48,7 +48,7 @@ export function FileCard({ file }: TableRowProps) {
   };
 
   return (
-    <div className="w-full md:w-[400px] lg:w-[414px] h-auto flex flex-col p-2 gap-1.5 shadow-lg border-gray-300 rounded-2xl overflow-hidden bg-white dark:bg-[var(--background-dark)] ">
+    <div className="w-full md:max-w-[400px]  h-auto flex flex-col p-2 gap-1.5 shadow-lg border-gray-300 rounded-2xl overflow-hidden bg-white dark:bg-[var(--background-dark)] ">
       {/* Header */}
       <div className="w-full h-10 flex p-2 items-center justify-between dark:bg-[var(--tertiary-dark)] border-b-[1px] dark:rounded-md">
         <CardMoreActions

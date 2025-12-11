@@ -40,27 +40,28 @@ export default function CardsList() {
   }, [inView, infiniteQuery?.fetchNextPage]);
 
   return (
-    <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-end">
-      {infiniteQuery.status === "pending" ? (
-        // Skeleton for first page
-        <FilesCardsSkeleton skeletonCount={4} />
-      ) : (
-        <>
-          {/* flashcards */}
-          {flashCards.map((f) => {
-            return <Card key={f.id} flashCard={f} />;
-          })}
+    <>
+      <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-evenly">
+        {infiniteQuery.status === "pending" ? (
+          // Skeleton for first page
+          <FilesCardsSkeleton skeletonCount={4} />
+        ) : (
+          <>
+            {/* flashcards */}
+            {flashCards.map((f) => {
+              return <Card key={f.id} flashCard={f} />;
+            })}
 
-          {/* Skeleton for end of list for scrolling */}
-          {infiniteQuery.isFetching ||
-            (infiniteQuery.isFetchingNextPage && (
-              <FilesCardsSkeleton skeletonCount={2} />
-            ))}
-
-          {/* Sentinel for scroll */}
-          <div ref={ref}></div>
-        </>
-      )}
-    </div>
+            {/* Skeleton for end of list for scrolling */}
+            {infiniteQuery.isFetching ||
+              (infiniteQuery.isFetchingNextPage && (
+                <FilesCardsSkeleton skeletonCount={2} />
+              ))}
+          </>
+        )}
+      </div>
+      {/* Sentinel for scroll */}
+      <div ref={ref}></div>
+    </>
   );
 }
