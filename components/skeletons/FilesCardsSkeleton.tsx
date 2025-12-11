@@ -9,7 +9,7 @@ export default function FilesCardsSkeleton({
   skeletonCount = 4,
 }: SkeletonProps): ReactElement {
   return (
-    <div className="w-full h-auto md:hidden flex flex-col gap-1.5">
+    <div className="w-full h-auto flex flex-col gap-1.5">
       {Array(skeletonCount)
         .fill(0)
         .map((_, i) => (

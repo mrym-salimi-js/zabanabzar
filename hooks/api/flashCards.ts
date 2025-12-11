@@ -12,6 +12,7 @@ import {
 import toast from "react-hot-toast";
 import { useDeleteFilesFromStorage } from "./deleteFileFromStorage";
 import { deleteFlashCardsFromDBService } from "@/services/flashCards/deleteFlashCardsFromDBService";
+import { useFlashCardStore } from "@/store/uploadFlashCardstore";
 
 type Variables = { data: CleanWordType };
 
@@ -21,6 +22,7 @@ export const useUpladeFlashCard = (): UseMutationResult<
   Variables
 > => {
   const queryClient = useQueryClient();
+  const { clearStore } = useFlashCardStore();
   return useMutation<FlashCardstResponse, Error, Variables>({
     mutationFn: async ({ data }: Variables) => {
       try {
@@ -43,6 +45,7 @@ export const useUpladeFlashCard = (): UseMutationResult<
     onSuccess: () => {
       toast.success("فلش کارت شما ساخته شد");
       queryClient.invalidateQueries({ queryKey: ["flashCards-infinite"] });
+      clearStore();
     },
     onError: () => {
       toast.error("خطا در ساخت فلش کارت");

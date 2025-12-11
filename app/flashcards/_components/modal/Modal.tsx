@@ -7,6 +7,7 @@ import ModalHeader from "./ModalHeader";
 import ModalContent from "./ModalContent";
 import { UseMutationResult } from "@tanstack/react-query";
 import { FlashCardItem } from "@/types/flashcard";
+import { useFlashCardStore } from "@/store/uploadFlashCardstore";
 
 type ModalProps<TData = unknown, TError = Error, TVariables = unknown> = {
   handleConfirm: () => void;
@@ -27,11 +28,13 @@ export default function Modal<TData, TError, TVariables>({
   closeRef,
   mutation,
 }: ModalProps<TData, TError, TVariables>): ReactElement {
+  const { clearStore } = useFlashCardStore();
+
   // // Clear all uploaded file after click on "انصراف" btn
-  // const handleClearText = () => {
-  //   // Clear saved text in localStorage
-  //   clearStore();
-  // };
+  const handleClearText = () => {
+    // Clear saved text in localStorage
+    clearStore();
+  };
 
   return (
     <Dialog>
@@ -48,7 +51,7 @@ export default function Modal<TData, TError, TVariables>({
           {/* Modal footer */}
           <ModalFooter
             closeRef={closeRef}
-            // handleCancel={handleClearText}
+            handleCancel={handleClearText}
             handleConfirm={handleConfirm}
             mutation={mutation}
             confirmBtnBG="bg-[var(--secondary)]"

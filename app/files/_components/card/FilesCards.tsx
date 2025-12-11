@@ -10,12 +10,14 @@ type FilesCardsProps = {
   filesList: FileItem[];
   isLoading: boolean;
   onLoadMore?: () => void;
+  status: string;
 };
 
 export default function FilesCards({
   filesList,
   isLoading,
   onLoadMore,
+  status,
 }: FilesCardsProps): ReactElement {
   // Next page loading
   const { ref, inView } = useInView();
@@ -28,20 +30,18 @@ export default function FilesCards({
 
   return (
     <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-evenly">
-      {isLoading && !filesList.length ? (
+      {status === "pending" ? (
         // Skeleton for first page
         <FilesCardsSkeleton skeletonCount={4} />
       ) : (
         <>
           {/* files */}
-          {filesList.map((file) => (
-            <FileCard key={file.id} file={file} />
+          {filesList.map((file, index) => (
+            <FileCard key={index} file={file} />
           ))}
 
-          {/* Skeleton of end of list for scrolling */}
-          {isLoading && filesList.length > 0 && (
-            <FilesCardsSkeleton skeletonCount={2} />
-          )}
+          {/* Skeleton for end of list for scrolling */}
+          {isLoading && <FilesCardsSkeleton skeletonCount={2} />}
 
           {/* Sentinel for scroll */}
           <div ref={ref}></div>

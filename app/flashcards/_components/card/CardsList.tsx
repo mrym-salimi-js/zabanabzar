@@ -4,6 +4,9 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { FlashCardstResponse } from "@/types/flashcard";
 import Card from "./Card";
+import FilesCardsSkeleton from "@/components/skeletons/FilesCardsSkeleton";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 export default function CardsList() {
   const limit = 10;
@@ -26,11 +29,38 @@ export default function CardsList() {
   // Finall data
   const flashCards = infiniteQuery.data?.pages.flatMap((p) => p.items) ?? [];
 
+  // Next page loading
+  const { ref, inView } = useInView();
+
+  // Fetch next page with scrolling and see end of page
+  useEffect(() => {
+    if (inView && infiniteQuery?.fetchNextPage) {
+      infiniteQuery?.fetchNextPage();
+    }
+  }, [inView, infiniteQuery?.fetchNextPage]);
+
   return (
     <div className="w-full h-auto flex flex-wrap gap-2 items-center justify-end">
-      {flashCards.map((f) => {
-        return <Card key={f.id} flashCard={f} />;
-      })}
+      {infiniteQuery.status === "pending" ? (
+        // Skeleton for first page
+        <FilesCardsSkeleton skeletonCount={4} />
+      ) : (
+        <>
+          {/* flashcards */}
+          {flashCards.map((f) => {
+            return <Card key={f.id} flashCard={f} />;
+          })}
+
+          {/* Skeleton for end of list for scrolling */}
+          {infiniteQuery.isFetching ||
+            (infiniteQuery.isFetchingNextPage && (
+              <FilesCardsSkeleton skeletonCount={2} />
+            ))}
+
+          {/* Sentinel for scroll */}
+          <div ref={ref}></div>
+        </>
+      )}
     </div>
   );
 }

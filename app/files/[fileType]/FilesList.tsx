@@ -74,6 +74,7 @@ export function FilesList({ fileType }: FilesListProps): ReactElement {
             infiniteQuery.isFetchingNextPage || infiniteQuery.isFetching
           }
           onLoadMore={infiniteQuery.fetchNextPage}
+          status={infiniteQuery.status}
         />
       )}
     </>
